@@ -1,17 +1,17 @@
 {% if include.v >= 72 %}
-    <h4>Sensor Status (sensor_status) is an encoded enumeration as follows</h4>
+    <h4>Sensor Status (sensor_status) is a set of bit flags, encoded in a single decimal value, each bit represents the following</h4>
     <table>
-        <tr><th>Hex Value</th><th>Applies to device<th>Status description</th></tr>
-        <tr><td>0x00000000</td><td>All</td><td>Sensors OK</td></tr>
-        <tr><td>0x00000001</td><td>AIR</td><td>lightning failed</td></tr>
-        <tr><td>0x00000002</td><td>AIR</td><td>lightning noise</td></tr>
-        <tr><td>0x00000004</td><td>AIR</td><td>lightning disturber</td></tr>
-        <tr><td>0x00000008</td><td>AIR</td><td>pressure failed</td></tr>
-        <tr><td>0x00000010</td><td>AIR</td><td>temperature failed</td></tr>
-        <tr><td>0x00000020</td><td>AIR</td><td>rh failed</td></tr>
-        <tr><td>0x00000040</td><td>SKY</td><td>wind failed</td></tr>
-        <tr><td>0x00000080</td><td>SKY</td><td>precip failed</td></tr>
-        <tr><td>0x00000100</td><td>SKY</td><td>light/uv failed</td></tr>
+        <tr><th>Binary Value</th><th>Applies to device<th>Status description</th></tr>
+        <tr><td>0b000000000</td><td>All</td><td>Sensors OK</td></tr>
+        <tr><td>0b000000001</td><td>AIR, Tempest</td><td>lightning failed</td></tr>
+        <tr><td>0b000000010</td><td>AIR, Tempest</td><td>lightning noise</td></tr>
+        <tr><td>0b000000100</td><td>AIR, Tempest</td><td>lightning disturber</td></tr>
+        <tr><td>0b000001000</td><td>AIR, Tempest</td><td>pressure failed</td></tr>
+        <tr><td>0b000010000</td><td>AIR, Tempest</td><td>temperature failed</td></tr>
+        <tr><td>0b000100000</td><td>AIR, Tempest</td><td>rh failed</td></tr>
+        <tr><td>0b001000000</td><td>SKY, Tempest</td><td>wind failed</td></tr>
+        <tr><td>0b010000000</td><td>SKY, Tempest</td><td>precip failed</td></tr>
+        <tr><td>0b100000000</td><td>SKY, Tempest</td><td>light/uv failed</td></tr>
     </table>
 
     <h4>debug</h4>
