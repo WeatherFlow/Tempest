@@ -1,0 +1,147 @@
+#sidebar {
+	width: 200px;
+	float: left;
+}
+
+#page, #page-full {
+	margin: 35px 0 0 250px;
+	box-sizing: border-box;
+}
+
+#page-full {
+	margin: 35px 0 0 0;
+}
+
+#posts {
+	margin-left: 300px;
+	box-sizing: border-box;
+}
+
+.category-list li {
+	padding: 6px;
+	margin: 0 0 0 14px;
+	list-style: none;
+}
+
+.category-list li a {
+	color: #1b75d5;
+	text-decoration: none;
+}
+
+.post {
+	margin: 50px 0;
+}
+
+.post h1, .post h2 a {
+	color: #1b75d5;
+	text-decoration: none;
+	font-size: 1.5em;
+	line-height: 1.5em;
+}
+
+.post-date {
+	color: #999;
+	padding: 5px 0;
+	margin: 0 !important;
+}
+
+#app-menu {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 10px;
+	width: 40px;
+	height: 40px;
+	background: url(../images/app-menu.svg) no-repeat 100% 50%;
+	z-index: 9999;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	#app-menu, #sidebar h3 {
+		display: block;
+	}
+
+	.api-home #app-menu {
+		display: none;
+	}
+
+	#sidebar {
+		display: none;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		background-color: #b4ceeb;
+		z-index: 100;
+		overflow-y: scroll;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	#sidebar #releases-cat {
+		margin-top: 50px;
+		text-align: center;
+		text-transform: uppercase;
+		background-color: transparent;
+		color: #1b75d5;
+		font-size: 1em;
+	}
+
+	.category-list {
+		width: 100%;
+		padding: 0;
+	}
+
+	.category-list li {
+		text-align: center;
+		margin: 10px 0;
+	}
+
+	.category-list li a {
+		font-size: 2em;
+		display: block;
+		padding: 20px 0;
+		background-color: #1b75d5;
+		color: #fff;
+	}
+
+	#page, #posts {
+		margin-left: 0;
+		clear: both;
+		padding: 0 15px 0 15px;
+	}
+
+	.post h1, .post h2 a {
+		display: inline-block;
+		font-size: 1.6em;
+		line-height: 1.2em;
+		text-align: center;
+	}
+}
+
+/* OAuth */
+.hint {
+	border: 1px solid #1b75d5;
+    background: rgba(27, 117, 213, .2) url(../images/star.svg) no-repeat 10px 17px;
+    background-size: 16px;
+    padding: 10px 10px 10px 40px;
+	color: #1b75d5;
+	margin: 35px 0;
+}
+
+.step {
+	text-transform: uppercase;
+	font-weight: 700;
+	color: #666;
+	margin: 25px 0 0 0;
+}
+
+.step + p {
+    margin: 0 0 14px 0;
+}
+
+.code-highlight-extra-padding {
+	padding: 10px;
+	display: block;
+}

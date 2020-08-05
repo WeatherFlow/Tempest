@@ -1,0 +1,36 @@
+<h2><a name="endpoints">UDP Basics</a></h2>
+The WeatherFlow Smart Weather Station's hub broadcasts UDP messages over port 50222 on the local network.
+
+<h2><a name="response-messages">Messages</a></h2>
+
+<div class="doc-section">
+{% include evt-precip.html v=include.v %}
+</div>
+
+<div class="doc-section">
+{% include evt-strike.html v=include.v %}
+</div>
+
+<div class="doc-section">
+{% include rapid-wind.html v=include.v %}
+</div>
+
+<div class="doc-section">
+{% include obs-air.html v=include.v %}
+</div>
+
+<div class="doc-section">
+{% include obs-sky.html v=include.v %}
+</div>
+
+<div class="doc-section">
+    {% include obs-tempest.html v=include.v %}
+</div>
+
+<div class="doc-section">
+{% include device-status.html v=include.v %}
+</div>
+
+<div class="doc-section">
+{% include hub-status.html v=include.v %}
+</div>

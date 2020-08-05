@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+    	{% include meta.html %}
+        <title>{{page.title}}</title>
+		<link rel="stylesheet" href="{{site.url}}/css/base.css">
+	        <link rel="stylesheet" href="{{site.url}}/css/syntax.css">
+		<link rel="stylesheet" href="{{site.url}}/css/release.css?v2">
+		<link rel="stylesheet" href="{{site.url}}/css/udp.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+	    <style>
+		table {
+		    width: 100%;
+		}
+
+		td, th {
+		    border: 1px solid #ddd;
+		    padding: 8px;
+		}
+
+		th {
+		    padding-top: 12px;
+		    padding-bottom: 12px;
+		    text-align: left;
+		    background-color: #969696;
+		    color: white;
+		    min-width: 150px;
+		}
+
+		h3 {
+			font-size: 1.3em;
+			margin: 25px 0 15px 0;
+		}
+
+		h4 {
+			font-size: 1.1em;
+			margin: 15px 0 0 0;
+		}
+	</style>
+	</head>
+	<body class="api-home">
+		<div id="app-menu"></div>
+		{% include header.html %}
+
+		{% include udp-version-selector.html %}
+
+		<div id="main-content">
+			<div id="page-full">
+				{{content}}
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="{{site.url}}/js/releases.js"></script>
+	</body>
+</html>

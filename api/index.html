@@ -1,0 +1,138 @@
+---
+layout: apihome
+title: WeatherFlow Smart Weather API
+---
+
+<h2><a name="overview">Overview</a></h2>
+<p>This API gives access to observations and meta data for WeatherFlow Smart Weather Stations.  REST services are available for pulling data. The API also supports websocket connections for pushing data to listening clients.</p>
+<ul>
+	<li>Websocket Data Streams
+		<ul>
+			<li>Device Observations</li>
+			<li>Device Events</li>
+			<li>Station Observations (federated) (coming soon 2017)</li>
+			<li>Station Events</li>
+		</ul>
+	</li>
+</ul>
+
+<p>You can learn more about WeatherFlow Smart Weather at <a href="http://www.weatherflow.com/smart-home-weather-stations/">http://www.weatherflow.com/smart-home-weather-stations/</a> . To see an example of what you can do with this API visit the <a href="https://smartweather.weatherflow.com/share/690/grid">Smart Weather website</a>.</p>
+
+<h2><a name="getting-started">Getting Started</a></h2>
+
+<p>During development and for any use that is strictly personal (one user, yourself), use this development API key:</p>
+		<ul>
+			<li><span class="code-highlight">20c70eae-e62f-4d3b-b3a4-8586e90f3ac8</span></li>
+			<li>Note, this key has some limitations in terms of frequency of requests and volume of data</li>
+			<li>Please be aware that rights to data access my be revoked at any time for any reason. This may include, but not limited to,  the number of stations accessible per key, frequency of requests, and volume of data.</li>
+		</ul>
+<p>When ready to deploy an applications/integration intended for use by others (more than one user, not yourself):</p>
+		<ul>
+			<li>Please <a href="mailto:support@weatherflow.com?subject=Smart Weather API Key Request">contact us</a> to obtain your own API key.</li>
+			<li>Please include a description of the app or integration you're working on, and any other helpful information.</li>
+		</ul>
+<p>Demo Station and Devices</p>
+		<ul>
+			<li>station_id = 690</li>
+			<li>(Air) device_id = 1110</li>
+		</ul>
+<h3>REST</h3>
+		<ul>
+			<li>Use the REST API Reference to see and test all services.
+				<ul>
+					<li>Use the "Authorization" button to either enter your API Key or use the Oauth2 path to connect to your Smart Weather user account.
+						<ul>
+							<li>If you do not do this step the API will respond with "401 Unauthorized"</li>
+						</ul>
+					</li>
+					<li>Find a station_id (this is the id of your Station). The easiest way to do this is sign into you Smart Weather account using a browser and go to an observation list view for a Station. You should see a URL that includes a station_id that looks something like this.
+						<ul>
+							<li><a href="https://smartweather.weatherflow.com/station/690" class="code-highlight">https://smartweather.weatherflow.com/station/690</a></li>
+						</ul>
+					</li>
+					<li>Try the stations service using the station_id. The response should contain all of the meta data for the Station. Make note of a device_id so you can use it later to get observations.</li>
+					<li>Try the observations service using just the device_id. If you only send the device_id in the request you should see the latest observation in the response.</li>
+				</ul>
+			</li>
+			<li>Examples (using the Demo Station and Device)
+				<ul>
+					<li>GET Station Meta Data
+						<ul>
+							<li><a href="https://swd.weatherflow.com/swd/rest/stations/690?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8" class="code-highlight">https://swd.weatherflow.com/swd/rest/stations/690?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8</a></li>
+						</ul>
+					</li>
+					<li>GET Latest Device Observation
+						<ul>
+							<li><a href="https://swd.weatherflow.com/swd/rest/observations/?device_id=1110&api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8" class="code-highlight">https://swd.weatherflow.com/swd/rest/observations/?device_id=1110&api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8</a></li>
+						</ul>
+					</li>
+					<li>GET Latest Station Observation
+						<ul>
+							<li><a href="https://swd.weatherflow.com/swd/rest/observations/station/690?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8" class="code-highlight">https://swd.weatherflow.com/swd/rest/observations/station/690?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+<h3>Websocket</h3>
+		<ul>
+			<li>Open a websocket connection
+				<ul>
+					<li class="code-highlight">wss://ws.weatherflow.com/swd/data?api_key=20c70eae-e62f-4d3b-b3a4-8586e90f3ac8</li>
+				</ul>
+			</li>
+			<li>Send a JSON message over the websocket connection to start listening for observations from the demo Device.  After sending this message your connected websocket client sould receive a new observation JSON message every minute.
+				<ul>
+					<li class="code-highlight">
+{
+  "type":"listen_start",
+  "device_id":1110,
+  "id":"random-id-12345"
+}
+					</li>
+				</ul>
+			</li>
+		</ul>
+
+<h2>Object Model</h2>
+<img src="{{site.url}}/images/swd_object_model.jpg" alt="WeatherFlow Smart Weather API Object Model" style="width:100%" />
+
+<h2><a name="security">Security</a></h2>
+<p>Smart Weather Station users have the option of setting the data for each of their stations as either public or private. The API has two access levels (Public and User).</p>
+
+<ul>
+	<li>Public Access Level with API Key
+		<ul>
+			<li>Access to all Stations currently set as "public"</li>
+			<li>REST - Send your API Key as "api_key" in the query string with all API requests</li>
+			<li>Websocket - Send your API Key as "api_key" in the query string when opening the websocket connection</li>
+		</ul>
+	</li>
+	<li>User Access Level with Oauth2 Access Token
+		<ul>
+			<li>Access to all data owned by the user's access token</li>
+			<li>Access to all Stations currently set as "public"</li>
+			<li>Oauth2 Implicit Flow
+				<ul>
+					<li>Use this flow to get an access token that never expires. This is the token you send with all API requests.</li>
+				</ul>
+			</li>
+			<li>REST - Send the Access Token as "token" in the query string with all API requests</li>
+			<li>Websocket - Send the Access Token as "token" in the query string when opening the websocket connection</li>
+		</ul>
+	</li>
+</ul>
+
+<h2><a name="api-reference">REST API Reference</a></h2>
+<p><a href="{{site.url}}/api/swagger" target="_blank">Rest API Reference</a>.</p>
+<p><a href="{{site.url}}/api/remote-developer-policy.html">Remote Data Access Policy</a>.</p>
+
+<h2><a name="ws-api-reference">Websocket API Reference</a></h2>
+<p><a href="{{site.url}}/api/ws.html" target="_blank">Websocket API Reference</a>.</p>
+<p><a href="{{site.url}}/api/remote-developer-policy.html">Remote Data Access Policy</a>.</p>
+
+<h2><a name="ws-api-reference">UDP Broadcast Reference</a></h2>
+<p><a href="{{site.url}}/api/udp.html" target="_blank">UDP Broadcast Reference</a>.</p>
+
+<h2><a name="ble-reference">BLE Reference</a></h2>
+<p>coming soon</p>

@@ -1,0 +1,36 @@
+#sections {
+	margin: 25px 0 0 0;
+	display: flex;
+	justify-content: stretch;
+}
+
+/*.doc-section {
+	display: inline-block;
+	background-position: 50% 10px;
+	background-size: auto 150px;
+	background-repeat: no-repeat;
+	padding: 170px 0 0 0;
+	margin: 25px 75px;
+	color: #1b75d5;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-size: 1.25em;
+}*/
+
+.doc-section {
+	width: 50%;
+	box-sizing: border-box;
+	margin: 0 50px 0 0;
+}
+
+.doc-section:last-child {
+	margin: 0 0 0 50px;
+}
+
+#release-notes {
+	background-image: url(../images/release-notes.svg);
+}
+
+#api-documentation {
+	background-image: url(../images/api.svg);
+}

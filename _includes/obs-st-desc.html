@@ -1,0 +1,23 @@
+{% if include.v >= 118 %}
+	<table>
+		<tr><th>Index</th><th>Field</th><th>Units</th></tr>
+		<tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+        <tr><td>1</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+        <tr><td>2</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+        <tr><td>3</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+        <tr><td>4</td><td>Wind Direction</td><td>Degrees</td></tr>
+        <tr><td>5</td><td>Wind Sample Interval</td><td>seconds</td></tr>
+        <tr><td>6</td><td>Station Pressure</td><td>MB</td></tr>
+        <tr><td>7</td><td>Air Temperature</td><td>C</td></tr>
+        <tr><td>8</td><td>Relative Humidity</td><td>%</td></tr>
+        <tr><td>9</td><td>Illuminance</td><td>Lux</td></tr>
+        <tr><td>10</td><td>UV</td><td>Index</td></tr>
+        <tr><td>11</td><td>Solar Radiation</td><td>W/m^2</td></tr>
+        <tr><td>12</td><td>Precip Accumulated</td><td>mm</td></tr>
+        <tr><td>13</td><td>Precipitation Type</td><td>0 = none, 1 = rain, 2 = hail</td></tr>
+        <tr><td>14</td><td>Lightning Strike Avg Distance</td><td>km</td></tr>
+        <tr><td>15</td><td>Lightning Strike Count</td><td></td></tr>
+        <tr><td>16</td><td>Battery</td><td>Volts</td></tr>
+        <tr><td>17</td><td>Report Interval</td><td>Minutes</td></tr>
+	</table>
+{% endif %}

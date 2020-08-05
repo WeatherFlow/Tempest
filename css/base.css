@@ -1,0 +1,180 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+th, td {
+	padding: 5px;
+	text-align: left;
+}
+
+th {
+	border-bottom: 1px solid #999;
+	color: #666;
+	vertical-align: baseline;
+}
+
+td {
+	border-bottom: 1px solid #ccc;
+}
+
+html, body {
+	height: 100%;
+	font-size: 16px;
+	font-family: Roboto, Arial, sans-serif;
+	line-height: 24px;
+}
+
+strong {
+	font-weight: 900;
+	letter-spacing: 1px;
+}
+
+h2 {
+	color: #1b75d5;
+	font-size: 1.5em;
+	margin: 25px 0 15px 0;
+}
+
+h2 a {
+	color: #1b75d5;
+	text-decoration: none;
+}
+
+p {
+	line-height: 2em;
+	margin: 14px 0;
+}
+
+ul {
+	margin: 25px 0;
+	padding: 0 0 0 20px;
+}
+
+li {
+	padding: 4px;
+	list-style: disc;
+}
+
+ul li ul {
+	margin: 0;
+}
+
+header {
+	background-color: #512B59;
+	padding: 0 15px 50px;
+	box-sizing: border-box;
+	color: #fff;
+	text-align: center;
+	font-size: 2em;
+}
+
+#header-ctn {
+	background: url(../images/logo.svg) no-repeat 50% 50px;
+	background-size: auto 175px;
+}
+
+#header-ctn h1 {
+	padding-top: 250px;
+	line-height: 1.25em;
+}
+
+#home {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	width: 28px;
+	height: 28px;
+	background: url(../images/home.svg) no-repeat 50% 50%;
+	background-size: 28px 28px;
+}
+
+#doc-sections {
+	display: flex;
+	flex-direction: row;
+	flew-wrap: wrap;
+	flex-flow: flex-start;
+}
+
+#doc-sections .doc-section {
+	padding: 15px;
+	text-align: center;
+}
+
+#main-content {
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.code-highlight {
+	font-family: monospace, Arial;
+	background-color: #eee;
+	border: 1px solid #ccc;
+	padding: 2px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.monospace {
+	font-family: monospace;
+}
+
+.source {
+	font-size: .8em;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	#header-ctn {
+		background-size: auto 90px;
+		background-position: 50% 30px;
+	}
+
+	#header-ctn h1 {
+		padding-top: 150px;
+	}
+}

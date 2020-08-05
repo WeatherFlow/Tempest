@@ -1,0 +1,293 @@
+---
+layout: apiwshome
+title: WeatherFlow Smart Weather API Websocket Reference
+---
+<h2><a name="endpoints">Endpoints</a></h2>
+<div class="code-highlight">ws://ws.weatherflow.com/swd/data</div>
+<div class="code-highlight">wss://ws.weatherflow.com/swd/data</div>
+
+<h2><a name="request-messages">Request Messages</a></h2>
+<table>
+  <tr><th>Request Message</th><th>Response Message Types</th><th>Description</th></tr>
+  <tr>
+    <td>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"listen_start",
+  "device_id":1110,
+  "id":"2098388936"
+}
+{% endhighlight %}
+    </div>
+    <td>ack<br>obs_air<br>obs_sky<br>evt_strike<br>evt_precip</td>
+    <td>Start listening for all new observations and events for a device_id.  Each new observation sent by the Device will be pushed to the client as soon as possible.  All Device events will be immediatly pushed.</td>
+  </tr>
+  <tr>
+    <td>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"listen_stop",
+  "device_id":1110,
+  "id":"2098388936"
+}
+{% endhighlight %}
+    </div>
+    <td>ack</td>
+    <td>Stop listening for all messages for a Device.</td>
+  </tr>
+  <tr>
+    <td>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"listen_start_events",
+  "station_id":2594,
+  "id":"2098388541"
+}
+{% endhighlight %}
+    </div>
+    <td>ack<br>evt_station_online<br>evt_station_offline</td>
+    <td>Start listening for all Station online and offline events.  All Station events will be immediatly pushed.</td>
+  </tr>
+  <tr>
+    <td>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"listen_stop_events",
+  "station_id":2594,
+  "id":"2098388541"
+}
+{% endhighlight %}
+    </div>
+    <td>ack</td>
+    <td>Stop listening for all event messages for a Station.</td>
+  </tr>
+  <tr>
+    <td>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"listen_rapid_start",
+  "device_id":1110,
+  "id":"2098388542"
+}
+{% endhighlight %}
+    </div>
+    <td>ack<br>rapid_wind</td>
+    <td>Start listening for rapid 3 second wind data for a Sky Device.</td>
+  </tr>
+  <tr>
+    <td>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"listen_rapid_stop",
+  "device_id":1110,
+  "id":"2098388587"
+}
+{% endhighlight %}
+    </div>
+    <td>ack</td>
+    <td>Stop listening for rapid data messages for a Device.</td>
+  </tr>
+
+</table>
+
+
+<h2><a name="response-messages">Response Messages</a></h2>
+<h3>Acknowledgement [type = ack]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"ack",
+  "id":"2098388936"
+}
+{% endhighlight %}
+</div>
+
+
+<br><br>
+<h3>Rain Start Event [type = evt_precip]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"evt_precip",
+  "device_id":1110
+}
+{% endhighlight %}
+</div>
+
+
+<br><br>
+<h3>Lightning Strike Event [type = evt_strike]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"evt_strike",
+  "device_id":1110,
+  "evt":[1493322445,27,3848]
+}
+{% endhighlight %}
+</div>
+Evt Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Distance</td><td>km</td></tr>
+  <tr><td>2</td><td>Energy</td><td></td></tr>
+</table>
+
+
+
+
+<br><br>
+<h3>Device Online Event [type = evt_device_online]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"evt_device_online",
+  "device_id":1110
+}
+{% endhighlight %}
+</div>
+
+
+
+
+<br><br>
+<h3>Device Offline Event [type = evt_device_offline]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"evt_device_offline",
+  "device_id":1110
+}
+{% endhighlight %}
+</div>
+
+
+
+
+<br><br>
+<h3>Station Online Event [type = evt_station_online]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"evt_station_online",
+  "station_id":4582
+}
+{% endhighlight %}
+</div>
+
+
+
+
+<br><br>
+<h3>Station Offline Event [type = evt_station_offline]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"evt_station_offline",
+  "station_id":4582
+}
+{% endhighlight %}
+</div>
+
+
+
+
+
+
+
+<br><br>
+<h3>Rapid Wind [type = rapid_wind] (3 second interval)</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"rapid_wind",
+  "device_id":1110,
+  "ob":[1493322445,2.3,128]
+}
+{% endhighlight %}
+</div>
+Ob Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Wind Speed</td><td>m/s</td></tr>
+  <tr><td>2</td><td>Wind Direction</td><td>Degrees</td></tr>
+</table>
+
+
+
+
+<br><br>
+<h3>Observation (Air) [type = obs_air]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"obs_air",
+  "device_id":1110,
+  "obs":[[1493164835,835.0,10.0,45,0,0,3.46,1]]
+}
+{% endhighlight %}
+</div>
+Observation Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Station Pressure</td><td>MB</td></tr>
+  <tr><td>2</td><td>Air Temperature</td><td>C</td></tr>
+  <tr><td>3</td><td>Relative Humidity</td><td>%</td></tr>
+  <tr><td>4</td><td>Lightning Strike Count</td><td></td></tr>
+  <tr><td>5</td><td>Lightning Strike Avg Distance</td><td>km</td></tr>
+  <tr><td>6</td><td>Battery</td><td>Volts</td></tr>
+  <tr><td>7</td><td>Report Interval</td><td>Minutes</td></tr>
+</table>
+
+<br><br>
+<h3>Observation (Sky) [type = obs_sky]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"obs_sky",
+  "device_id":1110,
+  "obs":[[1493321340,9000,10,0.0,2.6,4.6,7.4,187,3.12,1,130,1.034,0,3,0.0,1.011,1]]
+}
+{% endhighlight %}
+</div>
+Observation Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Illuminance</td><td>Lux</td></tr>
+  <tr><td>2</td><td>UV</td><td>Index</td></tr>
+  <tr><td>3</td><td>Rain Accumulated</td><td>mm</td></tr>
+  <tr><td>4</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+  <tr><td>5</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+  <tr><td>6</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+  <tr><td>7</td><td>Wind Direction</td><td>Degrees</td></tr>
+  <tr><td>8</td><td>Battery</td><td>Volts</td></tr>
+  <tr><td>9</td><td>Report Interval</td><td>Minutes</td></tr>
+  <tr><td>10</td><td>Solar Radiation</td><td>W/m^2</td></tr>
+  <tr><td>11</td><td>Local Daily Rain Accumulation</td><td>mm</td></tr>
+  <tr><td>12</td><td>Precipitation Type</td><td>0 = none, 1 = rain, 2 = hail</td></tr>
+  <tr><td>13</td><td>Wind Sample Interval</td><td>seconds</td></tr>
+  <tr><td>14</td><td>Rain Accumulated Final (Rain Check)</td><td>mm</td></tr>
+  <tr><td>15</td><td>Local Daily Rain Accumulation Final (Rain Check)</td><td>mm</td></tr>
+  <tr><td>16</td><td>Precipitation Analysis Type</td><td>0 = none<br>1 = Rain Check with user display on<br>2 = Rain Check with user display off</td></tr>
+</table>
+
+
+
+<h2><a name="other-useful-information">Other Useful Information</a></h2>
+<ul>
+  <li>A client should only open one websocket connection.</li>
+  <li>A client will be disconnected after 10 minutes of idle time.</li>
+  <li>All messages are JSON strings.</li>
+</ul>
+
+

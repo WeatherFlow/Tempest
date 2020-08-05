@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+    <head>
+    	{% include meta.html %}
+        <title>{{page.title}}</title>
+	    <link rel="stylesheet" href="{{site.url}}/css/base.css">
+        <link rel="stylesheet" href="{{site.url}}/css/syntax.css">
+	    <link rel="stylesheet" href="{{site.url}}/css/release.css?v2">
+	    <style>
+		    #main-content {
+                padding: 0 0 25px 0;
+            }
+            
+            h3 {
+                font-weight: bold;
+                padding: 15px 0 0 0;
+            }
+            
+            table {
+                width: 100%;                
+            }
+		    
+		    ul {
+                padding: 0 0 0 40px;
+                margin: 5px 0 25px 0;
+            }
+            
+            .access-chart {
+                border: 1px solid #222;
+            }
+            
+            .access-chart td {
+                border: 1px solid #222;
+                vertical-align: middle;
+                text-align: center;
+            }
+            
+            .red {
+                background-color: #ff4d4d;
+                text-transform: uppercase;
+            }
+            
+            .green, .public-only, .may {
+                background-color: #85e085;
+                text-transform: uppercase;
+            }            
+	    </style>
+    </head>
+	<body class="api-home">
+		<div id="app-menu"></div>
+		    {% include header.html %}		
+
+		    <div id="main-content">
+		    <div id="page-full">
+		        {{content}}
+		    </div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,91 @@
+{% if include.v >= 111 %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub_status",
+	  "firmware_revision":"35",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691,
+	  "reset_flags": "BOR,PIN,POR",
+	  "seq": 48,
+	  "fs": [1, 0, 15675411, 524288],
+          "radio_stats": [2, 1, 0, 3],
+          "mqtt_stats": [1, 0]
+	}
+{% elsif include.v >= 105 %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub_status",
+	  "firmware_revision":"35",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691,
+	  "reset_flags": "BOR,PIN,POR",
+	  "seq": 48,
+	  "fs": "0,0",
+          "radio_stats": [1, 1, 0],
+          "mqtt_stats": [1]
+	}
+{% elsif include.v >= 70 %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub_status",
+	  "firmware_revision":"35",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691,
+	  "reset_flags": "BOR,PIN,POR",
+	  "seq": 48,
+	  "fs": "0,0",
+          "radio_stats": [1, 1],
+          "mqtt_stats": [1]
+	}
+{% elsif include.v >= 65 %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub_status",
+	  "firmware_revision":"35",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691,
+	  "reset_flags": "BOR,PIN,POR",
+	  "seq": 48,
+	  "fs": "0,0",
+          "radio_stats": [1, 1]
+	}
+{% elsif include.v >= 35 %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub_status",
+	  "firmware_revision":"35",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691,
+	  "reset_flags": "BOR,PIN,POR",
+	  "stack": "1616,1608",
+	  "seq": 48,
+	  "fs": "0,0"
+	}
+{% elsif include.v >= 29 %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub_status",
+	  "firmware_revision":"34",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691,
+	  "reset_flags": "BOR,PIN,POR",
+	  "stack": "1616,1608",
+	  "seq": 48,
+	  "fs": 1
+	}
+{% else %}
+	{
+	  "serial_number":"HB-00000001",
+	  "type":"hub-status",
+	  "firmware_version":"13",
+	  "uptime":1670133,
+	  "rssi":-62,
+	  "timestamp":1495724691
+	}
+{% endif %}

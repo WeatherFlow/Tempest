@@ -1,0 +1,13 @@
+{% if include.v >= 29 %}
+	<h3>Status (hub) [type = hub_status]</h3>
+{% else %}
+	<h3>Status (hub) [type = hub-status]</h3>
+{% endif %}
+
+<div class="code-highlight">
+{% highlight javascript %}
+{% include hub-status-json.html v=include.v %}
+{% endhighlight %}
+</div>
+
+{% include hub-status-desc.html v=include.v %}

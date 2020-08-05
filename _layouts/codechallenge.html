@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+    	{% include meta.html %}
+        <title>{{page.title}}</title>
+		<link rel="stylesheet" href="{{site.url}}/css/base.css">
+        <link rel="stylesheet" href="{{site.url}}/css/release.css?v2">
+        <link rel="stylesheet" href="{{site.url}}/css/code-challenge.css">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+	</head>
+	<body class="api-home">
+		<div id="app-menu"></div>
+		{% include header.html %}
+
+		<div id="main-content">
+			<div id="sidebar">
+				{% include api-sections.html %}
+			</div>
+
+			<div id="page">
+				{{content}}
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="{{site.url}}/js/crypto.js"></script>
+        <script src="{{site.url}}/js/code-challenge.js"></script>
+	</body>
+</html>

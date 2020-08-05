@@ -1,0 +1,169 @@
+---
+layout: formulas
+title: Derived Metric Formulas
+---
+<div id="sidebar">
+  <ul class="category-list">
+    <li><a href="#air-density">Air Density</a></li>
+    <li><a href="#delta-t">Delta T</a></li>
+    <li><a href="#dew-point">Dew Point Temperature</a></li>
+    <li><a href="#feels-like">Feels Like Temperature</a></li>	  
+    <li><a href="#heat-index">Heat Index Temperature</a></li>
+    <li><a href="#pressure-trend">Pressure Trend</a></li>
+    <li><a href="#rain-rate">Rain Rate</a></li>
+    <li><a href="#sea-level-pressure">Sea Level Pressure</a></li>
+    <li><a href="#vapor-pressure">Vapor Pressure</a></li>
+    <li><a href="#wet-bulb">Wet Bulb Temperature</a></li>
+    <li><a href="#wind-chill">Wind Chill Temperature</a></li>
+  </ul>
+</div>
+
+<div id="posts">
+	<div class="post">
+		<h1><a name="air-density">Air Density</a></h1>
+		<p>$$\frac{P_{stn}\times{}100}{R_{specific}T}$$</p>
+		<p>\(P_{stn}\) = station pressure in millibars (mb)</p>
+		<p>\(T\) = temperature in Kelvin</p>
+		<p>\(R_{specific}\) = specific gas constant for dry air (287.058 J/(kg·K))</p>		
+	</div>
+	<div class="post">
+		<h1><a name="delta-t">Delta T</a></h1>
+		<p>Delta T, \(\Delta T\), is used in agriculture to indicate acceptable conditions for spraying pesticides and fertilizers. It is simply the difference between the air temperature (aka "dry bulb temperature") and the wet bulb temperature:</p>
+		<p>$$\Delta T = T - T_{wb}$$</p>
+	</div>
+	<div class="post">
+		<h1><a name="dew-point">Dew Point Temperature</a></h1>
+		<p class="source">Source: <a href="http://andrew.rsmas.miami.edu/bmcnoldy/Humidity.html">RSMAS</a></p>
+		<p>$$T_{d} = \frac{243.04 \bigg[\ln\big(\frac{RH}{100}\big) + \frac{17.625 \times{} T}{243.04 + T}\bigg]}{17.625 - \ln\big(\frac{RH}{100}\big) - \frac{17.625 \times{} T}{243.04 + T}}$$</p>
+		<p>\(T_{d}\) = dew point in degrees Celsius (&degC)</p>
+		<p>\(T\) = temperature in degrees Celsius (&degC)</p>
+		<p>\(RH\) = relative humidity (%)</p>
+	</div>
+  <div class="post">
+		<h1><a name="feels-like">Feels Like Temperature</a></h1>
+	  	<p>The Feels Like temperature is equal to the <a href="#heat-index">Heat Index</a> if the temperature is at or above 80&degF and the relative humidity is at or above 40%.  Alternatively, the Feels Like temperature is equal to <a href="#wind-chill">Wind Chill</a> if the temperature is at or below 50&degF and wind speeds are above 3mph.  If neither condition applies, the Feels Like temperature is equal to the air temperature.</p>
+	</div>
+  <div class="post">
+    <h1><a name="heat-index">Heat Index Temperature</a></h1>
+    <p class="source">Source: <a href="https://www.weather.gov/media/epz/wxcalc/heatIndex.pdf">Weather.gov</a></p>
+	  <p>Heat Index is calculated for temperatures at or above 80&degF and a relative humidity at or above 40%.</p>
+    <p>$$T_{hi} = -42.379 + (2.04901523\times{}T) 
+	        \\+ (10.1433127\times{}RH) - (0.22475541\times{}T\times{}RH)
+	        \\-(6.83783\times{}10^{-3}\times{}T^2) -(5.481717\times{}10^{-2}\times{}RH^2)
+	        \\+(1.22874\times{}10^{-3}\times{}T^2\times{}RH)+(8.5282\times{}10^{-4}\times{}T\times{}RH^2)
+	        \\-(1.99\times{}10^{-6}\times{}T^2\times{}RH^2)$$</p>
+	  <p>\(T\) = temperature in degrees Fahrenheit (&deg;F)</p>
+	  <p>\(RH\) = relative humidity (%)</p>
+  </div>
+	
+	<div class="post">
+		<h1><a name="pressure-trend">Pressure Trend</a></h1>
+		<p>The Pressure Trend description is determined by the rate of change over the past 3 hours.</p>
+		<p>$$\Delta P = P_{0h} - P_{3h}$$</p>
+		<p>\(P_{0h}\) = the latest pressure reading in millibars (mb)</p>
+		<p>\(P_{3h}\) = pressure reading 3 hours ago in millibars (mb)</p>
+		<table style="width: 100%">
+			<tr>
+				<th>Description</th>
+				<th>Rate</th>
+			</tr>
+			<tr>
+				<td>Steady</td>
+				<td>\(-1 mb < \Delta P < 1 mb \)</td>
+			</tr>
+			<tr>
+				<td>Falling</td>
+				<td>\(\Delta P \le -1 mb\)</td>
+			</tr>
+			<tr>
+				<td>Rising</td>
+				<td>\(\Delta P \ge 1 mb \)</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="post">
+		<h1><a name="rain-rate">Rain Rate</a></h1>
+		<p>The Rain Rate description is set according to the latest one minute accumulation, extrapolated to an hourly rate.</p>
+		<p>$$\Delta R = \frac{V_{r} \times{} 60min}{1h}$$</p>
+		<p>\(V_{r}\) = rain accumulation in millimeters over one minute (mm/min)</p>
+		<table style="width:100%">
+			<tr>
+				<th>Description</th>
+				<th>Rate</th>
+			</tr>
+			<tr>
+				<td>None</td>
+				<td>\(\Delta R = 0 mm/h\)</td>
+			</tr>
+			<tr>
+				<td>Very Light</td>
+				<td>\(0 mm/h < \Delta R < 0.25 mm/h\)</td>
+			</tr>
+			<tr>
+				<td>Light</td>
+				<td>\(0.25 mm/h \le \Delta R < 1.0 mm/h\)</td>
+			</tr>
+			<tr>
+				<td>Moderate</td>
+				<td>\(1.0 mm/h \le \Delta R < 4.0 mm/h\)</td>
+			</tr>
+			<tr>
+				<td>Heavy</td>
+				<td>\(4.0mm/h \le \Delta R < 16.0 mm/h\)</td>
+			</tr>
+			<tr>
+				<td>Very Heavy</td>
+				<td>\(16.0 mm/h \le \Delta R < 50.0 mm/h\)</td>
+			</tr>
+			<tr>
+				<td>Extreme</td>
+				<td>\(\Delta R \ge 50.0 mm/h\)</td>
+			</tr>
+		</table>
+	</div>
+	<div class="post">
+		<h1><a name="sea-level-pressure">Sea Level Pressure</a></h1>
+		<p class="source">Source: <a href="http://journals.ametsoc.org/doi/full/10.1175/1520-0434%281998%29013%3C0833%3AAEOUIS%3E2.0.CO%3B2">AMS</a></p>
+		<p>$$P_{sl} = P_{sta}\Big[1 + \frac{P_{0}}{P_{sta}}^{\frac{R_{d}\gamma_{s}}{g}}\frac{\gamma_{s}(h_{el} + h_{ag})}{T_{0}}\Big]^{\frac{g}{R_{d}\gamma_{s}}}$$</p>		
+		<p>\(P_{sta}\) = station pressure in millibars (mb)</p>
+		<p>\(P_{0}\) = standard sea level pressure (1013.25mb)</p>
+		<p>\(R_{d}\) = gas constant for dry air (\(287.05 \frac{J}{kg \cdot K}\))</p>
+		<p>\(\gamma_{s}\) = standard atmosphere lapse rate (\(0.0065 \frac{K}{m}\))</p>
+		<p>\(g\) = gravity (\(9.80665 \frac{m}{s^{2}}\))
+		<p>\(h_{el}\) = ground elevation in meters (m)</p>
+		<p>\(h_{ag}\) = station height above ground in meters (m)</p>
+		<p>\(T_{0}\) = standard sea level temperature (\(288.15 K\))</p>
+	</div>
+	
+	<div class="post">
+		<h1><a name="vapor-pressure">Vapor Pressure</a></h1>
+		<p class="source">Source: <a href="https://www.weather.gov/media/epz/wxcalc/vaporPressure.pdf">Weather.gov</a></p>
+		<p>Vapor pressure, \(P_{v}\) can be estimated in units of millibar (mb) as follows:</p>
+		<p>$$P_{v} = \frac{RH}{100} \times{} 6.112 \times{} e^{\Big(\frac{17.67 \times{} T}{T + 243.5}\Big)}$$</p>
+		<p>\(T\) = temperature in degrees Celsius (&degC)</p>
+		<p>\(RH\) = relative humidity (%)</p>
+	</div>
+	
+	<div class="post">
+		<h1><a name="wet-bulb">Wet Bulb Temperature</a></h1>
+		<p class="source">Source: <a href="https://www.weather.gov/media/epz/wxcalc/rhTdFromWetBulb.pdf">Weather.gov</a></p>
+		<p>Wet Bulb Temperature (\(T_{wb}\)), is determined using the following formulas for actual vapor pressure (\(P_{v}\)) and the vapor pressure related to wet bulb temperature (\(P_{v,wb}\)) in millibar (mb):</p>
+		<p>$$P_{v} = P_{v,wb} - P_{stn} \times (T - T_{wb}) \times 0.00066 \times (1 + (0.00115 \times T_{wb}))$$</p>
+		<p>$$P_{v,wb} = 6.112\times{}e^{\Big(\frac{17.67\times{}T_{wb}}{T_{wb}+243.5}\Big)}$$</p>
+		<p>\(T\) = temperature in degrees Celsius (&degC)</p>
+		<p>\(RH\) = relative humidity (%)</p>
+		<p>\(P_{stn}\) = station pressure in millibar (mb)</p>
+		<p>Note, the above equations can't be solved for \(T_{wb}\) directly, but several iterative methods may be used to determine \(T_{wb}\).</p>
+	</div>	
+  <div class="post">
+    <h1><a name="wind-chill">Wind Chill Temperature</a></h1>
+    <p class="source">Source: <a href="https://www.weather.gov/media/epz/wxcalc/windChill.pdf">Weather.gov</a></p>		
+    <p>Wind Chill is calculated for temperatures at or below 50&degF and wind speeds above 3mph.</p>
+    <p>$$T_{wc} = 35.74 + (0.6215\times{} T) 
+	    \\- \Big(35.75\times{}V^{0.16}\Big)
+			\\+ \Big(0.4275\times{}T\times{}V^{0.16}\Big)$$</p>
+    <p>\(T\) = temperature in degrees Fahrenheit (&degF)</p>
+    <p>\(V\) = wind speed in mph</p>
+  </div>  
+</div>

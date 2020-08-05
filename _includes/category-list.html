@@ -1,0 +1,9 @@
+<ul class="category-list">
+    <li><a id="releases-cat" href="{{site.url}}/releases">Releases</a>
+        <ul>
+        {% for category in site.categories %}
+            <li><a href="{{site.url}}/releases/{{ category | first | slugify }}.html">{{ category | first }}</a></li>
+        {% endfor %}
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,50 @@
+{% if include.v >= 31 %}
+	<table>
+		<tr><th>Index</th><th>Field</th><th>Units</th></tr>
+		<tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+		<tr><td>1</td><td>Illuminance</td><td>Lux</td></tr>
+		<tr><td>2</td><td>UV</td><td>Index</td></tr>
+		<tr><td>3</td><td>Rain Accumulated</td><td>mm</td></tr>
+		<tr><td>4</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+		<tr><td>5</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+		<tr><td>6</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+		<tr><td>7</td><td>Wind Direction</td><td>Degrees</td></tr>
+		<tr><td>8</td><td>Battery</td><td>Volts</td></tr>
+		<tr><td>9</td><td>Report Interval</td><td>Minutes</td></tr>
+		<tr><td>10</td><td>Solar Radiation</td><td>W/m^2</td></tr>
+		<tr><td>11</td><td>Local Day Rain Accumulation</td><td>mm</td></tr>
+		<tr><td>12</td><td>Precipitation Type</td><td>0 = none, 1 = rain, 2 = hail</td></tr>
+		<tr><td>13</td><td>Wind Sample Interval</td><td>seconds</td></tr>
+	</table>
+{% elsif include.v >= 29 %}
+	<table>
+		<tr><th>Index</th><th>Field</th><th>Units</th></tr>
+		<tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+		<tr><td>1</td><td>Illuminance</td><td>Lux</td></tr>
+		<tr><td>2</td><td>UV</td><td>Index</td></tr>
+		<tr><td>3</td><td>Rain Accumulated</td><td>mm</td></tr>
+		<tr><td>4</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+		<tr><td>5</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+		<tr><td>6</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+		<tr><td>7</td><td>Wind Direction</td><td>Degrees</td></tr>
+		<tr><td>8</td><td>Battery</td><td>Volts</td></tr>
+		<tr><td>9</td><td>Report Interval</td><td>Minutes</td></tr>
+		<tr><td>10</td><td>Solar Radiation</td><td>W/m^2</td></tr>
+		<tr><td>11</td><td>Local Day Rain Accumulation</td><td>mm</td></tr>
+	</table>
+{% else %}
+	<table>
+		<tr><th>Index</th><th>Field</th><th>Units</th></tr>
+		<tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+		<tr><td>1</td><td>Illuminance</td><td>Lux</td></tr>
+		<tr><td>2</td><td>UV</td><td>Index</td></tr>
+		<tr><td>3</td><td>Precip Accumulated</td><td>mm</td></tr>
+		<tr><td>4</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+		<tr><td>5</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+		<tr><td>6</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+		<tr><td>7</td><td>Wind Direction</td><td>Degrees</td></tr>
+		<tr><td>8</td><td>Battery</td><td>Volts</td></tr>
+		<tr><td>9</td><td>Report Interval</td><td>Minutes</td></tr>
+		<tr><td>10</td><td>Solar Radiation</td><td>W/m^2</td></tr>
+	</table>
+{% endif %}

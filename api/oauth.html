@@ -1,0 +1,111 @@
+---
+layout: apihome
+title: WeatherFlow Smart Weather OAuth 2.0 Support
+---
+
+<h2><a name="overview">Overview</a></h2>
+<p>The Smart Weather API supports the Authorization Code grant type.  For clients that are unable to maintain the confidentiality of the client secret, the API also supports the Authorization Code with PKCE grant type.</p>
+
+<h2><a name="overview">Creating a Client Application</a></h2>
+<p>Before you can begin using OAuth with the Smart Weather API, you must register your application with WeatherFlow. To do so, sign in to your Smart Weather account on the <a href="https://smartweather.weatherflow.com">Smart Weather Website</a>, navigate to Settings and then to Developers.</p>
+<p>The information below is required to register your application.</p>
+
+<p class="step">Application Name</p>
+<p>The name of your application.  This name will be displayed on the authorization page and should be a name that users will recognize and trust.</p>
+
+<p class="step">Application Description</p>
+<p>A brief description of your application.</p>
+
+<p class="step">Authorization Callback URL</p>
+<p>The endpoint that will receive authorization codes.  Each application may have muiltiple callback URLs.  For mobile applications a custom URL scheme can be registered.</p>
+
+<p class="hint">To register an appliction, you must have a Smart Weather account.</p>
+
+<h2><a name="authorization-code-grant">Authorization Code Grant Type</a></h2>
+<p class="step">Step 1:</p>
+<p>Request authorization from the user using the authorization endpoint below.</p>
+<p><span class="code-highlight code-highlight-extra-padding">https://smartweather.weatherflow.com/authorize.html</span></p>
+<p>With the request include the following query string parameters:</p>
+
+<p class="step monospace">client_id</p>
+<p>Provided when your application was created.</p>
+
+<p class="step monospace">response_type</p>
+<p>Set this value to <span class="code-highlight">code</span> to indicate that you would like an authorization code returned.</p>
+
+<p class="step monospace">redirect_uri</p>
+<p>The url you want the user to be redirected to after the authorization is completed.</p>
+
+<p class="hint">The redirect URL provided in the query string must be registered with the Smart Weather API.  If needed, you may register more than one redirect URL.</p>
+
+
+<p class="step">Step 2:</p>
+<p>Once redirected to the authorization page, the user will approve or deny the authorization request.  If they approve the request they will be redirected back to the redirect URL you provided along with an authorization code.</p>
+<p>Exchange the authorization code for an access token by making a <span class="code-highlight">POST</span> request to the API endpoint below.</p>
+<p><span class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/id/oauth2/token</span></p>
+
+<p>In the URL Encoded Form body of the <span class="code-highlight">POST</span> request include:</p>
+
+<p class="step monospace">grant_type</p>
+<p>Set this value to <span class="code-highlight">authorization_code</span></p>
+
+<p class="step monospace">code</p>
+<p>The authorization code received in the query string from the authorization server.</p>
+
+<p class="step monospace">client_secret</p>
+<p>Provided when your application was created.</p>
+
+<p class="hint">If you are not using a server application and cannot properly secure the client secret use the Authorization Code Grant with PKCE method instead.</p>
+
+<h2><a name="authorization-code-grant-pkce">Authorization Code with PKCE Grant Type</a></h2>
+
+<p>The Authorization Code with PKCE (Proof Key for Code Exchange) grant type is for applications that are not able to protect their client secret.</p>
+
+<p class="step">Step 1:</p>
+<p>Generate a code verifier.  This is a random string using the characters <span class="monospace">A-Z</span>, <span class="monospace">a-z</span>, <span class="monospace">0-9</span> and the characters <span class="monospace">-._~</span> that is between 43 to 128 characters long.</p>
+
+<p class="step">Step 2:</p>
+<p>Create a code challenge using the code verifier generated in Step 1.  The code challenge is a BASE64-URL-encoded string of the SHA256 hash of the code verifier.</p>
+
+<p class="hint">Our <a href="{{site.url}}/api/code-challenge.html">Code Challenge Tool</a> allows you to generate a sample code verifier and code challenge.  You may also enter your own code verifier and check to make sure you are generating the code challenge correctly.</p>
+
+<p class="step">Step 3:</p>
+<p>Request authorization from the user using the authorization endpoint below.</p>
+<p><span class="code-highlight code-highlight-extra-padding">https://smartweather.weatherflow.com/authorize.html</span></p>
+<p>With the request include the following query string parameters:</p>
+
+<p class="step monospace">client_id</p>
+<p>Provided when your application was created.</p>
+
+<p class="step monospace">response_type</p>
+<p>Set this value to <span class="code-highlight">code</span> to indicate that you would like an authorization code returned.</p>
+
+<p class="step monospace">redirect_uri</p>
+<p>The url you want the user to be redirected to after the authorization is completed.</p>
+
+<p class="step monospace">code_challenge</p>
+<p>The code challenge that was created in Step 2.</p>
+
+<p class="step monospace">code_challenge_method</p>
+<p>Use <span class="code-highlight">S256</span> to indicate that the <span class="code-highlight">code_challenge</span> parameter is a SHA256 hash of the code verifier.</p>
+
+<p class="hint">The redirect URL provided in the query string must be registered with the Smart Weather API.  If needed, you may register more than one redirect URL.</p>
+
+<p class="step">Step 4:</p>
+<p>Once redirected to the authorization page, the user will approve or deny the authorization request.  If they approve the request they will be redirected back to the redirect URL you provided along with an authorization code.</p>
+<p>Exchange the authorization code for an access token by making a <span class="code-highlight">POST</span> request to the API endpoint below.</p>
+<p><span class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/id/oauth2/token</span></p>
+
+<p>In the URL Encoded Form body of the <span class="code-highlight">POST</span> request include:</p>
+
+<p class="step monospace">client_id</p>
+<p>Provided when your application was created.</p>
+
+<p class="step monospace">grant_type</p>
+<p>Set this value to <span class="code-highlight">authorization_code</span></p>
+
+<p class="step monospace">code</p>
+<p>The authorization code received in the query string from the authorization server.</p>
+
+<p class="step monospace">code_verifier</p>
+<p>The random string generated in Step 1.</p>

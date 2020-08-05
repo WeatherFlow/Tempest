@@ -1,0 +1,119 @@
+{% if include.v >= 111 %}
+	<h4>Reset Flag Values</h4>
+	<table>
+		<tr><td>Value</td><td>Description</td></tr>
+		<tr><td>BOR</td><td>Brownout reset</td></tr>
+		<tr><td>PIN</td><td>PIN reset</td></tr>
+		<tr><td>POR</td><td>Power reset</td></tr>
+		<tr><td>SFT</td><td>Software reset</td></tr>
+		<tr><td>WDG</td><td>Watchdog reset</td></tr>
+		<tr><td>WWD</td><td>Window watchdog reset</td></tr>
+		<tr><td>LPW</td><td>Low-power reset</td></tr>
+	</table>
+
+	<h4>fs</h4>
+	<p>For internal use.</p>
+
+	<h4>radio_stats</h4>
+	<table>
+	  <tr><th>Index</th><th>Field</th></tr>
+	  <tr><td>0</td><td>Version</td></tr>
+	  <tr><td>1</td><td>Reboot Count</td></tr>
+	  <tr><td>2</td><td>I2C Bus Error Count</td></tr>
+	  <tr><td>3</td><td>Radio Status (0 = Radio Off, 1 = Radio On, 3 = Radio Active)</td></tr>
+	</table>
+
+	<h4>mqtt_stats</h4>
+	<p>For internal use.</p>
+{% elsif include.v >= 105 %}
+	<h4>Reset Flag Values</h4>
+	<table>
+		<tr><td>Value</td><td>Description</td></tr>
+		<tr><td>BOR</td><td>Brownout reset</td></tr>
+		<tr><td>PIN</td><td>PIN reset</td></tr>
+		<tr><td>POR</td><td>Power reset</td></tr>
+		<tr><td>SFT</td><td>Software reset</td></tr>
+		<tr><td>WDG</td><td>Watchdog reset</td></tr>
+		<tr><td>WWD</td><td>Window watchdog reset</td></tr>
+		<tr><td>LPW</td><td>Low-power reset</td></tr>
+	</table>
+
+	<h4>fs</h4>
+	<p>For internal use.</p>
+
+	<h4>radio_stats</h4>
+	<table>
+	  <tr><th>Index</th><th>Field</th></tr>
+	  <tr><td>0</td><td>Version</td></tr>
+	  <tr><td>1</td><td>Reboot Count</td></tr>
+	  <tr><td>2</td><td>I2C Bus Error Count</td></tr>
+	</table>
+
+	<h4>mqtt_stats</h4>
+	<p>For internal use.</p>
+{% elsif include.v >= 70 %}
+	<h4>Reset Flag Values</h4>
+	<table>
+		<tr><td>Value</td><td>Description</td></tr>
+		<tr><td>BOR</td><td>Brownout reset</td></tr>
+		<tr><td>PIN</td><td>PIN reset</td></tr>
+		<tr><td>POR</td><td>Power reset</td></tr>
+		<tr><td>SFT</td><td>Software reset</td></tr>
+		<tr><td>WDG</td><td>Watchdog reset</td></tr>
+		<tr><td>WWD</td><td>Window watchdog reset</td></tr>
+		<tr><td>LPW</td><td>Low-power reset</td></tr>
+	</table>
+
+	<h4>fs</h4>
+	<p>For internal use.</p>
+
+	<h4>radio_stats</h4>
+	<table>
+	  <tr><th>Index</th><th>Field</th></tr>
+	  <tr><td>0</td><td>Version</td></tr>
+	  <tr><td>1</td><td>Reboot Count</td></tr>
+	</table>
+
+	<h4>mqtt_stats</h4>
+	<p>For internal use.</p>
+{% elsif include.v >= 65 %}
+	<h4>Reset Flag Values</h4>
+	<table>
+		<tr><td>Value</td><td>Description</td></tr>
+		<tr><td>BOR</td><td>Brownout reset</td></tr>
+		<tr><td>PIN</td><td>PIN reset</td></tr>
+		<tr><td>POR</td><td>Power reset</td></tr>
+		<tr><td>SFT</td><td>Software reset</td></tr>
+		<tr><td>WDG</td><td>Watchdog reset</td></tr>
+		<tr><td>WWD</td><td>Window watchdog reset</td></tr>
+		<tr><td>LPW</td><td>Low-power reset</td></tr>
+	</table>
+
+	<h4>fs</h4>
+	<p>For internal use.</p>
+
+	<h4>radio_stats</h4>
+	<table>
+	  <tr><th>Index</th><th>Field</th></tr>
+	  <tr><td>0</td><td>Version</td></tr>
+	  <tr><td>1</td><td>Reboot Count</td></tr>
+	</table>
+{% elsif include.v >= 29 %}
+	<h4>Reset Flag Values</h4>
+	<table>
+		<tr><td>Value</td><td>Description</td></tr>
+		<tr><td>BOR</td><td>Brownout reset</td></tr>
+		<tr><td>PIN</td><td>PIN reset</td></tr>
+		<tr><td>POR</td><td>Power reset</td></tr>
+		<tr><td>SFT</td><td>Software reset</td></tr>
+		<tr><td>WDG</td><td>Watchdog reset</td></tr>
+		<tr><td>WWD</td><td>Window watchdog reset</td></tr>
+		<tr><td>LPW</td><td>Low-power reset</td></tr>
+	</table>
+
+	<h4>stack</h4>
+	<p>For internal use.</p>
+
+	<h4>fs</h4>
+	<p>For internal use.</p>
+{% endif %}

@@ -1,0 +1,14 @@
+{% if include.v >= 29 %}
+	<h3>Status (device) [type = device_status]</h3>
+{% else %}
+	<h3>Status (device) [type = station_status]</h3>
+{% endif %}
+
+<div class="code-highlight">
+{% highlight javascript %}
+{% include device-status-json.html v=include.v %}
+{% endhighlight %}
+</div>
+
+{% include device-status-desc.html v=include.v %}
+

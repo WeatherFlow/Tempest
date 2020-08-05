@@ -1,0 +1,4879 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "WeatherFlow Smart Weather API",
+    "contact": {
+      "email": "jforare@weatherflow.com"
+    }
+  },
+  "host": "dev-swd.weatherflow.com",
+  "basePath": "/swd/rest",
+  "tags": [
+    {
+      "name": "application",
+      "description": "Manage Oauth Applications"
+    },
+    {
+      "name": "calibration",
+      "description": "Manage Calibrations"
+    },
+    {
+      "name": "cl",
+      "description": "Continuous Learning"
+    },
+    {
+      "name": "device_learning",
+      "description": "Manage Device Learning values."
+    },
+    {
+      "name": "devices",
+      "description": "Manage User Devices"
+    },
+    {
+      "name": "events",
+      "description": "Get time series Event data"
+    },
+    {
+      "name": "forecast",
+      "description": "Get forecast data"
+    },
+    {
+      "name": "locations",
+      "description": "Locations (Stations)"
+    },
+    {
+      "name": "location_configuration",
+      "description": "Set primary sensors for a Location"
+    },
+    {
+      "name": "location_image",
+      "description": "Location Images by location_integration_id"
+    },
+    {
+      "name": "location_integration",
+      "description": "Things integrated with a Location (Nest camera)"
+    },
+    {
+      "name": "location_items",
+      "description": "Location Items (Cards)"
+    },
+    {
+      "name": "location_share",
+      "description": "Public Location meta data and third party sharing"
+    },
+    {
+      "name": "manufacturing",
+      "description": "Hardware and firmware"
+    },
+    {
+      "name": "nest",
+      "description": "Nest"
+    },
+    {
+      "name": "observations",
+      "description": "Get observations for a Smart Weather Device."
+    },
+    {
+      "name": "support",
+      "description": "Services for Support and Customer Service Tools"
+    },
+    {
+      "name": "token",
+      "description": "Manage Access Tokens"
+    },
+    {
+      "name": "user",
+      "description": "Users"
+    },
+    {
+      "name": "user_notifications",
+      "description": "Configure and Get User Notifications"
+    },
+    {
+      "name": "user_settings",
+      "description": "Set User Settings"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "security": [
+    {
+      "swdImplicit": [
+        "user"
+      ]
+    },
+    {
+      "swdApiKey": []
+    }
+  ],
+  "paths": {
+
+    "/token": {
+      "get": {
+        "tags": [
+          "token"
+        ],
+        "description": "Get All tokens for a user.  Application data is also included with each token.  Personal Use tokens are not included in this set.  They have their own getter. see GET token_personal_use",
+        "summary": "Get All tokens for a user",
+        "operationId": "getToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }    
+    },
+    "/token_personal_use": {
+      "get": {
+        "tags": [
+          "token"
+        ],
+        "description": "Get all Personal Use Tokens for a user.  This is the only way to get these tokens.  They are filterd from the get all tokens request.",
+        "summary": "Get All Personal Use Tokens for a user",
+        "operationId": "getToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "token"
+        ],
+        "summary": "Create a Personal Use Access Token",
+        "description": "Create a new Personal Use Access Token.  These tokens are the easiest way an API user can get started.  They are connected to a hidden Personal Use application that is owned by the user.  A user can create multiple Personal Use tokens and are all limited at the User level using the hidden application that they belong to.",
+        "operationId": "createPersonalUseAccessToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "An optional name that can be added to a token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "token"
+        ],
+        "summary": "Update a Personal Use Access Token",
+        "description": "Update the name associated with a Personal Use Token",
+        "operationId": "updatePersonalUseAccessToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token_id",
+            "in": "query",
+            "description": "The token_id for the token that you want to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A Name that can be added to a token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },      
+      "delete": {
+        "tags": [
+          "token"
+        ],
+        "description": "Delete a Personal Use Access Token",
+        "summary": "Delete a Personal Use Access Token",
+        "operationId": "deletePersonalUseToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token_id",
+            "in": "query",
+            "description": "The token_id for the token that you want to delete.",
+            "required": true,
+            "type": "String"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+  "/token_application": {
+      "get": {
+        "tags": [
+          "token"
+        ],
+        "description": "Get all Application Tokens for an application.  All application tokens belong to the common user apps@weatherflow.com.  These tokens have application specific access.  The default access is guest access to public data.",
+        "summary": "Get All Application Tokens for an application",
+        "operationId": "getApplicationTokens",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+       "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The client_id of the application that you want to get Application tokens for.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "token"
+        ],
+        "summary": "Create an Application Access Token",
+        "description": "Create a new Application Access Token.  These tokens allow an application owner to access the API without attaching a token to their user.  By default they will get access to public data.  Application specific access rules can be applied to these tokens.",
+        "operationId": "createApplicationAccessToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The client_id of the application that you want to create an Application token for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "An optional name that can be added to a token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "token"
+        ],
+        "summary": "Update an Application Access Token",
+        "description": "Update the name associated with an Application Token",
+        "operationId": "updateApplicationAccessToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token_id",
+            "in": "query",
+            "description": "The token_id for the token that you want to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A Name that can be added to a token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },      
+      "delete": {
+        "tags": [
+          "token"
+        ],
+        "description": "Delete an Application Access Token",
+        "summary": "Delete an Application Use Access Token",
+        "operationId": "deleteApplicationUseToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token_id",
+            "in": "query",
+            "description": "The token_id for the token that you want to delete.",
+            "required": true,
+            "type": "String"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/forecast": {
+      "get": {
+        "tags": [
+          "forecast"
+        ],
+        "summary": "Get a Simple Daily Forecast",
+        "description": "This is the daily forecast used by the forecast card in the v1 apps",
+        "operationId": "getForecast",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "long"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "long"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/better_forecast": {
+      "get": {
+        "tags": [
+          "forecast"
+        ],
+        "summary": "Get all Better Forecast Data",
+        "description": "The better forecast includes current conditions, daily forecast and hourly forecast.",
+        "operationId": "getBetterForecast",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "long"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "long"
+          },
+          {
+            "name": "station_id",
+            "in": "query",
+            "description": "The station_id to use in the current conditions response object.  If the Station has a recent observation it will be used.  Any fields not available from the Station will get their values from the another source. If a station_id is not provided all current condition data will come from another source",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "units_temp",
+            "in": "query",
+            "description": "default = c",
+            "required": false,
+            "enum": [
+              "c",
+              "f"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_wind",
+            "in": "query",
+            "description": "default = mps",
+            "required": false,
+            "enum": [
+              "mph",
+              "kph",
+              "kts",
+              "mps",
+              "bft",
+              "lfm"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_pressure",
+            "in": "query",
+            "description": "default = mb",
+            "required": false,
+            "enum": [
+              "mb",
+              "inhg",
+              "mmhg",
+              "hpa"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_precip",
+            "in": "query",
+            "description": "default = mm",
+            "required": false,
+            "enum": [
+              "mm",
+              "cm",
+              "in"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_distance",
+            "in": "query",
+            "description": "default = km",
+            "required": false,
+            "enum": [
+              "km",
+              "mi"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "numbers_as_strings",
+            "in": "query",
+            "description": "All number fields in the response object will be Strings.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "verbose",
+            "in": "query",
+            "description": "Add a debug root level object to the response.  This object will contain all source data used and other useful information.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/application": {
+      "get": {
+        "tags": [
+          "application"
+        ],
+        "summary": "Get Oauth Applications",
+        "description": "Applications belong to users.  Some support switches are available when using an enterprise key.",
+        "operationId": "getApplication",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "include_metrics",
+            "in": "query",
+            "description": "Include application usage time series count metrics for the last 2 weeks.  The String array of values is time(UTC),count.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "include_all_applications",
+            "in": "query",
+            "description": "Support (Enterprise only) switch for getting all Oauth Applications and nested Access Tokens.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "include_all_tokens",
+            "in": "query",
+            "description": "Support (Enterprise only) switch to return all tokens when using include_all_applications",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "application"
+        ],
+        "description": "Create Oauth Application",
+        "summary": "Create a new Oauth Application",
+        "operationId": "createOauthApplication",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "application_in",
+            "in": "body",
+            "description": "All fields posted in the body will be inserted in the database.  It is not necessary to post all fields. Default values will be used.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ApplicationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "application"
+        ],
+        "description": "Update Oauth Application",
+        "summary": "Update Oauth Application. Send the changed items in the body with the application_id.",
+        "operationId": "updateOauthApplication",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "application_in",
+            "in": "body",
+            "description": "All fields put in the body will be updated in the database.  It is not necessary to put all fields.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationPut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "application"
+        ],
+        "description": "Delete an Oauth Application",
+        "summary": "Delete an Oauth Application",
+        "operationId": "deleteApplication",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "client_id of the Application to delete",
+            "required": true,
+            "type": "String"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/cl_analysis": {
+      "get": {
+        "tags": [
+          "cl"
+        ],
+        "description": "The Continuous Learning analysis is a generated json file on S3.",
+        "summary": "Get the latest Countuous Learning analysis for a station or get the entire analysis.",
+        "operationId": "getCLAnalysis",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "description": "ID of Station",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cl_type",
+            "in": "query",
+            "description": "The type of analysis file.<br><br>AVAILABLE TYPES<br>humidity<br>pressure<br>rain<br>uv",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/cl_analysis_set": {
+      "get": {
+        "tags": [
+          "cl"
+        ],
+        "description": "The Continuous Learning analysis is a generated json file on S3.",
+        "summary": "Get the last 10 Countuous Learning analysis for a station.",
+        "operationId": "getCLAnalysisSet",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "description": "ID of Station",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "cl_type",
+            "in": "query",
+            "description": "The type of analysis file.<br><br>AVAILABLE TYPES<br>humidity<br>pressure<br>rain<br>uv",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "num",
+            "in": "query",
+            "description": "Number of files to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/cl_device_qc": {
+      "get": {
+        "tags": [
+          "cl"
+        ],
+        "description": "The QC data is always in the latest RainCheck file.",
+        "summary": "Get the latest RainCheck QC for a Device",
+        "operationId": "getCLDeviceQC",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "ID of Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/cl_device_qc_set": {
+      "get": {
+        "tags": [
+          "cl"
+        ],
+        "description": "The QC data is always in the latest RainCheck file.",
+        "summary": "Get the latest RainCheck QC for all Devices",
+        "operationId": "getCLDeviceQC",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "This services supports a csv response option.  Use format=csv",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/device_learning_reset": {
+      "get": {
+        "tags": [
+          "device_learning"
+        ],
+        "description": "Reset Device Learning status",
+        "summary": "Reset Device Learning status so it will start over.",
+        "operationId": "getDeviceLearning",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "ID of Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/device_learning_setup_complete": {
+      "get": {
+        "tags": [
+          "device_learning"
+        ],
+        "description": "Set Device Learning to Setup Complete",
+        "summary": "Sets the status of Device Learning for a Device to Setup Complete",
+        "operationId": "getDeviceLearning",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "ID of Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/device_learning": {
+      "get": {
+        "tags": [
+          "device_learning"
+        ],
+        "description": "Get Device Learning by station_id",
+        "summary": "Get Device Learning values for all Devices in a Station",
+        "operationId": "getDeviceLearning",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "description": "Station ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/calibrations": {
+      "get": {
+        "tags": [
+          "calibration"
+        ],
+        "description": "Get all non confirmed Hub Calibration Settings",
+        "summary": "Get all non confirmed Hub Calibration Settings.  This is the starting point for the Hub Calibrations Settings sync system.",
+        "operationId": "getCalibrations",
+        "security": [
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/calibration/{device_id}": {
+      "get": {
+        "tags": [
+          "calibration"
+        ],
+        "description": "Get all Hub Calibration Settings for a Device",
+        "summary": "Get all Hub Calibration Settings for a Device.",
+        "operationId": "getCalibrationByDeviceId",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/calibration": {
+      "post": {
+        "tags": [
+          "calibration"
+        ],
+        "summary": "Updates settings for a Device stored on the Hub and/or the Device",
+        "description": "This will update the values in the database and immediately push the values to the Hub.  If confirmation does not happen with a Hub response it will fall into the job work list for the sync system.<br><br>Hub v94 added two new fields (do not send these if hub < v94)<br>sky_rain_scale_b<br>sky_gust_lull_factor<br><br>2020.3.11 Added as3935* support",
+        "operationId": "updateHubCalibrationSettings",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "settings",
+            "in": "body",
+            "description": "All fields posted in the body will be updated in the database.  It is not necessary to post all fields. (power_saving_mode 0 = off, 1 = on)",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HubCalibrationSettingsPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/calibration_push_to_hub": {
+      "get": {
+        "tags": [
+          "calibration"
+        ],
+        "description": "Push Hub Calibration Settings for a Device",
+        "summary": "Pushes the current Hub Calibration Settings values in the database to the Hub that the device is connected to.  The Device's device_id or serial_number can be used.",
+        "operationId": "pushHubCalibration",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "ID of Device (not hub)",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "serial_number",
+            "in": "query",
+            "description": "Serial Number of Device (not hub)",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/events/device/{device_id}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "description": "Get time series Event data.<br><br>Response Array Layout<br><br>evt_strike<br>0 timestamp<br>1 distance (km)<br>2 energy<br><br>All others<br>0 timestamp  ",
+        "summary": "Get time series Event data",
+        "operationId": "getEventsByDeviceId",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "description": "CSV list of event types that you want data for.<br><br>AVAILABLE TYPES<br>evt_strike<br>evt_precip<br>evt_device_online<br>evt_device_offline",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "day_offset",
+            "in": "query",
+            "description": "TIME FILTER - Get all events in the range of the offset day to today UTC. offset.<br><br>0 - Current day UTC<br>1 - Yesterday UTC",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_start",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_end",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    },
+    "/events/station/{station_id}": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "description": "Get time series Event data.<br><br>Response Array Layout<br><br>All<br>0 timestamp  ",
+        "summary": "Get time series Event data",
+        "operationId": "getEventsByStationId",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "path",
+            "description": "ID of Station",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "description": "CSV list of event types that you want data for.<br><br>AVAILABLE TYPES<br>evt_station_online<br>evt_station_offline",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "day_offset",
+            "in": "query",
+            "description": "TIME FILTER - Get all events in the range of the offset day to today UTC. offset.<br><br>0 - Current day UTC<br>1 - Yesterday UTC",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_start",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_end",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "description": "Create a new User.<br><br>Fields from Firebase Token<br>uid<br>name<br>email_address<br>provider",
+        "summary": "Create a new User",
+        "operationId": "craeateUser",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "The User to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "description": "Update a User.<br><br>Fields from Firebase Token<br>uid<br>name<br>email_address<br>provider",
+        "summary": "Update a User",
+        "operationId": "updateUser",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "The updated User values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/user_groups": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "description": "Get the set of groups that a user belongs to.",
+        "summary": "Get User Groups",
+        "operationId": "getUserGroups",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/user_settings": {
+      "get": {
+        "tags": [
+          "user_settings"
+        ],
+        "description": "Get the saved Settings for a user",
+        "summary": "Get the saved Settings for a user",
+        "operationId": "getUserSettings",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user_settings"
+        ],
+        "description": "Create User Settings for a user.<br><br>units_temp [f,c]<br>units_wind [mps,mph,kph,kts,bft,lmf]<br>units_other [imperial,metric]<br>units_precip [in,mm,cm]<br>units_distanct [mi,km]<br>units_pressure [inhg,mb]<br>units_direction [degrees,cardinal]<br>events_status [true,false]<br>events_lightning [true,false]<br>events_rain_start [true,false]<br>current_location [location_id]<br>location_name",
+        "summary": "Create User Settings for a user",
+        "operationId": "craeateUserSettings",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userNotification",
+            "in": "body",
+            "description": "The User Settings to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserSettingsPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user_settings"
+        ],
+        "description": "Update a User Settings.  Must submit all settings.<br><br>units_temp [f,c]<br>units_wind [mps,mph,kph,kts,bft,lmf]<br>units_other [imperial,metric]<br>units_precip [in,mm,cm]<br>units_distanct [mi,km]<br>units_pressure [inhg,mb]<br>units_direction [degrees,cardinal]<br>events_status [true,false]<br>events_lightning [true,false]<br>events_rain_start [true,false]<br>current_location [location_id]<br>location_name",
+        "summary": "Update User Settings",
+        "operationId": "updateUserSettings",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userNotification",
+            "in": "body",
+            "description": "The updated User Settings values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserSettingsPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user_settings"
+        ],
+        "description": "Delete a User Settings record",
+        "summary": "Delete a User Settings record",
+        "operationId": "deleteUserSettings",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/diagnostics/{location_id}": {
+      "get": {
+        "tags": [
+          "support"
+        ],
+        "description": "Diagnostic data for all Devices in a Station",
+        "summary": "Get Station Diagnostics",
+        "operationId": "getStationDiagnosticsById",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "path",
+            "description": "ID of Location to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/report": {
+      "get": {
+        "tags": [
+          "support"
+        ],
+        "description": "Get a custom report.  Use a JSON string to define the desired report.<br><br>Example:<br>{\"report_name\":\"get_user\",\"user_id\":\"SctOdpF8bdYP54OSrTWq93QSBzD3\"}",
+        "summary": "Get a custom report",
+        "operationId": "getReport",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "options",
+            "in": "query",
+            "description": "JSON report properties",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "support"
+        ],
+        "description": "Get a custom report.  Use a JSON string to define the desired report.",
+        "summary": "Get a custom report",
+        "operationId": "getReportPost",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device",
+            "in": "body",
+            "description": "Report properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/status_message_report": {
+      "get": {
+        "tags": [
+          "support"
+        ],
+        "description": "Get a report on a variety of metrics gathered from device status messages.",
+        "summary": "Get a report using device status message data",
+        "operationId": "getStatusMessageReport",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "include_device_ids",
+            "in": "query",
+            "description": "Make the response verbose and add device_id arrays to it.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "minutes_offset",
+            "in": "query",
+            "description": "Minutes offset from now used to determine the minimum time used when selecting device status messages",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/status_messages_latest": {
+      "get": {
+        "tags": [
+          "support"
+        ],
+        "description": "Get latest devices status messages.  Optional filters can be applied.",
+        "summary": "Get a latest device status messages",
+        "operationId": "getStatusMessageReport",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_type",
+            "in": "query",
+            "description": "Filter by device type<br><br>Possible values<br>AR<br>SK",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "minutes_offset",
+            "in": "query",
+            "description": "Minutes offset from now used to determine the minimum time used when selecting device status messages",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sensor_status",
+            "in": "query",
+            "description": "Filter by sensor status<br><br>Possible values<br>OK<br>AIR_LIGHTNING_FAIL<br>AIR_LIGHTNING_NOISE<br>AIR_LIGHTNING_DISTURBER<br>AIR_PRESSURE_FAIL<br>AIR_TEMPERATURE_FAIL<br>AIR_RH_FAIL<br>SKY_WIND_FAIL<br>SKY_PRECIP_FAIL<br>SKY_LIGHT_UV_FAIL",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/devices": {
+      "get": {
+        "tags": [
+          "devices"
+        ],
+        "description": "Get all Devices for a user.  Devices are also returned in the Locations(Stations) response.",
+        "summary": "Get all Devices for a user",
+        "operationId": "getDevices",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "devices"
+        ],
+        "description": "Create a new Device for a User",
+        "summary": "Create a new Device for a User",
+        "operationId": "craeateDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device",
+            "in": "body",
+            "description": "The Device to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevicePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/devices/{device_id}": {
+      "put": {
+        "tags": [
+          "devices"
+        ],
+        "description": "Update a Device",
+        "summary": "Update a Device",
+        "operationId": "updateDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the Device target",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "device",
+            "in": "body",
+            "description": "The Device values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DevicePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "devices"
+        ],
+        "description": "Delete a Device record",
+        "summary": "Delete a Device record",
+        "operationId": "deleteDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of the Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/user_notifications": {
+      "get": {
+        "tags": [
+          "user_notifications"
+        ],
+        "description": "Get User Notification targets for a user.  Firebase Cloud Messaging (fcm) is the only type so far",
+        "summary": "Get User Notification targets for a user",
+        "operationId": "getUserNotifications",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user_notifications"
+        ],
+        "description": "Create a new User Notification target",
+        "summary": "Create a new User Notification target",
+        "operationId": "craeateUserNotification",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userNotification",
+            "in": "body",
+            "description": "The User Notification target to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserNotificationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/user_notifications/{user_notification_id}": {
+      "put": {
+        "tags": [
+          "user_notifications"
+        ],
+        "description": "Update a User Notification target record.  Update fields: type, send_to, status, name",
+        "summary": "Update User Notification target record",
+        "operationId": "updateUserNotification",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_notification_id",
+            "in": "path",
+            "description": "ID of the UserNotification target",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "userNotification",
+            "in": "body",
+            "description": "The updated User Notification values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserNotificationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user_notifications"
+        ],
+        "description": "Delete a User Notification record",
+        "summary": "Delete a User Notification record",
+        "operationId": "deleteUserNotification",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_notification_id",
+            "in": "path",
+            "description": "ID of the User Notification",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "tags": [
+          "user_notifications"
+        ],
+        "description": "Get a history of the notifications sent to a user for a Station.  Notification type and time filters are available.  The default time range is the last 28 days.  The key is station_id.<br><br>Types<br>evt_strike<br>evt_precip<br>evt_device_online<br>evt_device_offline<br>evt_station_online<br>evt_station_offline<br>evt_qc_alert_rain<br><br>The type filter is a wildcard.  For example, a value of station will return both evt_station_online and evt_station_offline types.",
+        "summary": "Get a history of the notifications sent to a user",
+        "operationId": "getNotifications",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "description": "The station_id for the Station.",
+            "required": true,
+            "type": "int64"
+          },
+          {
+            "name": "time_start",
+            "in": "query",
+            "description": "Time range start in epoch seconds",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_end",
+            "in": "query",
+            "description": "Time range end in epoch seconds",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "type_filter",
+            "in": "query",
+            "description": "Wildcard String to filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/locations": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Smart Weather Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.<br><br>PUBLIC API NOTE<br>The public API maps this service to /stations and converts all fields from location to station.",
+        "summary": "Get all Locations for a user",
+        "operationId": "getStations",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StationSet"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Create a Location (Station)",
+        "summary": "Create a Location",
+        "operationId": "craeateLocation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "body",
+            "description": "The Location to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/locations/{location_id}": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Smart Weather Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.<br><br>PUBLIC API NOTE<br>The public API maps this service to /stations and converts all fields from location to station.",
+        "summary": "Get a Location by ID",
+        "operationId": "getStationById",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "path",
+            "description": "ID of Location to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StationSet"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Update a Location (Station)",
+        "summary": "Update a Location",
+        "operationId": "updateLocation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "path",
+            "description": "ID of Station to update",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "location",
+            "in": "body",
+            "description": "The Location to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Delete a Location (Station)",
+        "summary": "Delete a Location",
+        "operationId": "deleteLocation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "path",
+            "description": "ID of Station to delete",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_share": {
+      "get": {
+        "tags": [
+          "location_share"
+        ],
+        "description": "Get Public field meta data for a Location. Manage meta data used to share locations with third party systems such as WeatherUnderground.  A location only has a single public name.",
+        "summary": "Get Public field meta data for a Location and manage Location (Station) sharing with third parties",
+        "operationId": "getSLocationShare",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "Location (Station) ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LocationSharePost"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "location_share"
+        ],
+        "description": "The location_share POST and PUT are a bit confusing as they have evolved over time. This PUT is used to update the fields of the location share table and requires a location_share_id. The POST is used to update fields in other tables related to public and private data. The POST can also be used to create a new location_share record. Send the fields below as json fields in the POST body for the action that you need<br><br><b>Create a Location third party share</b><br>location_id<br>public_name<br>share_type<br>share_meta.station_id<br>share_meta.station_key<br><br><b>Update public_name</b><br>location_id<br>public_name<br><br><b>Update public lat lon</b><br>location_id<br>public_latitude<br>public_longitude<br><br><b>Update share_with_wf (is_public)</b><br>location_id<br>share_with_wf",
+        "summary": "Create a Location third party share or update Public/Private data",
+        "operationId": "craeateLocationShare",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locationShare",
+            "in": "body",
+            "description": "The Location to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationSharePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_share/{location_share_id}": {
+      "put": {
+        "tags": [
+          "location_share"
+        ],
+        "description": "Update a location share record.  Update fields: share_meta, send_rain.  The location_share POST and PUT are a bit confusing as they have evolved over time.  This PUT is used to update the fields of the location share table and requires a location_share_id.  The POST is used to update fields in other tables related to public and private data.  The POST can also be used to create a new location_share record.",
+        "summary": "Update location share record",
+        "operationId": "updateLocationShare",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_share_id",
+            "in": "path",
+            "description": "ID of the LocationShare",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "locationShare",
+            "in": "body",
+            "description": "The updated location share values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationSharePut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "location_share"
+        ],
+        "description": "Delete a location share record",
+        "summary": "Delete a location share record",
+        "operationId": "deleteLocationShare",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_share_id",
+            "in": "path",
+            "description": "ID of the LocationShare",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_image": {
+      "get": {
+        "tags": [
+          "location_image"
+        ],
+        "description": "Get saved images for a Station.  The key for these images is a location_integration_id.  You can get the latest image or a range by using the minutes_offset parameter.",
+        "summary": "Get Location Images",
+        "operationId": "getLocationImage",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "Location (Station) ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "minutes_offset",
+            "in": "query",
+            "description": "Get all records within the last number of minutes.  If omitted only the latest record is returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "location_image"
+        ],
+        "description": "Create a Location Image",
+        "summary": "Create a Location image",
+        "operationId": "craeateLocationImage",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locationImage",
+            "in": "body",
+            "description": "The Location image to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationImagePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Location Integration not found"
+          }
+        }
+      }
+    },
+    "/location_image/{location_image_id}": {
+      "delete": {
+        "tags": [
+          "location_image"
+        ],
+        "description": "Delete a Location Image record",
+        "summary": "Delete a Location Image record",
+        "operationId": "deleteLocationImage",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_image_id",
+            "in": "path",
+            "description": "ID of the LocationImage",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_integration": {
+      "get": {
+        "tags": [
+          "location_integration"
+        ],
+        "description": "Manage meta data used to integration locations with third party systems such as WeatherUnderground.  A location only has a single public name.",
+        "summary": "Manage Location (Station) sharing with third parties",
+        "operationId": "getSLocationIntegration",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "Location (Station) ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "location_integration"
+        ],
+        "description": "Create a Location third party integration",
+        "summary": "Create a Location third party integration",
+        "operationId": "craeateLocationIntegration",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "locationIntegration",
+            "in": "body",
+            "description": "The Location to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationIntegrationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_integration/{location_integration_id}": {
+      "put": {
+        "tags": [
+          "location_integration"
+        ],
+        "description": "Update a location integration record.  Update fields: integration_meta, public_name",
+        "summary": "Update location integration record",
+        "operationId": "updateLocationIntegration",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_integration_id",
+            "in": "path",
+            "description": "ID of the LocationIntegration",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "locationIntegration",
+            "in": "body",
+            "description": "The updated location integration values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationIntegrationPut"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "location_integration"
+        ],
+        "description": "Delete a location integration record",
+        "summary": "Delete a location integration record",
+        "operationId": "deleteLocationIntegration",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_integration_id",
+            "in": "path",
+            "description": "ID of the LocationIntegration",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_items": {
+      "post": {
+        "tags": [
+          "location_items"
+        ],
+        "description": "Create a Location Item (Card). No getter is available.  The Location Items are included in the GET locations response.  <br><br>item list<br>air_temperature_humidity<br>barometric_pressure<br>lightning<br>light<br>rain<br>wind<br>diagnostics<br>forecast",
+        "summary": "Create a Location Item (Card)",
+        "operationId": "craeateLocationItem",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_item",
+            "in": "body",
+            "description": "The Location Item to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationItemPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_items/{location_item_id}": {
+      "delete": {
+        "tags": [
+          "location_items"
+        ],
+        "description": "Delete a Location Item record",
+        "summary": "Delete a Location Item record",
+        "operationId": "deleteLocationItem",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_item_id",
+            "in": "path",
+            "description": "LocationItem ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/location_items/sort": {
+      "get": {
+        "tags": [
+          "location_items"
+        ],
+        "description": "Set the sort order for all Location Items (Cards) for a Location.  Submit a list containing all location_item_id values for a location in the order that you want them sorted in.",
+        "summary": "Set the sort order for all Location Items (Cards) for a Location.",
+        "operationId": "sortLocationItem",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "The Location that contains the Location Items to be sorted",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "location_item_id_order",
+            "in": "query",
+            "description": "Comma separated list of location_item_id values in the desired sort order.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/location_configuration": {
+      "get": {
+        "tags": [
+          "location_configuration"
+        ],
+        "description": "Configure primary sensors for a Location(Station).  The Location could have multiple devices of the same type.",
+        "summary": "Get primary sensors for a Location",
+        "operationId": "getLocationConfiguration",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "Location (Station) ID",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "primary_only",
+            "in": "query",
+            "description": "Only send all device_id, capability that are primary",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/observations": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "description": "NOTE: This is the first generation endpoint for device observations.  It is only used by our applications.  The public API changes the URL and does not document buckets for now.<br><br>Get observations for a Device(Air,Sky) by using the device_id as the key.  You can find device_id values in the response from the Stations service  You can get observations using several filters (latest, time range, day offset, bucket).  \n  \nUse the \"type\" value to determine the layout of the observations values.  The \"obs\" object is an array of observations.  Each observation is an array of observation values (see layout below).<br><br>**Air**  <br>Observation Layout (1,5,30,180 minute buckets)<br>(type=\"obs_air\")<br>0 - epoch (seconds UTC)<br>1 - pressure (MB)<br>2 - air temperature (C)<br>3 - relative humidity (%)<br>4 - strike count<br>5 - average strike distance<br>6 - battery<br>7 - report interval<br><br>Observation Layout (Day bucket)<br>(type=\"obs_air_ext\")<br>0 - epoch (seconds UTC)<br>1 - pressure avg (MB)<br>2 - air temperature avg (C)<br>3 - relative humidity avg (%)<br>4 - strike count total<br>5 - average strike distance<br>6 - air temperature high (C)<br>7 - air temperature low (C)<br>8 - pressure high (MB)<br>9 - pressure low (MB)<br>10 - relative humidity high (%)<br>11 - relative humidity low (%)<br>12 - record count<br>13 - battery average<br><br>**Sky** <br>Observation Layout (1,5,30,180 minute buckets)<br>(type=\"obs_sky\")<br>0 - epoch (seconds UTC)<br>1 - lux ()<br>2 - UV Index<br>3 - precipitation (mm)<br>4 - wind lull  (m/s)<br>5 - wind avg (m/s)<br>6 - wind gust (m/s)<br>7 - wind dir<br>8 - battery<br>9 - report interval<br>10 - solar radiation<br>11 - local day precip accumulation<br>12 - precipitation type<br>13 - wind sample interval<br>14 - precipitation final (mm)<br>15 - local day precip accumulation final (mm)<br>16 - precip analysis type<br><br>Observation Layout (Day bucket)<br>(type=\"obs_sky_ext\")<br>0 - epoch (seconds UTC)<br>1 - lux ()<br>2 - uv<br>3 - local day precipication accumulation (mm)<br>4 - wind lull (m/s)<br>5 - wind avg (m/s)<br>6 - wind gust (m/s)<br>7 - wind direction<br>8 - lux high ()<br>9 - lux low<br>10 - uv high<br>11 - uv low<br>12 - record count<br>13 - solar radiation<br>14 - solar radiation high<br>15 - solar radiation low<br>16 - battery<br>17 - local day precip accumulation final (mm)<br>18 - precip analysis type<br>19 - local day precip minutes<br>20 - wind sample interval<br>21 - precipitaiton type<br>22 - local day precip minutes final<br><br>**Storm** <br>Observation Layout (1,5,30,180 minute buckets)<br>(type=\"obs_st\")<br>0 - epoch (seconds UTC)<br>1 - wind lull  (m/s)<br>2 - wind avg (m/s)<br>3 - wind gust (m/s)<br>4 - wind dir<br>5 - wind sample interval<br>6 - pressure (MB)<br>7 - air temperature (C)<br>8 - relative humidity (%)<br>9 - illuminance (lux)<br>10 - uv (index)<br>11 - solar radiation (W/m^2)<br>12 - precipitation (mm)<br>13 - precipitation type<br>14 - average strike distance<br>15 - strike count<br>16 - battery<br>17 - report interval<br>18 - local day precip accumulation (mm)<br>19 - precipitaion final (mm)<br>20 - local day precip accumulation final (mm)<br>21 - precip analysis type<br><br>Observation Layout (Day bucket)<br>(type=\"obs_st_ext\")<br>0 - epoch (seconds UTC)<br>1 - pressure avg (MB)<br>2 - pressure high (MB)<br>3 - pressure low (MB)<br>4 - air temperature avg (C)<br>5 - air temperature high (C)<br>6 - air temperature low (C)<br>7 - relative humidity avg (%)<br>8 - relative humidity high (%)<br>9 - relative humidity low (%)<br>10 - illuminance avg (lux)<br>11 - illuminance high (lux)<br>12 - illuminance low (lux)<br>13 - uv avg (index)<br>14 - uv high (index)<br>15 - uv low (index)<br>16 - solar radiation avg (W/m^2)<br>17 - solar radiation high (W/m^2)<br>18 - solar radiation low (W/m^2)<br>19 - wind avg avg (m/s)<br>20 - wind gust high (m/s)<br>21 - wind lull low (m/s)<br>22 - wind direction avg<br>23 - wind sample interval high (minutes)<br>24 - strike count total<br>25 - strike distance avg (km)<br>26 - record count<br>27 - battery avg (volts)<br>28 - local day precip accumulation (mm)<br>29 - local day precip accumulation final (mm)<br>30 - local day precip minutes<br>31 - local day precip minutes final<br>32 - precipitaiton type high<br>33 - precip analysis type high<br><br><br>Latest Observation - Summary Object<br>Latest observations either delivered over websocket or by REST also contain a summary object at the root level.<br><br>Air<br>summary.pressure_trend<br>summary.strike_count_3h<br>summary.strike_last_dist<br>summary.strike_last_epoch<br><br>Sky<br>summary.precip_accum_local_yesterday<br>summary.precip_accum_local_yesterday_final<br>summary.precip_analysis_type_yesterday<br><br>Storm<br>summary.pressure_trend<br>summary.strike_count_3h<br>summary.strike_last_dist<br>summary.strike_last_epoch<br>summary.precip_accum_local_yesterday<br>summary.precip_accum_local_yesterday_final<br>summary.precip_analysis_type_yesterday",
+        "summary": "(Public API) Get observations for a single Smart Weather Device",
+        "operationId": "getObservationsByDeviceId",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "ID of Device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "day_offset",
+            "in": "query",
+            "description": "TIME FILTER - Get an entire day of observations by UTC day offset.<br><br>0 - Current day UTC<br>1 - Yesterday UTC",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_start",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.  Observation data at a one minute time resolution is available for a time range that is five days or less.  You also need to send \"time_end\".  This field pair is optional.  If the request does not contain any time filters only the latest observation will be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_end",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.  Observation data at a one minute time resolution is available for a time range that is five days or less.  You also need to send \"time_start\".  This field pair is optional.  If the request does not contain any time filters only the latest observation will be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "bucket",
+            "in": "query",
+            "description": "Bucket a (1 minute data)<br> - Range max 1 day<br>Bucket b (5 minute data)<br> - Range max 5 day<br>Bucket c (30 minute data)<br> - Range max 30 day<br>Bucket d (180 minute data)<br> - Range max 180 day<br>Bucket e (1 day data)<br> - Range greater than 180 days<br><br>* bucket can override default only in one direction.  For example, it is valid to ask for bucket E for any time range but it is not possible to get bucket A if range greater than day.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "raw",
+            "in": "query",
+            "description": "Used to replace AIS adjusted values with raw data.  This option is only available for the one minute bucket.<br>false (default)<br>true (replace adjusted records with raw records)<br>only (only return raw records saved when AIS updates records.",
+            "required": false,
+            "enum": [
+              "true",
+              "false",
+              "only"
+            ],
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ObservationSet"
+            }
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    },
+    "/observations/location": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "description": "IMPORTANT NOTE: This is the first generation Location Observation currently only used by our applications.  The public version of this service changes location to station.  The endpoint is also changed and some items are removed to simplify.  See the public API documentation for details.<br><br>Get the latest federated observation for a Station.  This observation is made from the latest Device observations that belong to the Station.  If a user has multiple Devices of the same type they are able to designate one of them as primary. This is the one used to make the federated observation.<br><br>A user can also designate each device as either indoor or outdoor.  All indoor observation value fields will end with an \"_indoor\" suffix.  Outdoor observations fields do not have a suffix.<br><br>The station_units values represent the units of the Station's owner, not the units of the observation values in the API response.<br><br>Units<br>temperature = C<br>pressure = MB<br>wind = mps<br>precip = <br>distance = km<br>lux = <br>solar radiation = ",
+        "summary": "(Public API) Get the latest Station observation",
+        "operationId": "getStationObservation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "ID of Location(Station) to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "verbose",
+            "in": "query",
+            "description": "Add extra data to the response including the raw observations that made the station observation.  This exists to help debug issues with the final location observation values.<br><br>verbose=true",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StationObservation"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/nest/access_token": {
+      "get": {
+        "tags": [
+          "nest"
+        ],
+        "description": "Get a Nest Access Token.  You must first get a one time use Nest Authorization Code to use this service.",
+        "summary": "Get a long lived Nest Access Token",
+        "operationId": "getNestAccessToken",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Nest Authorization Code (one time use)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/NestAccessToken"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/audit_duplicate_device": {
+      "post": {
+        "tags": [
+          "manufacturing"
+        ],
+        "description": "Insert audit_duplicate_device record. This data is used to find hubs with duplicate serial numbers",
+        "summary": "Create a audit_duplicate_device record.",
+        "operationId": "craeateAuditDuplicateDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "audit_duplicate_device",
+            "in": "body",
+            "description": "device_type, serial_number, tag",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuditDuplicateDevicePost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/firmware": {
+      "get": {
+        "tags": [
+          "manufacturing"
+        ],
+        "description": "Get information for the latest firmware available for the Device's serial number.  The latest available version is controlled by the pending firmware revision value.",
+        "summary": "Get latest available firmware information",
+        "operationId": "getFirmware",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serial_number",
+            "in": "query",
+            "description": "Device serial number",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Firmware"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/p_device": {
+      "get": {
+        "tags": [
+          "manufacturing"
+        ],
+        "description": "Create a new PDevice.",
+        "summary": "Create a new PDevice",
+        "operationId": "createPDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_type",
+            "in": "query",
+            "description": "Device type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firmware_revision",
+            "in": "query",
+            "description": "Desired firmware revision",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "pending_firmware_revision",
+            "in": "query",
+            "description": "Desired pending firmware revision",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "hardware_revision",
+            "in": "query",
+            "description": "Desired hardware revision",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PDevicePost"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/p_device/serial_number_burn_success": {
+      "get": {
+        "tags": [
+          "manufacturing"
+        ],
+        "description": "Adds a note to the PDevice after the serial number has been successfully burned to the device.",
+        "summary": "Confirm Serial Number burn to PDevice",
+        "operationId": "serialNumberBurnSuccess",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "serial_number",
+            "in": "query",
+            "description": "Device serial number",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "swdImplicit": {
+      "type": "oauth2",
+      "scopes": {
+        "user": "Grants read/write access to all user data."
+      },
+      "flow": "implicit",
+      "authorizationUrl": "https://smartweather.weatherflow.com/authorize.html"
+    },
+    "swdApiKey": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "token"
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "properties": {
+        "device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 128
+        },
+        "serial_number": {
+          "type": "string",
+          "example": "AR-12345678"
+        },
+        "device_meta": {
+          "$ref": "#/definitions/DeviceMeta"
+        },
+        "device_type": {
+          "type": "string",
+          "example": "AR",
+          "enum": [
+            "AR",
+            "SK"
+          ]
+        },
+        "hardware_revision": {
+          "type": "string",
+          "example": "3"
+        },
+        "firmware_revision": {
+          "type": "string",
+          "example": "3"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "DeviceMeta": {
+      "type": "object",
+      "properties": {
+        "agl": {
+          "type": "number",
+          "format": "float",
+          "example": 2.2
+        },
+        "name": {
+          "type": "string",
+          "example": "Pool Air Device"
+        },
+        "environment": {
+          "type": "string",
+          "example": "outdoor",
+          "enum": [
+            "indoor",
+            "outdoor"
+          ]
+        },
+        "wifi_network_name": {
+          "type": "string"
+        }
+      }
+    },
+    "Station": {
+      "type": "object",
+      "properties": {
+        "station_id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 67
+        },
+        "name": {
+          "type": "string",
+          "example": "Home"
+        },
+        "public_name": {
+          "type": "string",
+          "example": "Public Location Name"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 29.00724
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -80.88067
+        },
+        "station_meta": {
+          "$ref": "#/definitions/StationMeta"
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "station_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StationItem"
+          }
+        }
+      }
+    },
+    "StationItem": {
+      "type": "object",
+      "properties": {
+        "location_item_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 55
+        },
+        "station_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 67
+        },
+        "device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 55
+        },
+        "item": {
+          "type": "string",
+          "example": "air_temperature_humidity"
+        }
+      }
+    },
+    "StationMeta": {
+      "type": "object",
+      "properties": {
+        "elevation": {
+          "type": "number",
+          "format": "float",
+          "example": 33.2
+        },
+        "share_with_wf": {
+          "type": "boolean",
+          "example": true,
+          "default": true
+        },
+        "share_with_wu": {
+          "type": "boolean",
+          "example": true,
+          "default": true
+        }
+      }
+    },
+    "StationSet": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Station"
+          }
+        }
+      }
+    },
+    "ObservationSet": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "device_id": {
+          "type": "number",
+          "format": "in32",
+          "example": 59
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "obs_sky",
+            "obs_air"
+          ],
+          "example": "obs_air"
+        },
+        "obs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObservationValuesArray"
+          }
+        }
+      }
+    },
+    "StationUnits": {
+      "type": "object",
+      "properties": {
+        "units_temp": {
+          "type": "string",
+          "example": "f"
+        },
+        "units_wind": {
+          "type": "string",
+          "example": "mph"
+        },
+        "units_precip": {
+          "type": "string",
+          "example": "in"
+        },
+        "units_pressure": {
+          "type": "string",
+          "example": "mb"
+        },
+        "units_distance": {
+          "type": "string",
+          "example": "mi"
+        },
+        "units_direction": {
+          "type": "string",
+          "example": "cardinal"
+        },
+        "units_other": {
+          "type": "string",
+          "example": "imperial"
+        }
+      }
+    },
+    "ObservationValuesArray": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "example": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    "StationObservation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "station_units": {
+          "$ref": "#/definitions/StationUnits"
+        },
+        "station_id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 67
+        },
+        "station_name": {
+          "type": "string",
+          "example": "Home"
+        },
+        "public_name": {
+          "type": "string",
+          "example": "Public Location Name"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 29.00724
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -80.88067
+        },
+        "timezone": {
+          "type": "string",
+          "example": "America/New_York"
+        },
+        "elevation": {
+          "type": "number",
+          "format": "float",
+          "example": 21.845
+        },
+        "obs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StationObservationValues"
+          }
+        }
+      }
+    },
+    "StationObservationValues": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "number",
+          "format": "in32",
+          "example": 1495732068
+        },
+        "air_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 29.1
+        },
+        "barometric_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 1002.9
+        },
+        "sea_level_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 1004.7
+        },
+        "relative_humidity": {
+          "type": "number",
+          "format": "float",
+          "example": 77
+        },
+        "precip": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "precip_accum_last_1hr": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "precip_accum_last_24hr": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "wind_avg": {
+          "type": "number",
+          "format": "float",
+          "example": 3.5
+        },
+        "wind_direction": {
+          "type": "number",
+          "format": "int64",
+          "example": 289
+        },
+        "wind_gust": {
+          "type": "number",
+          "format": "float",
+          "example": 5.1
+        },
+        "wind_lull": {
+          "type": "number",
+          "format": "float",
+          "example": 2.2
+        },
+        "solar_radiation": {
+          "type": "number",
+          "format": "float",
+          "example": 330
+        },
+        "uv": {
+          "type": "number",
+          "format": "float",
+          "example": 8
+        },
+        "brightness": {
+          "type": "number",
+          "format": "float",
+          "example": 7000
+        },
+        "lightning_strike_last_epoch": {
+          "type": "number",
+          "format": "float",
+          "example": 1495652340
+        },
+        "lightning_strike_last_distance": {
+          "type": "number",
+          "format": "float",
+          "example": 22
+        },
+        "lightning_strike_count_last_3hr": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "feels_like": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "heat_index": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "wind_chill": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "dew_point": {
+          "type": "number",
+          "format": "float",
+          "example": 17.2
+        },
+        "wet_bulb_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 18.6
+        },
+        "delta_t": {
+          "type": "number",
+          "format": "float",
+          "example": -2.8
+        },
+        "air_density": {
+          "type": "number",
+          "format": "float",
+          "example": 1.18257
+        },
+        "air_temperature_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 29.1
+        },
+        "barometric_pressure_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1002.9
+        },
+        "sea_level_pressure_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1004.7
+        },
+        "relative_humidity_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 77
+        },
+        "precip_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "precip_accum_last_1hr_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "precip_accum_last_24hr_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "wind_avg_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 3.5
+        },
+        "wind_direction_indoor": {
+          "type": "number",
+          "format": "int64",
+          "example": 289
+        },
+        "wind_gust_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 5.1
+        },
+        "wind_lull_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 2.2
+        },
+        "solar_radiation_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 330
+        },
+        "uv_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 8
+        },
+        "brightness_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 7000
+        },
+        "lightning_strike_last_epoch_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1495652340
+        },
+        "lightning_strike_last_distance_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 22
+        },
+        "lightning_strike_count_last_3hr_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "feels_like_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "heat_index_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "wind_chill_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "dew_point_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 17.2
+        },
+        "wet_bulb_temperature_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 18.6
+        },
+        "delta_t_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": -2.8
+        },
+        "air_density_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1.18257
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "status_message": {
+          "type": "string",
+          "example": "SUCCESS"
+        }
+      }
+    },
+    "LocationPost": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Home"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 27.1
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -81.2
+        },
+        "location_meta": {
+          "$ref": "#/definitions/LocationPostLocationMeta"
+        }
+      }
+    },
+    "LocationPostLocationMeta": {
+      "type": "object",
+      "properties": {
+        "share_with_wf": {
+          "type": "boolean",
+          "example": true
+        },
+        "share_with_wu": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "LocationItemPost": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "item": {
+          "type": "string",
+          "enum": [
+            "air_temperature_humidity",
+            "barometric_pressure",
+            "lightning",
+            "light",
+            "rain",
+            "wind",
+            "diagnostics",
+            "forecast"
+          ],
+          "example": "air_temperature_humidity"
+        }
+      }
+    },
+    "AuditDuplicateDevicePost": {
+      "type": "object",
+      "properties": {
+        "device_type": {
+          "type": "string",
+          "example": "HB"
+        },
+        "serial_number": {
+          "type": "string",
+          "example": "00003333"
+        },
+        "tag": {
+          "type": "string",
+          "example": "tag value"
+        }
+      }
+    },
+    "UserNotificationPost": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "fcm"
+          ],
+          "example": "fcm"
+        },
+        "send_to": {
+          "type": "string",
+          "example": "asdfgeradfgbaafgghsfadfgafasreadfafeaad"
+        },
+        "status": {
+          "type": "string",
+          "example": "active"
+        },
+        "name": {
+          "type": "string",
+          "example": "My iPhone Name"
+        }
+      }
+    },
+    "UserPost": {
+      "type": "object",
+      "properties": {
+        "locale": {
+          "type": "string",
+          "example": "en-US"
+        }
+      }
+    },
+    "ReportPost": {
+      "type": "object",
+      "properties": {
+        "report_name": {
+          "type": "string",
+          "example": "get_user"
+        },
+        "user_id": {
+          "type": "string",
+          "example": "SctOdpF8bdYP54OSrTWq93QSBzD3"
+        }
+      }
+    },
+    "LocationSharePost": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "public_name": {
+          "type": "string",
+          "example": "Bent Oaks Deland"
+        },
+        "public_latitude": {
+          "type": "integer",
+          "format": "int32",
+          "example": 29.1
+        },
+        "public_longitude": {
+          "type": "integer",
+          "format": "int32",
+          "example": -81.1
+        },
+        "share_with_wf": {
+          "type": "boolean",
+          "example": true
+        },
+        "share_type": {
+          "type": "string",
+          "enum": [
+            "wu"
+          ],
+          "example": "wu"
+        },
+        "share_meta": {
+          "$ref": "#/definitions/LocationSharePostShareMeta"
+        }
+      }
+    },
+    "LocationSharePut": {
+      "type": "object",
+      "properties": {
+        "send_rain": {
+          "type": "boolean",
+          "example": true
+        },
+        "share_meta": {
+          "$ref": "#/definitions/LocationSharePostShareMeta"
+        }
+      }
+    },
+    "LocationSharePostShareMeta": {
+      "type": "object",
+      "properties": {
+        "station_id": {
+          "type": "string",
+          "example": "KFLDEBAR21"
+        },
+        "station_key": {
+          "type": "string",
+          "example": "dsd54rse1"
+        }
+      }
+    },
+    "DevicePost": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "serial_number": {
+          "type": "string",
+          "example": "AR-00000134"
+        },
+        "device_meta": {
+          "$ref": "#/definitions/DevicePostDeviceMeta"
+        }
+      }
+    },
+    "DevicePostDeviceMeta": {
+      "type": "object",
+      "properties": {
+        "agl": {
+          "type": "integer",
+          "format": "int32",
+          "example": 15
+        },
+        "name": {
+          "type": "string",
+          "example": "Pool Air"
+        },
+        "environment": {
+          "type": "string",
+          "example": "indoor"
+        },
+        "wifi_network_name": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "UserSettingsPost": {
+      "type": "object",
+      "properties": {
+        "units_temp": {
+          "type": "string",
+          "example": "f"
+        },
+        "units_wind": {
+          "type": "string",
+          "example": "mph"
+        },
+        "units_other": {
+          "type": "string",
+          "example": "imperial"
+        },
+        "units_precip": {
+          "type": "string",
+          "example": "in"
+        },
+        "units_distance": {
+          "type": "string",
+          "example": "mi"
+        },
+        "units_pressure": {
+          "type": "string",
+          "example": "mb"
+        },
+        "units_direction": {
+          "type": "string",
+          "example": "cardinal"
+        },
+        "events_status": {
+          "type": "boolean",
+          "example": true
+        },
+        "events_lightning": {
+          "type": "boolean",
+          "example": true
+        },
+        "events_rain_start": {
+          "type": "boolean",
+          "example": true
+        },
+        "current_location": {
+          "type": "string",
+          "example": "690"
+        },
+        "location_name": {
+          "type": "string",
+          "example": "My Home"
+        }
+      }
+    },
+    "LocationIntegrationPost": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "share_type": {
+          "type": "string",
+          "enum": [
+            "nest_camera"
+          ],
+          "example": "nest_camera"
+        },
+        "integration_meta": {
+          "$ref": "#/definitions/LocationIntegrationPostIntegrationMeta"
+        }
+      }
+    },
+    "LocationIntegrationPut": {
+      "type": "object",
+      "properties": {
+        "location_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "integration_meta": {
+          "$ref": "#/definitions/LocationIntegrationPostIntegrationMeta"
+        }
+      }
+    },
+    "LocationIntegrationPostIntegrationMeta": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string",
+          "example": "c.7WyZkq1KAIevg1hCRp4Sq50aTQJeVLerVzV0SJysgzlIW1tr8k6JzD4DXXaKaOyBWyMoBckLpHsX8QY2JKtvbaS8WoCEcMqetaGxFerd9XJWh3GStMLNIeTFnVDNmYoh9RR8DCC08E4qYA6z"
+        },
+        "camera_id": {
+          "type": "string",
+          "example": "JXsk8Mkm0qqmZnk8SEmPQYHOHsyf6Ym-dw2xewcD-An1BbD7Sls1LQ"
+        },
+        "camera_name": {
+          "type": "string",
+          "example": "Backyard"
+        }
+      }
+    },
+    "LocationImagePost": {
+      "type": "object",
+      "properties": {
+        "location_integration_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 150
+        },
+        "url": {
+          "type": "string",
+          "example": "http://swdimages.weatherflow.com/image.jpg"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1500576213
+        },
+        "image_meta": {
+          "$ref": "#/definitions/LocationImagePostImageMeta"
+        }
+      }
+    },
+    "LocationImagePostImageMeta": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "example": "a good error message"
+        }
+      }
+    },
+    "NestAccessToken": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "access_token": {
+          "type": "string"
+        }
+      }
+    },
+    "Firmware": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "firmware_revision": {
+          "type": "integer",
+          "format": "int32",
+          "example": 14
+        },
+        "hash": {
+          "type": "string",
+          "example": "05de6370238672314d9a2577df880a01ea581f3ef780371d7376ab5cfdda3ff3"
+        },
+        "signature": {
+          "type": "string",
+          "example": "b673d1f8197f501964ac833d02abfb75454b0f09"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "example": 429236
+        },
+        "device_type": {
+          "type": "string",
+          "example": "HB"
+        },
+        "url": {
+          "type": "string",
+          "example": "http://s3.amazonaws.com/swd-shared/hub_2017-05-11T210333.img"
+        }
+      }
+    },
+    "PDevicePost": {
+      "type": "object",
+      "properties": {
+        "p_device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 154
+        },
+        "device_key": {
+          "type": "string",
+          "example": "15b805121f004dbe5ce631569fcca116"
+        },
+        "serial_number": {
+          "type": "string",
+          "example": "HB-00000092"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "example": 429236
+        },
+        "status_code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "status_message": {
+          "type": "string",
+          "example": "SUCCESS"
+        }
+      }
+    },
+    "ApplicationPost": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "My Application"
+        },
+        "note": {
+          "type": "string",
+          "example": "Weather data display"
+        },
+        "redirect_url": {
+          "type": "string",
+          "example": ""
+        },
+        "referrers": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "TokenPost": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "example": "idididididididididididididid"
+        },
+        "name": {
+          "type": "string",
+          "example": "my token"
+        },
+        "type": {
+          "type": "string",
+          "example": "user",
+          "enum": [
+            "user",
+            "application"
+          ]
+        }
+      }
+    },
+    "ApplicationPut": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "example": "idididididididididididididid"
+        },
+        "name": {
+          "type": "string",
+          "example": "My Application"
+        },
+        "note": {
+          "type": "string",
+          "example": "Weather data display"
+        },
+        "redirect_url": {
+          "type": "string",
+          "example": ""
+        },
+        "referrers": {
+          "type": "string",
+          "example": ""
+        }
+      }
+    },
+    "HubCalibrationSettingsPost": {
+      "type": "object",
+      "properties": {
+        "device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 154
+        },
+        "debug_state": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "sky_rain_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 0.2122
+        },
+        "sky_rain_scale_b": {
+          "type": "number",
+          "format": "float",
+          "example": -0.5395
+        },
+        "sky_wind_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "sky_gust_lull_factor": {
+          "type": "number",
+          "format": "float",
+          "example": 1.6
+        },
+        "sky_direction_offset": {
+          "type": "integer",
+          "format": "int32",
+          "example": 154
+        },
+        "sky_lux_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "sky_uv_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "sky_solar_radiation_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_rh_offset": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_rh_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_temp_offset": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_temp_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_pressure_offset": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_pressure_scale": {
+          "type": "number",
+          "format": "float",
+          "example": 1
+        },
+        "air_suppress_lightning": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "power_saving_mode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "rain_check": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "as3935_afe_gain_boost": {
+          "type": "integer",
+          "format": "int32",
+          "example": 14
+        },
+        "as3935_noise_floor_level": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2
+        },
+        "as3935_watchdog_threshold": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3
+        },
+        "as3935_min_strike_count": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "as3935_spike_rejection_factor": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2
+        }
+      }
+    }
+  }
+}

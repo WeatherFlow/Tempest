@@ -1,0 +1,184 @@
+
+---
+layout: apiwshome
+title: WeatherFlow Smart Weather UDP Reference
+---
+<h2><a name="endpoints">UDP Basics</a></h2>
+The WeatherFlow Smart Weather Station's hub broadcasts UDP messages over port 50222 on the local network.
+
+<h2><a name="response-messages">Messages</a></h2>
+
+<h3>Rain Start Event [type = evt_precip]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number": "SK-00008453",
+  "type":"evt_precip",
+  "hub_sn": "HB-00000001",
+  "evt":[1493322445]
+}
+{% endhighlight %}
+</div>
+Evt Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+</table>
+
+
+<br><br>
+<h3>Lightning Strike Event [type = evt_strike]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number": "AR-00004049",
+  "type":"evt_strike",
+  "device_id":1110,
+  "hub_sn": "HB-00000001",
+  "evt":[1493322445,27,3848]
+}
+{% endhighlight %}
+</div>
+Evt Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Distance</td><td>km</td></tr>
+  <tr><td>2</td><td>Energy</td><td></td></tr>
+</table>
+
+
+<br><br>
+<h3>Rapid Wind [type = rapid_wind]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number": "SK-00008453",
+  "type":"rapid_wind",
+  "device_id":1110,
+  "hub_sn": "HB-00000001",
+  "ob":[1493322445,2.3,128]
+}
+{% endhighlight %}
+</div>
+Ob Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Wind Speed</td><td>mps</td></tr>
+  <tr><td>2</td><td>Wind Direction</td><td>Degrees</td></tr>
+</table>
+
+
+
+
+<br><br>
+<h3>Observation (AIR) [type = obs_air]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number": "AR-00004049",
+  "type":"obs_air",
+  "hub_sn": "HB-00000001",
+  "device_id":1110,
+  "obs":[[1493164835,835.0,10.0,45,0,0,3.46,1]],
+  "firmware_revision": 17
+}
+{% endhighlight %}
+</div>
+Observation Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Station Pressure</td><td>MB</td></tr>
+  <tr><td>2</td><td>Air Temperature</td><td>C</td></tr>
+  <tr><td>3</td><td>Relative Humidity</td><td>%</td></tr>
+  <tr><td>4</td><td>Lightning Strike Count</td><td></td></tr>
+  <tr><td>5</td><td>Lightning Strike Avg Distance</td><td>km</td></tr>
+  <tr><td>6</td><td>Battery</td><td></td></tr>
+  <tr><td>7</td><td>Report Interval</td><td>Minutes</td></tr>
+</table>
+
+<br><br>
+<h3>Observation (Sky) [type = obs_sky]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number": "SK-00008453",
+  "type":"obs_sky",
+  "hub_sn": "HB-00000001",
+  "device_id":1110,
+  "obs":[[1493321340,9000,10,0.0,2.6,4.6,7.4,187,3.12,1,130]],
+  "firmware_revision": 29
+}
+{% endhighlight %}
+</div>
+Observation Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Illuminance</td><td>Lux</td></tr>
+  <tr><td>2</td><td>UV</td><td>Index</td></tr>
+  <tr><td>3</td><td>Rain Accumulated</td><td>mm</td></tr>
+  <tr><td>4</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+  <tr><td>5</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+  <tr><td>6</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+  <tr><td>7</td><td>Wind Direction</td><td>Degrees</td></tr>
+  <tr><td>8</td><td>Battery</td><td>Volts</td></tr>
+  <tr><td>9</td><td>Report Interval</td><td>Minutes</td></tr>
+  <tr><td>10</td><td>Solar Radiation</td><td>W/m^2</td></tr>
+  <tr><td>11</td><td>Local Day Rain Accumulation</td><td>mm</td></tr>
+</table>
+
+
+<br/><br/>
+<h3>Status (device) [type = device_status]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number": "AR-00004049",
+  "type": "device_status",
+  "hub_sn": "HB-00000001",
+  "timestamp": 1510855923,
+  "uptime": 2189,
+  "voltage": 3.50,
+  "firmware_revision": 17,
+  "rssi": -17,
+  "sensor_status": 0
+}
+{% endhighlight %}
+</div>
+Sensor Status (sensor_status) is an encoded enumeration as follows
+<table>
+  <tr><th>Hex Value</th><th>Applies to device<th>Status description</th></tr>
+  <tr><td>0x00000000</td><td>All</td><td>Sensors OK</td></tr>
+  <tr><td>0x00000001</td><td>AIR</td><td>lightning failed</td></tr>
+  <tr><td>0x00000002</td><td>AIR</td><td>lightning noise</td></tr>
+  <tr><td>0x00000004</td><td>AIR</td><td>lightning disturber</td></tr>
+  <tr><td>0x00000008</td><td>AIR</td><td>pressure failed</td></tr>
+  <tr><td>0x00000010</td><td>AIR</td><td>temperature failed</td></tr>
+  <tr><td>0x00000020</td><td>AIR</td><td>rh failed</td></tr>
+  <tr><td>0x00000040</td><td>SKY</td><td>wind failed</td></tr>
+  <tr><td>0x00000080</td><td>SKY</td><td>precip failed</td></tr>
+  <tr><td>0x00000100</td><td>SKY</td><td>light/uv failed</td></tr>
+</table>
+
+<br/><br/>
+<h3>Status (hub) [type = hub_status]</h3>
+<div class="code-highlight">
+{% highlight javascript %}
+{
+  "serial_number":"HB-00000001",
+  "type":"hub_status",
+  "firmware_revision":"13",
+  "uptime":1670133,
+  "rssi":-62,
+  "timestamp":1495724691,
+  "reset_flags": 234881026,
+  "stack": "1616,1608"
+}
+{% endhighlight %}
+</div>
+
+<br/><br/>
+

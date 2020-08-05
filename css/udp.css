@@ -1,0 +1,17 @@
+#page-full .doc-section {
+	margin: 40px 0;
+}
+
+.doc-section h3 {
+	color: #1b75d5;
+}
+
+#udp-version-selector {
+	background-color: #dedede;
+	padding: 10px;
+}
+
+#udp-version-selector select {
+	display: block;
+	margin: 0 auto;
+}

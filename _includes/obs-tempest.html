@@ -1,0 +1,11 @@
+{% if include.v >= 118 %}
+<h3>Observation (Tempest) [type = obs_st]</h3>
+<div class="code-highlight">
+	{% highlight javascript %}
+	{% include obs-st-json.html v=include.v %}
+	{% endhighlight %}
+</div>
+
+<h4>Observation Value Layout</h4>
+{% include obs-st-desc.html v=include.v %}
+{% endif %}

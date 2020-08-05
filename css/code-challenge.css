@@ -1,0 +1,26 @@
+input {
+    font-size: 1em;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#generate-code-verifier {
+    text-decoration: none;
+    text-transform: none;
+    font-weight: normal;
+}
+
+#character-count {
+    color: #666;
+    text-align: right;
+    padding: 0 4px 0 0;
+    margin: 0;
+    font-size: .85em;
+}
+
+#error-msg {
+    color: red;
+    min-height: 2em;
+    margin: 35px 0 10px 0;
+}

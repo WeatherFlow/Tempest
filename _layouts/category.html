@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+    <head>
+    	{% include meta.html %}
+        <title>{{page.title}}</title>
+		<link rel="stylesheet" href="{{site.url}}/css/base.css">
+		<link rel="stylesheet" href="{{site.url}}/css/release.css?v3">
+		<link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+	</head>
+	<body>
+		<div id="app-menu"></div>
+		{% include header.html %}
+
+		<div id="main-content">
+			<div id="sidebar">
+				{% include category-list.html %}
+			</div>
+
+			<div id="posts">
+				{{content}}
+			</div>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="{{site.url}}/js/releases.js"></script>
+	</body>
+</html>

@@ -1,0 +1,14 @@
+{% if include.v >= 29 %}
+	{
+	  "serial_number": "SK-00008453",
+	  "type":"rapid_wind",
+	  "hub_sn": "HB-00000001",
+	  "ob":[1493322445,2.3,128]
+	}
+{% else %}
+	{
+	  "type":"rapid_wind",
+	  "device_id":1110,
+	  "ob":[1493322445,2.3,128]
+	}
+{% endif %}
