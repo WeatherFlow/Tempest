@@ -5,15 +5,15 @@ title: WeatherFlow Tempest API & Developer Platform
 
 <h2>Getting Started</h2>
 <h3>Step 1. Review the Data Access Policy.</h3>
-<p>Most third-party Tempest apps and integrations are designed for the personal use by a single Tempest System owner. To learn more, please read our Remote Data Access Policy. If you have an idea for an application or integration that goes beyond the personal use case, such as a general purpose app that accesses data from many Tempest locations, please contact us.</a>
-<h3>Step 2. Authenticae (aka "Get an access token")</h3>
+<p>Most third-party Tempest apps and integrations are designed for the personal use by a single Tempest System owner. To learn more, please read our <a href="https://weatherflow.github.io/SmartWeather/api/remote-developer-policy.html">Remote Data Access Policy</a>. If you have an idea for an application or integration that goes beyond the personal use case, such as a general purpose app that accesses data from many Tempest locations, <a href="https://weatherflow.com/partner-inquiry/">please contact us</a>.</p>
+<h3>Step 2. Authenticate (aka "Get an access token")</h3>
 <p>To start using the REST or WS API, all you need is an access token. Your app or integration must ensure that the user viewing the station data is the owner of that station by authenticating the user’s account. There are two options for authentication: Oauth or the Personal Access Token.</p>
-<p><b>OAuth Access Token</b>. OAuth is an open standard for authentication that provides a seamless integration between your app and the user’s Tempest account. OAuth is the way our official integrations (Amazon Echo, Google Home, IFTTT, etc.) work, and we strongly encourage you to use OAuth in any app with a web-based interface, including mobile apps. For more information on Oauth, please see the Tempest OAuth 2.0 Support section.</p>
+<p><b>OAuth Access Token</b>. OAuth is an open standard for authentication that provides a seamless integration between your app and the user’s Tempest account. OAuth is the way our official integrations (Amazon Echo, Google Home, IFTTT, etc.) work, and we strongly encourage you to use OAuth in any app with a web-based interface, including mobile apps. For more information on Oauth, please see the <a href="oauth.html">Tempest OAuth 2.0 Support</a> section.</p>
 <p><b>Personal Access Token</b>. If you have a simple app or integration that does not have a web-based interface (e.g., a downloadable script or a smart home configuration that does not have a graphical user interface), you should use the “personal access token” method. Your users will need to sign in to the Tempest Web App at tempestwx.com, then go to Settings -> Data Authorizations -> Create Token, then copy & paste that token into your app.</p>
 <h5>Note: While OAuth is the preferred authentication method for production applications, the Personal Access Token is the simplest way to get started with the API - just sign in to your own account and generate one. You can add OAuth once your app or integration is ready for external testing.</h5>
 <h3>Step 3. Dive in!</h3>
 <p>Once you have an access token (either a personal or Oauth), you’re ready to start playing with the API. Here are the links to our full documentation for REST & WebSockets, along with a few simple examples to get you started:</p>
-<h2><a href="">REST reference</a></h2>
+<h2><a href="swagger/">REST reference</a></h2>
 <h3>Examples:</h3>
 <ul>
 	<li>GET Station Meta Data</li>
@@ -22,8 +22,8 @@ title: WeatherFlow Tempest API & Developer Platform
 	<div class="code-highlight">https://swd.weatherflow.com/swd/rest/observations/station/[your_station_id]?token=[your_access_token]</div>
 	<li>GET Latest Device Observation</li>
 	<div class="code-highlight">https://swd.weatherflow.com/swd/rest/observations/?device_id=[your_device_id]&token=[your_access_token]</div>
-<ul>
-<h2><a href="">WebSockets reference</a>
+</ul>
+<h2><a href="ws.html">WebSockets reference</a>
 <h3>Examples:</h3>
 <ul>
 	<li>Open a websocket connection</li>
