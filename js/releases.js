@@ -7,7 +7,7 @@ $(document).ready(function () {
 		var version = $(this).val();
 		// https://weatherflow.github.io/SmartWeather/api/udp/v29/
 		if (version != "---") {
-			window.location = "/SmartWeather/api/udp/" + version;
+			window.location = "/Tempest/api/udp/" + version;
 		}
 	});
 })
