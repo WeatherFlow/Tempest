@@ -1,13 +1,13 @@
 ---
 layout: apihome
-title: WeatherFlow Smart Weather OAuth 2.0 Support
+title: WeatherFlow Tempest OAuth 2.0 Support
 ---
 
 <h2><a name="overview">Overview</a></h2>
-<p>The Smart Weather API supports the Authorization Code grant type.  For clients that are unable to maintain the confidentiality of the client secret, the API also supports the Authorization Code with PKCE grant type.</p>
+<p>The Tempest API supports the Authorization Code grant type.  For clients that are unable to maintain the confidentiality of the client secret, the API also supports the Authorization Code with PKCE grant type.</p>
 
 <h2><a name="overview">Creating a Client Application</a></h2>
-<p>Before you can begin using OAuth with the Smart Weather API, you must register your application with WeatherFlow. To do so, sign in to your Smart Weather account on the <a href="https://smartweather.weatherflow.com">Smart Weather Website</a>, navigate to Settings and then to Developers.</p>
+<p>Before you can begin using OAuth with the Tempest API, you must register your application with WeatherFlow. To do so, sign in to your Tempest account on the <a href="https://tempestwx.com">Tempest Website</a>, navigate to Settings and then to Developers.</p>
 <p>The information below is required to register your application.</p>
 
 <p class="step">Application Name</p>
@@ -19,7 +19,7 @@ title: WeatherFlow Smart Weather OAuth 2.0 Support
 <p class="step">Authorization Callback URL</p>
 <p>The endpoint that will receive authorization codes.  Each application may have muiltiple callback URLs.  For mobile applications a custom URL scheme can be registered.</p>
 
-<p class="hint">To register an appliction, you must have a Smart Weather account.</p>
+<p class="hint">To register an appliction, you must have a Tempest account.</p>
 
 <h2><a name="authorization-code-grant">Authorization Code Grant Type</a></h2>
 <p class="step">Step 1:</p>
@@ -36,7 +36,7 @@ title: WeatherFlow Smart Weather OAuth 2.0 Support
 <p class="step monospace">redirect_uri</p>
 <p>The url you want the user to be redirected to after the authorization is completed.</p>
 
-<p class="hint">The redirect URL provided in the query string must be registered with the Smart Weather API.  If needed, you may register more than one redirect URL.</p>
+<p class="hint">The redirect URL provided in the query string must be registered with the Tempest API.  If needed, you may register more than one redirect URL.</p>
 
 
 <p class="step">Step 2:</p>
@@ -89,7 +89,7 @@ title: WeatherFlow Smart Weather OAuth 2.0 Support
 <p class="step monospace">code_challenge_method</p>
 <p>Use <span class="code-highlight">S256</span> to indicate that the <span class="code-highlight">code_challenge</span> parameter is a SHA256 hash of the code verifier.</p>
 
-<p class="hint">The redirect URL provided in the query string must be registered with the Smart Weather API.  If needed, you may register more than one redirect URL.</p>
+<p class="hint">The redirect URL provided in the query string must be registered with the Tempest API.  If needed, you may register more than one redirect URL.</p>
 
 <p class="step">Step 4:</p>
 <p>Once redirected to the authorization page, the user will approve or deny the authorization request.  If they approve the request they will be redirected back to the redirect URL you provided along with an authorization code.</p>
