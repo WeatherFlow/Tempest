@@ -117,6 +117,7 @@ p.note {
     	padding: 15px;
     	color: #333;
     	font-size: .95em;
+	margin: auto 0 3em auto;
 }
 
 p > a {
