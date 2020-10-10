@@ -32,16 +32,18 @@ title: WeatherFlow Tempest API & Developer Platform
 <p class="step">Listen for observations</p>
 <p>Send a JSON message over the websocket connection to start listening for observations from the device. After sending this message your connected websocket client should receive a new observation JSON message every minute.</p>
 <div class="code-highlight code-highlight-extra-padding">
+	<pre>
 	{
 		"type":"listen_start",
 		"device_id": [your_device_id],
 		"id":"random-id-12345"
 	}
+	</pre>
 </div>
 
 <h3>Step 4. Join the Community.</h3>
 <p>If you haven’t already, head over to the <a href="https://community.weatherflow.com/c/developers/5">Developers</a> area of our <a href="https://community.weatherflow.com/">Community Forum</a>, where friendly users swap ideas, information and help (WeatherFlow staff is known to  lurk there regularly)</p>
 <h3>Step 5. Share your Creation.</h3>
 <p>Tell the World how great your awesome new application or integration is! An announcement to <a href="https://community.weatherflow.com/">our Forum</a> is a great place to start.</p>
-<h6>Can I access data from the hardware locally? To ensure access to the best data, all third-party applications and integrations should use the remote interfaces (REST & Websockets) as their primary source for data, even if they are running on the same network as the local Tempest device. There is also a local interface available for those applications that require completely off-grid applications, but this should only be used as a backup to the remote interfaces.</h6>
+<p class="fine-print">Can I access data from the hardware locally? To ensure access to the best data, all third-party applications and integrations should use the remote interfaces (REST & Websockets) as their primary source for data, even if they are running on the same network as the local Tempest device. There is also a local interface available for those applications that require completely off-grid applications, but this should only be used as a backup to the remote interfaces.</p>
 	
