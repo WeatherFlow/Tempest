@@ -94,12 +94,12 @@ h3 {
 h4 {
 	color: #007399;
     	font-size: 1.2em;
+	margin: 1.2em 0 .25em 0;
 }
 
 h4 a {
 	color: #007399;
 	text-decoration: none;
-	margin: 1.2em 0 .25em 0;
 }
 
 p {
