@@ -17,19 +17,19 @@ title: WeatherFlow Tempest API & Developer Platform
 <h5>Examples:</h5>
 <ul>
 	<li>GET Station Meta Data</li>
-	<div class="code-highlight">https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token]</div>
+	<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token]</div>
 	<li>GET Latest Station Observation</li>
-	<div class="code-highlight">https://swd.weatherflow.com/swd/rest/observations/station/[your_station_id]?token=[your_access_token]</div>
+	<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/observations/station/[your_station_id]?token=[your_access_token]</div>
 	<li>GET Latest Device Observation</li>
-	<div class="code-highlight">https://swd.weatherflow.com/swd/rest/observations/?device_id=[your_device_id]&token=[your_access_token]</div>
+	<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/observations/?device_id=[your_device_id]&token=[your_access_token]</div>
 </ul>
 <h4><a href="ws.html">WebSockets reference</a></h4>
 <h5>Examples:</h5>
 <ul>
 	<li>Open a websocket connection</li>
-	<div class="code-highlight">wss://ws.weatherflow.com/swd/data?token=[your_access_token]</div>
+	<div class="code-highlight code-highlight-extra-padding">wss://ws.weatherflow.com/swd/data?token=[your_access_token]</div>
 	<li>Send a JSON message over the websocket connection to start listening for observations from the device. After sending this message your connected websocket client should receive a new observation JSON message every minute.</li>
-	<div class="code-highlight">{ "type":"listen_start", "device_id":your_device_id, "id":"random-id-12345" }</div>
+	<div class="code-highlight code-highlight-extra-padding">{ "type":"listen_start", "device_id":your_device_id, "id":"random-id-12345" }</div>
 </ul>
 <h3>Step 4. Join the Community.</h3>
 <p>If you haven’t already, head over to the <a href="https://community.weatherflow.com/c/developers/5">Developers</a> area of our <a href="https://community.weatherflow.com/">Community Forum</a>, where friendly users swap ideas, information and help (WeatherFlow staff is known to  lurk there regularly)</p>
