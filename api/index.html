@@ -4,14 +4,14 @@ title: WeatherFlow Tempest API & Developer Platform
 ---
 
 <h2>Getting Started</h2>
-<h3 class="step">Step 1. Review the Data Access Policy.</h3>
+<h3>Step 1. Review the Data Access Policy.</h3>
 <p>Most third-party Tempest apps and integrations are designed for the personal use by a single Tempest System owner. To learn more, please read our <a href="https://weatherflow.github.io/SmartWeather/api/remote-developer-policy.html">Remote Data Access Policy</a>. If you have an idea for an application or integration that goes beyond the personal use case, such as a general purpose app that accesses data from many Tempest locations, <a href="https://weatherflow.com/partner-inquiry/">please contact us</a>.</p>
-<h3 class="step">Step 2. Authenticate (aka "Get an access token")</h3>
+<h3>Step 2. Authenticate (aka "Get an access token")</h3>
 <p>To start using the REST or WS API, all you need is an access token. Your app or integration must ensure that the user viewing the station data is the owner of that station by authenticating the user’s account. There are two options for authentication: Oauth or the Personal Access Token.</p>
 <p>OAuth Access Token. OAuth is an open standard for authentication that provides a seamless integration between your app and the user’s Tempest account. OAuth is the way our official integrations (Amazon Echo, Google Home, IFTTT, etc.) work, and we strongly encourage you to use OAuth in any app with a web-based interface, including mobile apps. For more information on Oauth, please see the <a href="oauth.html">Tempest OAuth 2.0 Support</a> section.</p>
 <p>Personal Access Token. If you have a simple app or integration that does not have a web-based interface (e.g., a downloadable script or a smart home configuration that does not have a graphical user interface), you should use the “personal access token” method. Your users will need to sign in to the Tempest Web App at tempestwx.com, then go to Settings -> Data Authorizations -> Create Token, then copy & paste that token into your app.</p>
 <h6>Note: While OAuth is the preferred authentication method for production applications, the Personal Access Token is the simplest way to get started with the API - just sign in to your own account and generate one. You can add OAuth once your app or integration is ready for external testing.</h6>
-<h3 class="step">Step 3. Dive in!</h3>
+<h3>Step 3. Dive in!</h3>
 <p>Once you have an access token (either a personal or Oauth), you’re ready to start playing with the API. Here are the links to our full documentation for REST & WebSockets, along with a few simple examples to get you started:</p>
 <h4><a href="swagger/">REST reference</a></h5>
 <h5>Examples:</h5>
@@ -31,9 +31,9 @@ title: WeatherFlow Tempest API & Developer Platform
 	<li>Send a JSON message over the websocket connection to start listening for observations from the device. After sending this message your connected websocket client should receive a new observation JSON message every minute.</li>
 	<div class="code-highlight code-highlight-extra-padding">{ "type":"listen_start", "device_id":your_device_id, "id":"random-id-12345" }</div>
 </ul>
-<h3 class="step">Step 4. Join the Community.</h3>
+<h3>Step 4. Join the Community.</h3>
 <p>If you haven’t already, head over to the <a href="https://community.weatherflow.com/c/developers/5">Developers</a> area of our <a href="https://community.weatherflow.com/">Community Forum</a>, where friendly users swap ideas, information and help (WeatherFlow staff is known to  lurk there regularly)</p>
-<h3 class="step">Step 5. Share your Creation.</h3>
+<h3>Step 5. Share your Creation.</h3>
 <p>Tell the World how great your awesome new application or integration is! An announcement to <a href="https://community.weatherflow.com/">our Forum</a> is a great place to start.</p>
 <h6>Can I access data from the hardware locally? To ensure access to the best data, all third-party applications and integrations should use the remote interfaces (REST & Websockets) as their primary source for data, even if they are running on the same network as the local Tempest device. There is also a local interface available for those applications that require completely off-grid applications, but this should only be used as a backup to the remote interfaces.</h6>
 	
