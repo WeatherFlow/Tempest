@@ -111,6 +111,14 @@ p.fine-print {
 	font-size: .9em;
 }
 
+p.note {
+	border: 2px solid #bbbaba;
+    	background-color: #e0e0df;
+    	padding: 15px;
+    	color: #333;
+    	font-size: .95em;
+}
+
 p > a {
 	color: #007399;
 }
