@@ -91,6 +91,16 @@ h3 {
     font-size: 1.5em;
 }
 
+h4 {
+	color: #007399;
+    	font-size: 1.2em;
+}
+
+h4 a {
+	color: #007399;
+	text-decoration: none;
+}
+
 p {
 	line-height: 2em;
 	margin: 14px 0;
