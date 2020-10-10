@@ -13,16 +13,19 @@ title: WeatherFlow Tempest API & Developer Platform
 <h6>Note: While OAuth is the preferred authentication method for production applications, the Personal Access Token is the simplest way to get started with the API - just sign in to your own account and generate one. You can add OAuth once your app or integration is ready for external testing.</h6>
 <h3>Step 3. Dive in!</h3>
 <p>Once you have an access token (either a personal or Oauth), you’re ready to start playing with the API. Here are the links to our full documentation for REST & WebSockets, along with a few simple examples to get you started:</p>
-<h4><a href="swagger/">REST reference</a></h5>
+
+<h4><a href="swagger/">REST reference</a></h4>
 <h5>Examples:</h5>
-<ul>
-	<li>GET Station Meta Data</li>
-	<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token]</div>
-	<li>GET Latest Station Observation</li>
-	<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/observations/station/[your_station_id]?token=[your_access_token]</div>
-	<li>GET Latest Device Observation</li>
-	<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/observations/?device_id=[your_device_id]&token=[your_access_token]</div>
-</ul>
+
+<p class="step">GET Station Meta Data</p>
+<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/stations?token=[your_access_token]</div>
+
+<p class="step">GET Latest Station Observation</>
+<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/observations/station/[your_station_id]?token=[your_access_token]</div>
+
+<p class="step">GET Latest Device Observation</p>
+<div class="code-highlight code-highlight-extra-padding">https://swd.weatherflow.com/swd/rest/observations/?device_id=[your_device_id]&token=[your_access_token]</div>
+
 <h4><a href="ws.html">WebSockets reference</a></h4>
 <h5>Examples:</h5>
 <ul>
