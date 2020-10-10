@@ -162,8 +162,8 @@ header {
 
 .code-highlight {
 	font-family: monospace, Arial;
-	background-color: #84dade;
-	border: 1px solid #0077399;
+	background-color: rgba(255,198, 41, .3);
+    	border: 2px solid #ffc629;
 	padding: 2px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
