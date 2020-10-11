@@ -1383,7 +1383,7 @@ body {
 }
 .swagger-section #header {
     font-size: 16px;
-    background: linear-gradient(#1267c0,#73a5da);;
+    background: #512B59;
     padding: 0 15px 50px;
     min-width: 775px
 }
