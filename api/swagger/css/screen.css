@@ -1027,7 +1027,7 @@ body {
     color: #0f6ab4
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.heading ul.options li a {
-    color: #0f6ab4
+    color: ##00a887
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.content {
     background-color: #ebf3f9;
