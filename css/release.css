@@ -33,10 +33,9 @@
 }
 
 .post h1, .post h2 a {
-	color: #1b75d5;
 	text-decoration: none;
-	font-size: 1.5em;
-	line-height: 1.5em;
+	font-size: .9em;
+	line-height: .9em;
 }
 
 .post-date {
