@@ -32,6 +32,10 @@
       "description": "Manage User Devices"
     },
     {
+      "name": "external_app",
+      "description": "External Apps that we push data to"
+    },
+    {
       "name": "events",
       "description": "Get time series Event data"
     },
@@ -2153,6 +2157,512 @@
         }
       }
     },
+    
+    
+    
+    
+    "/external_app_user": {
+      "get": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Get External App data for a user.  This includes refresh_token, refresh_token_url and data_push_url",
+        "summary": "Get External App data for a user.",
+        "operationId": "getExternalApps",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Create a new External App User record. If this is a SmartThings insert (external_app_id = 1) all of the users devices will also be inserted into external_app_devices.",
+        "summary": "Create a new External App User record.",
+        "operationId": "craeateExternalAppUser",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "refresh_token",
+            "in": "query",
+            "description": "refresh_token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refresh_token_url",
+            "in": "query",
+            "description": "refresh_token_url",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data_push_url",
+            "in": "query",
+            "description": "data_push_url",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Update an External App User record.  All fields sent will be updated in the database.",
+        "summary": "Update an External App User record.",
+        "operationId": "updateExternalAppUser",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "refresh_token",
+            "in": "query",
+            "description": "refresh_token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refresh_token_url",
+            "in": "query",
+            "description": "refresh_token_url",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "data_push_url",
+            "in": "query",
+            "description": "data_push_url",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Delete an External App User record.",
+        "summary": "Delete an External App User record.",
+        "operationId": "deleteExternalAppUser",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+
+
+
+
+
+    "/external_app_device": {
+      "get": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Get External App devices for a user.  This will return an array of all devices for an external_app_id.",
+        "summary": "Get External App devices for a user.",
+        "operationId": "getExternalDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Create a new External App Device record.  Add a Device (device_id) or a (location_id).  Current SmartThings uses device_id.",
+        "summary": "Create a new External App Device record.",
+        "operationId": "createExternalAppDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "device_id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "location_id",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Delete an External App Device record.  Remove a device if you no longer want it to return on the active work list.",
+        "summary": "Delete an External App Device record.",
+        "operationId": "deleteExternalAppDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "device_id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "location_id",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    
+    
+    
+
+
+
+
+
+
+
+
+    "/external_app_device_update_poll": {
+      "get": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Update the latest poll time to now for a Device.",
+        "summary": "Update the latest poll time to now for a Device.",
+        "operationId": "getExternalDevice",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "device_id",
+            "in": "query",
+            "description": "device_id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "location_id",
+            "in": "query",
+            "description": "location_id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "device_id_list",
+            "in": "query",
+            "description": "csv list of device_id values",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "location_id_list",
+            "in": "query",
+            "description": "csv list of location_id values",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    
+
+    
+    
+    
+    "/external_app_work_list": {
+      "get": {
+        "tags": [
+          "external_app"
+        ],
+        "description": "Get the work list for an external application.",
+        "summary": "Get the work list for an external application.",
+        "operationId": "getExternalAppWorkList",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "external_app_id",
+            "in": "query",
+            "description": "ID of the External App",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    
+    
+    
+    
+    
+    
     "/user_notifications": {
       "get": {
         "tags": [

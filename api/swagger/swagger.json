@@ -1,797 +1,797 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "",
-        "version": "1.0.0",
-        "title": "WeatherFlow Smart Weather API",
-        "contact": {
-            "email": "jforare@weatherflow.com"
-        }
-    },
-    "host": "swd.weatherflow.com",
-    "basePath": "/swd/rest",
-    "tags": [
-        {
-            "name": "observations",
-            "description": "Get observations for a Smart Weather Device."
-        },
-        {
-            "name": "stations",
-            "description": "Get Stations with Smart Weather Devices"
-        }
-    ],
-    "schemes": [
-        "http",
-        "https"
-    ],
-    "security": [
-        {
-            "swdImplicit": [
-                "user"
-            ]
-        },
-        {
-            "swdApiKey": []
-        }
-    ],
-    "paths": {
-        "/stations": {
-            "get": {
-                "tags": [
-                    "stations"
-                ],
-                "description": "Smart Weather Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.",
-                "summary": "Find all Stations for a user",
-                "operationId": "getStations",
-                "security": [
-                    {
-                        "swdImplicit": [
-                            "user"
-                        ]
-                    },
-                    {
-                        "swdApiKey": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/StationSet"
-                        }
-                    },
-                    "404": {
-                        "description": "Station not found"
-                    }
-                }
-            }
-        },
-        "/stations/{station_id}": {
-            "get": {
-                "tags": [
-                    "stations"
-                ],
-                "description": "Smart Weather Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.",
-                "summary": "Find a Station by ID",
-                "operationId": "getStationById",
-                "security": [
-                    {
-                        "swdImplicit": [
-                            "user"
-                        ]
-                    },
-                    {
-                        "swdApiKey": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "station_id",
-                        "in": "path",
-                        "description": "ID of Station to return",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/StationSet"
-                        }
-                    },
-                    "404": {
-                        "description": "Station not found"
-                    }
-                }
-            }
-        },
-        "/observations/device/{device_id}": {
-            "get": {
-                "tags": [
-                    "observations"
-                ],
-                "description": "Get observations for a Device(Air,Sky,Tempest) by using the device_id as the key.  You can find device_id values in the response from the Stations service  You can get observations using several filters (latest, time range, day offset).  \n  \nUse the \"type\" value to determine the layout of the observations values.  The \"obs\" object is an array of observations.  Each observation is an array of observation values (see layout below).<br><br>**Air**  (type=\"obs_air\")<br>Observation Layout<br>0 - Epoch (seconds UTC)<br>1 - Station Pressure (MB)<br>2 - Air Temperature (C)<br>3 - Relative Humidity (%)<br>4 - Lightning Strike Count<br>5 - Lightning Strike Average Distance (km)<br>6 - Battery (volts)<br>7 - Report Interval (minutes)<br><br>**Sky** (type=\"obs_sky\")<br>Observation Layout<br>0 - Epoch (seconds UTC)<br>1 - Illuminance (lux)<br>2 - UV (index)<br>3 - Rain Accumulation (mm)<br>4 - Wind Lull  (m/s)<br>5 - Wind Avg (m/s)<br>6 - Wind Gust (m/s)<br>7 - Wind Direction (degrees)<br>8 - Battery (volts)<br>9 - Report Interval (minutes)<br>10 - Solar Radiation (W/m^2)<br>11 - Local Day Rain Accumulation (mm)<br>12 - Precipitation Type (0 = none, 1 = rain, 2 = hail)<br>13 - Wind Sample Interval (seconds)<br>14 - Rain Accumulation Final (Rain Check) (mm)<br>15 - Local Day Rain Accumulation Final (Rain Check) (mm)<br>16 - Precipitation Analysis Type (0 = none, 1 = Rain Check with user display on, 2 = Rain Check with user display off)<br><br>**Tempest** (type=\"obs_st\")<br>Observation Layout<br>0 - Epoch (Seconds UTC)<br>1 - Wind Lull  (m/s)<br>2 - Wind Avg (m/s)<br>3 - Wind Gust (m/s)<br>4 - Wind Direction (degrees)<br>5 - Wind Sample Interval (seconds)<br>6 - Pressure (MB)<br>7 - Air Temperature (C)<br>8 - Relative Humidity (%)<br>9 - Illuminance (lux)<br>10 - UV (index)<br>11 - Solar Radiation (W/m^2)<br>12 - Rain Accumulation (mm)<br>13 - Precipitation Type (0 = none, 1 = rain, 2 = hail)<br>14 - Average Strike Distance (km)<br>15 - Strike Count<br>16 - Battery (volts)<br>17 - Report Interval (minutes)<br>18 - Local Day Rain Accumulation (mm)<br>19 - Rain Accumulation Final (Rain Check) (mm)<br>20 - Local Day Rain Accumulation Final (Rain Check) (mm)<br>21 - Precipitation Aanalysis Type (0 = none, 1 = Rain Check with user display on, 2 = Rain Check with user display off)",
-                "summary": "Get observations for a single Smart Weather Device",
-                "operationId": "getObservationsByDeviceId",
-                "security": [
-                    {
-                        "swdImplicit": [
-                            "user"
-                        ]
-                    },
-                    {
-                        "swdApiKey": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "device_id",
-                        "in": "path",
-                        "description": "ID of device",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "day_offset",
-                        "in": "query",
-                        "description": "TIME FILTER - Get an entire day of observations by UTC day offset.<br><br>0 - Current day UTC<br>1 - Yesterday UTC",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "time_start",
-                        "in": "query",
-                        "description": "TIME FILTER - Time range start time epoch seconds UTC.  Observation data at a one minute time resolution is available for a time range that is five days or less.  You also need to send \"time_end\".  This field pair is optional.  If the request does not contain any time filters only the latest observation will be returned.",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "time_end",
-                        "in": "query",
-                        "description": "TIME FILTER - Time range start time epoch seconds UTC.  Observation data at a one minute time resolution is available for a time range that is five days or less.  You also need to send \"time_start\".  This field pair is optional.  If the request does not contain any time filters only the latest observation will be returned.",
-                        "required": false,
-                        "type": "integer",
-                        "format": "int64"
-                    },
-                    {
-                        "name": "format",
-                        "in": "query",
-                        "description": "Use format=csv to return a CSV response type.",
-                        "required": false,
-                        "enum": [
-                          "csv"
-                        ],
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/ObservationSet"
-                        }
-                    },
-                    "404": {
-                        "description": "Device not found"
-                    }
-                }
-            }
-        },
-        "/observations/station/{station_id}": {
-            "get": {
-                "tags": [
-                    "observations"
-                ],
-                "description": "Get the latest federated observation for a Station.  This observation is made from the latest Device observations that belong to the Station.  If a user has multiple Devices of the same type they are able to designate one of them as primary. This is the one used to make the federated observation.<br><br>A user can also designate each device as either indoor or outdoor.  All indoor observation value fields will end with an \"_indoor\" suffix.  Outdoor observations fields do not have a suffix.<br><br>The station_units values represent the units of the Station's owner, not the units of the observation values in the API response. ",
-                "summary": "Get the latest Station observation",
-                "operationId": "getStationObservation",
-                "security": [
-                    {
-                        "swdImplicit": [
-                            "user"
-                        ]
-                    },
-                    {
-                        "swdApiKey": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "station_id",
-                        "in": "path",
-                        "description": "ID of Station to return",
-                        "required": true,
-                        "type": "integer",
-                        "format": "int64"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/StationObservation"
-                        }
-                    },
-                    "404": {
-                        "description": "Station not found"
-                    }
-                }
-            }
-        }
-    },
-    "securityDefinitions": {
-        "swdImplicit": {
-            "type": "oauth2",
-            "scopes": {
-                "user": "Grants read/write access to all user data."
-            },
-            "flow": "implicit",
-            "authorizationUrl": "https://smartweather.weatherflow.com/authorize.html"
-        },
-        "swdApiKey": {
-            "type": "apiKey",
-            "in": "query",
-            "name": "api_key"
-        }
-    },
-    "definitions": {
-        "Device": {
-            "type": "object",
-            "properties": {
-                "device_id": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 128
-                },
-                "serial_number": {
-                    "type": "string",
-                    "example": "AR-12345678"
-                },
-                "device_meta": {
-                    "$ref": "#/definitions/DeviceMeta"
-                },
-                "device_type": {
-                    "type": "string",
-                    "example": "AR",
-                    "enum": [
-                        "AR",
-                        "SK"
-                    ]
-                },
-                "hardware_revision": {
-                    "type": "string",
-                    "example": "3"
-                },
-                "firmware_revision": {
-                    "type": "string",
-                    "example": "3"
-                },
-                "notes": {
-                    "type": "string"
-                }
-            }
-        },
-        "DeviceMeta": {
-            "type": "object",
-            "properties": {
-                "agl": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 2.2
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Pool Air Device"
-                },
-                "environment": {
-                    "type": "string",
-                    "example": "outdoor",
-                    "enum": [
-                        "indoor",
-                        "outdoor"
-                    ]
-                },
-                "wifi_network_name": {
-                    "type": "string"
-                }
-            }
-        },
-        "Station": {
-            "type": "object",
-            "properties": {
-                "station_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 67
-                },
-                "name": {
-                    "type": "string",
-                    "example": "Home"
-                },
-                "public_name": {
-                    "type": "string",
-                    "example": "Public Location Name"
-                },
-                "latitude": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 29.00724
-                },
-                "longitude": {
-                    "type": "number",
-                    "format": "float",
-                    "example": -80.88067
-                },
-                "station_meta": {
-                    "$ref": "#/definitions/StationMeta"
-                },
-                "devices": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Device"
-                    }
-                },
-                "station_items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/StationItem"
-                    }
-                }
-            }
-        },
-        "StationItem": {
-            "type": "object",
-            "properties": {
-                "location_item_id": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 55
-                },
-                "station_id": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 67
-                },
-                "device_id": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 55
-                },
-                "item": {
-                    "type": "string",
-                    "example": "air_temperature_humidity"
-                }
-            }
-        },
-        "StationMeta": {
-            "type": "object",
-            "properties": {
-                "elevation": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 33.2
-                },
-                "share_with_wf": {
-                    "type": "boolean",
-                    "example": true,
-                    "default": true
-                },
-                "share_with_wu": {
-                    "type": "boolean",
-                    "example": true,
-                    "default": true
-                }
-            }
-        },
-        "StationSet": {
-            "type": "object",
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Status"
-                },
-                "locations": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/Station"
-                    }
-                }
-            }
-        },
-        "ObservationSet": {
-            "type": "object",
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Status"
-                },
-                "device_id": {
-                    "type": "number",
-                    "format": "in32",
-                    "example": 59
-                },
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "obs_sky",
-                        "obs_air"
-                    ],
-                    "example": "obs_air"
-                },
-                "obs": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ObservationValuesArray"
-                    }
-                }
-            }
-        },
-        "StationUnits": {
-            "type": "object",
-            "properties": {
-                "units_temp": {
-                    "type": "string",
-                    "example": "f"
-                },
-                "units_wind": {
-                    "type": "string",
-                    "example": "mph"
-                },
-                "units_precip": {
-                    "type": "string",
-                    "example": "in"
-                },
-                "units_pressure": {
-                    "type": "string",
-                    "example": "mb"
-                },
-                "units_distance": {
-                    "type": "string",
-                    "example": "mi"
-                },
-                "units_direction": {
-                    "type": "string",
-                    "example": "cardinal"
-                },
-                "units_other": {
-                    "type": "string",
-                    "example": "imperial"
-                }
-            }
-        },
-        "ObservationValuesArray": {
-            "type": "array",
-            "items": {
-                "type": "number",
-                "example": [
-                    1,
-                    2,
-                    3,
-                    4,
-                    5,
-                    6,
-                    7,
-                    8
-                ]
-            }
-        },
-        "StationObservation": {
-            "type": "object",
-            "properties": {
-                "status": {
-                    "$ref": "#/definitions/Status"
-                },
-                "station_units": {
-                    "$ref": "#/definitions/StationUnits"
-                },
-                "station_id": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 67
-                },
-                "station_name": {
-                    "type": "string",
-                    "example": "Home"
-                },
-                "public_name": {
-                    "type": "string",
-                    "example": "Public Location Name"
-                },
-                "latitude": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 29.00724
-                },
-                "longitude": {
-                    "type": "number",
-                    "format": "float",
-                    "example": -80.88067
-                },
-                "timezone": {
-                    "type": "string",
-                    "example": "America/New_York"
-                },
-                "elevation": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.845
-                },
-                "obs": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/StationObservationValues"
-                    }
-                }
-            }
-        },
-        "StationObservationValues": {
-            "type": "object",
-            "properties": {
-                "timestamp": {
-                    "type": "number",
-                    "format": "in32",
-                    "example": 1495732068
-                },
-                "air_temperature": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 29.1
-                },
-                "barometric_pressure": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1002.9
-                },
-                "sea_level_pressure": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1004.7
-                },
-                "relative_humidity": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 77
-                },
-                "precip": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 0.0
-                },
-                "precip_accum_last_1hr": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 0.0
-                },
-                "wind_avg": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 3.5
-                },
-                "wind_direction": {
-                    "type": "number",
-                    "format": "int64",
-                    "example": 289
-                },
-                "wind_gust": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 5.1
-                },
-                "wind_lull": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 2.2
-                },
-                "solar_radiation": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 330
-                },
-                "uv": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 8
-                },
-                "brightness": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 7000
-                },
-                "lightning_strike_last_epoch": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1495652340
-                },
-                "lightning_strike_last_distance": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 22
-                },
-                "lightning_strike_count_last_3hr": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 0
-                },
-                "feels_like": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.4
-                },
-                "heat_index": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.4
-                },
-                "wind_chill": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.4
-                },
-                "dew_point": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 17.2
-                },
-                "wet_bulb_temperature": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 18.6
-                },
-                "delta_t": {
-                    "type": "number",
-                    "format": "float",
-                    "example": -2.8
-                },
-                "air_density": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1.18257
-                },
-                "air_temperature_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 29.1
-                },
-                "barometric_pressure_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1002.9
-                },
-                "sea_level_pressure_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1004.7
-                },
-                "relative_humidity_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 77
-                },
-                "precip_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 0.0
-                },
-                "precip_accum_last_1hr_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 0.0
-                },
-                "wind_avg_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 3.5
-                },
-                "wind_direction_indoor": {
-                    "type": "number",
-                    "format": "int64",
-                    "example": 289
-                },
-                "wind_gust_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 5.1
-                },
-                "wind_lull_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 2.2
-                },
-                "solar_radiation_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 330
-                },
-                "uv_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 8
-                },
-                "brightness_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 7000
-                },
-                "lightning_strike_last_epoch_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1495652340
-                },
-                "lightning_strike_last_distance_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 22
-                },
-                "lightning_strike_count_last_3hr_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 0
-                },
-                "feels_like_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.4
-                },
-                "heat_index_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.4
-                },
-                "wind_chill_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 21.4
-                },
-                "dew_point_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 17.2
-                },
-                "wet_bulb_temperature_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 18.6
-                },
-                "delta_t_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": -2.8
-                },
-                "air_density_indoor": {
-                    "type": "number",
-                    "format": "float",
-                    "example": 1.18257
-                }
-            }
-        },
-        "Status": {
-            "type": "object",
-            "properties": {
-                "status_code": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 0
-                },
-                "status_message": {
-                    "type": "string",
-                    "example": "SUCCESS"
-                }
-            }
-        }
+  "swagger": "2.0",
+  "info": {
+    "description": "",
+    "version": "1.0.0",
+    "title": "WeatherFlow Tempest API",
+    "contact": {
+      "email": "jforare@weatherflow.com"
     }
+  },
+  "host": "swd.weatherflow.com",
+  "basePath": "/swd/rest",
+  "tags": [
+    {
+      "name": "observations",
+      "description": "Get Observations"
+    },
+    {
+      "name": "stations",
+      "description": "Get Stations"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "security": [
+    {
+      "swdImplicit": [
+        "user"
+      ]
+    },
+    {
+      "swdApiKey": []
+    }
+  ],
+  "paths": {
+    "/stations": {
+      "get": {
+        "tags": [
+          "stations"
+        ],
+        "description": "Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.",
+        "summary": "Find all Stations for a user",
+        "operationId": "getStations",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StationSet"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/stations/{station_id}": {
+      "get": {
+        "tags": [
+          "stations"
+        ],
+        "description": "Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.",
+        "summary": "Find a Station by ID",
+        "operationId": "getStationById",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "path",
+            "description": "ID of Station to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StationSet"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/observations/device/{device_id}": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "description": "Get observations for a Device(Air,Sky,Tempest) by using the device_id as the key.  You can find device_id values in the response from the Stations service  You can get observations using several filters (latest, time range, day offset).  \n  \nUse the \"type\" value to determine the layout of the observations values.  The \"obs\" object is an array of observations.  Each observation is an array of observation values (see layout below).<br><br>**Air**  (type=\"obs_air\")<br>Observation Layout<br>0 - Epoch (seconds UTC)<br>1 - Station Pressure (MB)<br>2 - Air Temperature (C)<br>3 - Relative Humidity (%)<br>4 - Lightning Strike Count<br>5 - Lightning Strike Average Distance (km)<br>6 - Battery (volts)<br>7 - Report Interval (minutes)<br><br>**Sky** (type=\"obs_sky\")<br>Observation Layout<br>0 - Epoch (seconds UTC)<br>1 - Illuminance (lux)<br>2 - UV (index)<br>3 - Rain Accumulation (mm)<br>4 - Wind Lull  (m/s)<br>5 - Wind Avg (m/s)<br>6 - Wind Gust (m/s)<br>7 - Wind Direction (degrees)<br>8 - Battery (volts)<br>9 - Report Interval (minutes)<br>10 - Solar Radiation (W/m^2)<br>11 - Local Day Rain Accumulation (mm)<br>12 - Precipitation Type (0 = none, 1 = rain, 2 = hail)<br>13 - Wind Sample Interval (seconds)<br>14 - Rain Accumulation Final (Rain Check) (mm)<br>15 - Local Day Rain Accumulation Final (Rain Check) (mm)<br>16 - Precipitation Analysis Type (0 = none, 1 = Rain Check with user display on, 2 = Rain Check with user display off)<br><br>**Tempest** (type=\"obs_st\")<br>Observation Layout<br>0 - Epoch (Seconds UTC)<br>1 - Wind Lull  (m/s)<br>2 - Wind Avg (m/s)<br>3 - Wind Gust (m/s)<br>4 - Wind Direction (degrees)<br>5 - Wind Sample Interval (seconds)<br>6 - Pressure (MB)<br>7 - Air Temperature (C)<br>8 - Relative Humidity (%)<br>9 - Illuminance (lux)<br>10 - UV (index)<br>11 - Solar Radiation (W/m^2)<br>12 - Rain Accumulation (mm)<br>13 - Precipitation Type (0 = none, 1 = rain, 2 = hail)<br>14 - Average Strike Distance (km)<br>15 - Strike Count<br>16 - Battery (volts)<br>17 - Report Interval (minutes)<br>18 - Local Day Rain Accumulation (mm)<br>19 - Rain Accumulation Final (Rain Check) (mm)<br>20 - Local Day Rain Accumulation Final (Rain Check) (mm)<br>21 - Precipitation Aanalysis Type (0 = none, 1 = Rain Check with user display on, 2 = Rain Check with user display off)",
+        "summary": "Get Observations for a Single Device",
+        "operationId": "getObservationsByDeviceId",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "device_id",
+            "in": "path",
+            "description": "ID of device",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "day_offset",
+            "in": "query",
+            "description": "TIME FILTER - Get an entire day of observations by UTC day offset.<br><br>0 - Current day UTC<br>1 - Yesterday UTC",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_start",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.  Observation data at a one minute time resolution is available for a time range that is five days or less.  You also need to send \"time_end\".  This field pair is optional.  If the request does not contain any time filters only the latest observation will be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "time_end",
+            "in": "query",
+            "description": "TIME FILTER - Time range start time epoch seconds UTC.  Observation data at a one minute time resolution is available for a time range that is five days or less.  You also need to send \"time_start\".  This field pair is optional.  If the request does not contain any time filters only the latest observation will be returned.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Use format=csv to return a CSV response type.",
+            "required": false,
+            "enum": [
+              "csv"
+            ],
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ObservationSet"
+            }
+          },
+          "404": {
+            "description": "Device not found"
+          }
+        }
+      }
+    },
+    "/observations/station/{station_id}": {
+      "get": {
+        "tags": [
+          "observations"
+        ],
+        "description": "Get the latest federated observation for a Station.  This observation is made from the latest Device observations that belong to the Station.  If a user has multiple Devices of the same type they are able to designate one of them as primary. This is the one used to make the federated observation.<br><br>A user can also designate each device as either indoor or outdoor.  All indoor observation value fields will end with an \"_indoor\" suffix.  Outdoor observations fields do not have a suffix.<br><br>The station_units values represent the units of the Station's owner, not the units of the observation values in the API response. ",
+        "summary": "Get the latest Station observation",
+        "operationId": "getStationObservation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "path",
+            "description": "ID of Station to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/StationObservation"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "swdImplicit": {
+      "type": "oauth2",
+      "scopes": {
+        "user": "Grants read/write access to all user data."
+      },
+      "flow": "implicit",
+      "authorizationUrl": "https://smartweather.weatherflow.com/authorize.html"
+    },
+    "swdApiKey": {
+      "type": "apiKey",
+      "in": "query",
+      "name": "api_key"
+    }
+  },
+  "definitions": {
+    "Device": {
+      "type": "object",
+      "properties": {
+        "device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 128
+        },
+        "serial_number": {
+          "type": "string",
+          "example": "AR-12345678"
+        },
+        "device_meta": {
+          "$ref": "#/definitions/DeviceMeta"
+        },
+        "device_type": {
+          "type": "string",
+          "example": "AR",
+          "enum": [
+            "AR",
+            "SK"
+          ]
+        },
+        "hardware_revision": {
+          "type": "string",
+          "example": "3"
+        },
+        "firmware_revision": {
+          "type": "string",
+          "example": "3"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "DeviceMeta": {
+      "type": "object",
+      "properties": {
+        "agl": {
+          "type": "number",
+          "format": "float",
+          "example": 2.2
+        },
+        "name": {
+          "type": "string",
+          "example": "Pool Air Device"
+        },
+        "environment": {
+          "type": "string",
+          "example": "outdoor",
+          "enum": [
+            "indoor",
+            "outdoor"
+          ]
+        },
+        "wifi_network_name": {
+          "type": "string"
+        }
+      }
+    },
+    "Station": {
+      "type": "object",
+      "properties": {
+        "station_id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 67
+        },
+        "name": {
+          "type": "string",
+          "example": "Home"
+        },
+        "public_name": {
+          "type": "string",
+          "example": "Public Location Name"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 29.00724
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -80.88067
+        },
+        "station_meta": {
+          "$ref": "#/definitions/StationMeta"
+        },
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "station_items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StationItem"
+          }
+        }
+      }
+    },
+    "StationItem": {
+      "type": "object",
+      "properties": {
+        "location_item_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 55
+        },
+        "station_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 67
+        },
+        "device_id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 55
+        },
+        "item": {
+          "type": "string",
+          "example": "air_temperature_humidity"
+        }
+      }
+    },
+    "StationMeta": {
+      "type": "object",
+      "properties": {
+        "elevation": {
+          "type": "number",
+          "format": "float",
+          "example": 33.2
+        },
+        "share_with_wf": {
+          "type": "boolean",
+          "example": true,
+          "default": true
+        },
+        "share_with_wu": {
+          "type": "boolean",
+          "example": true,
+          "default": true
+        }
+      }
+    },
+    "StationSet": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Station"
+          }
+        }
+      }
+    },
+    "ObservationSet": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "device_id": {
+          "type": "number",
+          "format": "in32",
+          "example": 59
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "obs_sky",
+            "obs_air"
+          ],
+          "example": "obs_air"
+        },
+        "obs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ObservationValuesArray"
+          }
+        }
+      }
+    },
+    "StationUnits": {
+      "type": "object",
+      "properties": {
+        "units_temp": {
+          "type": "string",
+          "example": "f"
+        },
+        "units_wind": {
+          "type": "string",
+          "example": "mph"
+        },
+        "units_precip": {
+          "type": "string",
+          "example": "in"
+        },
+        "units_pressure": {
+          "type": "string",
+          "example": "mb"
+        },
+        "units_distance": {
+          "type": "string",
+          "example": "mi"
+        },
+        "units_direction": {
+          "type": "string",
+          "example": "cardinal"
+        },
+        "units_other": {
+          "type": "string",
+          "example": "imperial"
+        }
+      }
+    },
+    "ObservationValuesArray": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "example": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    "StationObservation": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "station_units": {
+          "$ref": "#/definitions/StationUnits"
+        },
+        "station_id": {
+          "type": "integer",
+          "format": "int64",
+          "example": 67
+        },
+        "station_name": {
+          "type": "string",
+          "example": "Home"
+        },
+        "public_name": {
+          "type": "string",
+          "example": "Public Location Name"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 29.00724
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -80.88067
+        },
+        "timezone": {
+          "type": "string",
+          "example": "America/New_York"
+        },
+        "elevation": {
+          "type": "number",
+          "format": "float",
+          "example": 21.845
+        },
+        "obs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StationObservationValues"
+          }
+        }
+      }
+    },
+    "StationObservationValues": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "type": "number",
+          "format": "in32",
+          "example": 1495732068
+        },
+        "air_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 29.1
+        },
+        "barometric_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 1002.9
+        },
+        "sea_level_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 1004.7
+        },
+        "relative_humidity": {
+          "type": "number",
+          "format": "float",
+          "example": 77
+        },
+        "precip": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "precip_accum_last_1hr": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "wind_avg": {
+          "type": "number",
+          "format": "float",
+          "example": 3.5
+        },
+        "wind_direction": {
+          "type": "number",
+          "format": "int64",
+          "example": 289
+        },
+        "wind_gust": {
+          "type": "number",
+          "format": "float",
+          "example": 5.1
+        },
+        "wind_lull": {
+          "type": "number",
+          "format": "float",
+          "example": 2.2
+        },
+        "solar_radiation": {
+          "type": "number",
+          "format": "float",
+          "example": 330
+        },
+        "uv": {
+          "type": "number",
+          "format": "float",
+          "example": 8
+        },
+        "brightness": {
+          "type": "number",
+          "format": "float",
+          "example": 7000
+        },
+        "lightning_strike_last_epoch": {
+          "type": "number",
+          "format": "float",
+          "example": 1495652340
+        },
+        "lightning_strike_last_distance": {
+          "type": "number",
+          "format": "float",
+          "example": 22
+        },
+        "lightning_strike_count_last_3hr": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "feels_like": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "heat_index": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "wind_chill": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "dew_point": {
+          "type": "number",
+          "format": "float",
+          "example": 17.2
+        },
+        "wet_bulb_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 18.6
+        },
+        "delta_t": {
+          "type": "number",
+          "format": "float",
+          "example": -2.8
+        },
+        "air_density": {
+          "type": "number",
+          "format": "float",
+          "example": 1.18257
+        },
+        "air_temperature_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 29.1
+        },
+        "barometric_pressure_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1002.9
+        },
+        "sea_level_pressure_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1004.7
+        },
+        "relative_humidity_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 77
+        },
+        "precip_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "precip_accum_last_1hr_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "wind_avg_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 3.5
+        },
+        "wind_direction_indoor": {
+          "type": "number",
+          "format": "int64",
+          "example": 289
+        },
+        "wind_gust_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 5.1
+        },
+        "wind_lull_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 2.2
+        },
+        "solar_radiation_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 330
+        },
+        "uv_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 8
+        },
+        "brightness_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 7000
+        },
+        "lightning_strike_last_epoch_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1495652340
+        },
+        "lightning_strike_last_distance_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 22
+        },
+        "lightning_strike_count_last_3hr_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 0
+        },
+        "feels_like_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "heat_index_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "wind_chill_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 21.4
+        },
+        "dew_point_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 17.2
+        },
+        "wet_bulb_temperature_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 18.6
+        },
+        "delta_t_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": -2.8
+        },
+        "air_density_indoor": {
+          "type": "number",
+          "format": "float",
+          "example": 1.18257
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "status_code": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0
+        },
+        "status_message": {
+          "type": "string",
+          "example": "SUCCESS"
+        }
+      }
+    }
+  }
 }
