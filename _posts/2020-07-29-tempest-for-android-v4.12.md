@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Smart Weather for Android - v4.12"
+title:  "Tempest for Android - v4.12"
 date:   2020-07-29 12:00:01 -0500
 categories: Android
 ---
