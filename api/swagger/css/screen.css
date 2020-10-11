@@ -735,7 +735,7 @@ body {
     padding-left: 0
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource div.heading h2 {
-    color: #999;
+    color: #007399;
     padding-left: 0;
     display: block;
     clear: none;
@@ -744,7 +744,7 @@ body {
     font-weight: 700
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource div.heading h2 a {
-    color: #999
+    color: #007399
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource div.heading h2 a:hover {
     color: #000
@@ -1383,7 +1383,7 @@ body {
 }
 .swagger-section #header {
     font-size: 16px;
-    background: linear-gradient(#1267c0,#73a5da);;
+    background: #512B59;
     padding: 0 15px 50px;
     min-width: 775px
 }
@@ -1417,7 +1417,7 @@ body {
     padding: 10px 60px;
     font-size: .9em;
     color: #fff;
-    background-color: #1b75d5;
+    background-color: #512B59;
     font-size: 22px;
     float: right;
 };

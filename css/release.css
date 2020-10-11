@@ -131,11 +131,11 @@ h2 {
 
 /* OAuth */
 .hint {
-	border: 1px solid #1b75d5;
-    background: rgba(27, 117, 213, .2) url(../images/star.svg) no-repeat 10px 17px;
+	border: 1px solid #007399;
+    background: rgba(0, 115, 153, .2) url(../images/star.svg) no-repeat 10px 17px;
     background-size: 16px;
     padding: 10px 10px 10px 40px;
-	color: #1b75d5;
+	color: #007399;
 	margin: 35px 0;
 }
 
