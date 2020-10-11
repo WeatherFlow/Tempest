@@ -744,7 +744,7 @@ body {
     font-weight: 700
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource div.heading h2 a {
-    color: #999
+    color: #007399
 }
 .swagger-section .swagger-ui-wrap ul#resources li.resource div.heading h2 a:hover {
     color: #000
