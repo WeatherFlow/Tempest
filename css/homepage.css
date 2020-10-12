@@ -34,3 +34,11 @@
 #api-documentation {
 	background-image: url(../images/api.svg);
 }
+
+@media only screen and (max-device-width: 480px) and (min-device-width: 320px)
+	#main-content {
+	    margin-left: 0;
+	    clear: both;
+	    padding: 0 15px 0 15px;
+	}
+}
