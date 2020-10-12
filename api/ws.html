@@ -3,15 +3,15 @@ layout: apiwshome
 title: WeatherFlow Tempest API Websocket Reference
 ---
 <h2><a name="endpoints">Endpoints</a></h2>
-<div class="code-highlight">ws://ws.weatherflow.com/swd/data</div>
-<div class="code-highlight">wss://ws.weatherflow.com/swd/data</div>
+<div class="code-highlight code-highlight-extra-padding">ws://ws.weatherflow.com/swd/data</div>
+<div class="code-highlight code-highlight-extra-padding">wss://ws.weatherflow.com/swd/data</div>
 
 <h2><a name="request-messages">Request Messages</a></h2>
 <table>
   <tr><th>Request Message</th><th>Response Message Types</th><th>Description</th></tr>
   <tr>
     <td>
-      <div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"listen_start",
@@ -25,7 +25,7 @@ title: WeatherFlow Tempest API Websocket Reference
   </tr>
   <tr>
     <td>
-      <div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"listen_stop",
@@ -39,7 +39,7 @@ title: WeatherFlow Tempest API Websocket Reference
   </tr>
   <tr>
     <td>
-      <div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"listen_start_events",
@@ -53,7 +53,7 @@ title: WeatherFlow Tempest API Websocket Reference
   </tr>
   <tr>
     <td>
-      <div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"listen_stop_events",
@@ -67,7 +67,7 @@ title: WeatherFlow Tempest API Websocket Reference
   </tr>
   <tr>
     <td>
-      <div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"listen_rapid_start",
@@ -81,7 +81,7 @@ title: WeatherFlow Tempest API Websocket Reference
   </tr>
   <tr>
     <td>
-      <div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"listen_rapid_stop",
@@ -99,7 +99,7 @@ title: WeatherFlow Tempest API Websocket Reference
 
 <h2><a name="response-messages">Response Messages</a></h2>
 <h3>Acknowledgement [type = ack]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"ack",
@@ -111,7 +111,7 @@ title: WeatherFlow Tempest API Websocket Reference
 
 <br><br>
 <h3>Rain Start Event [type = evt_precip]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"evt_precip",
@@ -123,7 +123,7 @@ title: WeatherFlow Tempest API Websocket Reference
 
 <br><br>
 <h3>Lightning Strike Event [type = evt_strike]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"evt_strike",
@@ -145,7 +145,7 @@ Evt Value Layout
 
 <br><br>
 <h3>Device Online Event [type = evt_device_online]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"evt_device_online",
@@ -159,7 +159,7 @@ Evt Value Layout
 
 <br><br>
 <h3>Device Offline Event [type = evt_device_offline]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"evt_device_offline",
@@ -173,7 +173,7 @@ Evt Value Layout
 
 <br><br>
 <h3>Station Online Event [type = evt_station_online]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"evt_station_online",
@@ -187,7 +187,7 @@ Evt Value Layout
 
 <br><br>
 <h3>Station Offline Event [type = evt_station_offline]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"evt_station_offline",
@@ -204,7 +204,7 @@ Evt Value Layout
 
 <br><br>
 <h3>Rapid Wind [type = rapid_wind] (3 second interval)</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"rapid_wind",
@@ -226,7 +226,7 @@ Ob Value Layout
 
 <br><br>
 <h3>Observation (Air) [type = obs_air]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"obs_air",
@@ -250,7 +250,7 @@ Observation Value Layout
 
 <br><br>
 <h3>Observation (Sky) [type = obs_sky]</h3>
-<div class="code-highlight">
+      <div class="monospace">
 {% highlight javascript %}
 {
   "type":"obs_sky",
