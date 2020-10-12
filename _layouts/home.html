@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+      {% include meta.html %}
+      <title>{{page.title}}</title>
+		  <link rel="stylesheet" href="css/base.css">
+		  <link rel="stylesheet" href="css/homepage.css">
+		  <link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+	  </head>
+	<body>
+		<header>
+			<div id="header-ctn">
+				<h1>{{page.title}}</h1>
+			</div>
+		</header>
+
+		<div id="main-content">
+      {{content}}		    
+		</div>
+	</body>
+</html>
