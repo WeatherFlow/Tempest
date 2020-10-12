@@ -50,10 +50,16 @@
 		<div id="app-menu"></div>
 		    {% include header.html %}		
 
-		    <div id="main-content">
-		    <div id="page-full">
-		        {{content}}
-		    </div>
+		<div id="main-content">
+			<div id="sidebar">
+				{% include api-sections.html %}
+			</div>
+
+			<div id="page">
+				{{content}}
+			</div>
 		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="{{site.url}}/js/releases.js"></script>
 	</body>
 </html>
