@@ -3,6 +3,16 @@ body {
     font-size: 16px;
 }
 
+#home {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 28px;
+    height: 28px;
+    background: url(../../../images/home.svg) no-repeat 50% 50%;
+    background-size: 28px 28px;
+}
+
 .swagger-section pre code {
     display: block;
     padding: .5em;
