@@ -75,7 +75,7 @@ strong {
 }
 
 h2 {
-	color: #007399;
+	color: #512B59;
 	font-size: 2.5em;
 	margin: 2em 0 1em 0;
 	line-height: 1.5em;
@@ -87,13 +87,13 @@ h2 a {
 }
 
 h3 {
-    color: #00a887;
+    color: #512B59;
     margin: 25px 0 0 0;
     font-size: 1.5em;
 }
 
 h4 {
-	color: #007399;
+	color: #512B59;
     	font-size: 1.2em;
 	margin: 1.2em 0 .25em 0;
 }
@@ -176,6 +176,7 @@ header {
 }
 
 #doc-sections .doc-section {
+	color: #512B59;
 	padding: 15px;
 	text-align: center;
 }
