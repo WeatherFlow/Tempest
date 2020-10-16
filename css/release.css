@@ -130,17 +130,6 @@
 }
 
 /* OAuth */
-.hint {
-}
-
-.hint {
-	border: 1px solid #00a887;
-	background: rgba(0, 168, 135, .2) url(../images/star.svg) no-repeat 10px 17px;
-	color: #00a887;
-	background-size: 16px;
-	padding: 10px 10px 10px 40px;
-	margin: 35px 0;
-}
 
 .step {
 	text-transform: uppercase;
