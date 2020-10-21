@@ -248,7 +248,7 @@
     "swdApiKey": {
       "type": "apiKey",
       "in": "query",
-      "name": "api_key"
+      "name": "token"
     }
   },
   "definitions": {
