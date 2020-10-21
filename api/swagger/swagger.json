@@ -75,7 +75,7 @@
           "stations"
         ],
         "description": "Devices all belong to a Station.  This response contains Station metadata and metadata for the Devices in it.  Each user can create multiple Stations.  A Device can only be in one Station at a time.  Only devices with a serial_number value can send new observations.  A Device wihout a serial_number indicates that Device is no longer active.",
-        "summary": "Find a Station by ID",
+        "summary": "Find a Station by station_id",
         "operationId": "getStationById",
         "security": [
           {
