@@ -14,7 +14,7 @@ templates['apikey_auth'] = template({"1":function(container,depth0,helpers,parti
     + ((stack1 = (helpers.sanitize || (depth0 && depth0.sanitize) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.value : depth0),{"name":"sanitize","hash":{},"data":data})) != null ? stack1 : "")
     + "</span>\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "                <input placeholder=\"api_key\" class=\"auth_input input_apiKey_entry\" name=\"apiKey\" type=\"text\"/>\n";
+    return "                <input placeholder=\"token\" class=\"auth_input input_apiKey_entry\" name=\"apiKey\" type=\"text\"/>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing;
 
