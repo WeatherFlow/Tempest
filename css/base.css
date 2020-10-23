@@ -196,6 +196,10 @@ header {
 	border-radius: 3px;
 }
 
+#page-full .code-highlight {
+	font-size: 14px;
+}
+
 .monospace {
 	font-family: monospace;
 }
