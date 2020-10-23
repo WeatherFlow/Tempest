@@ -281,6 +281,43 @@ Observation Value Layout
   <tr><td>16</td><td>Precipitation Analysis Type</td><td>0 = none<br>1 = Rain Check with user display on<br>2 = Rain Check with user display off</td></tr>
 </table>
 
+<br><br>
+<h3>Observation (Tempest) [type = obs_st]</h3>
+      <div class="code-highlight">
+{% highlight javascript %}
+{
+  "type":"obs_st",
+  "device_id":62009,
+  "obs": [[1603481377,0,0.09,0.54,333,6,1014.8,28.8,71,16639,1.83,139,0,0,0,0,2.42,1,0.07615,null,null,0]]
+}
+{% endhighlight %}
+</div>
+Observation Value Layout
+<table>
+  <tr><th>Index</th><th>Field</th><th>Units</th></tr>
+  <tr><td>0</td><td>Time Epoch</td><td>Seconds</td></tr>
+  <tr><td>1</td><td>Wind Lull (minimum 3 second sample)</td><td>m/s</td></tr>
+  <tr><td>2</td><td>Wind Avg (average over report interval)</td><td>m/s</td></tr>
+  <tr><td>3</td><td>Wind Gust (maximum 3 second sample)</td><td>m/s</td></tr>
+  <tr><td>4</td><td>Wind Direction</td><td>Degrees</td></tr>
+  <tr><td>5</td><td>Wind Sample Interval</td><td>seconds</td></tr> 
+  <tr><td>6</td><td>Station Pressure</td><td>MB</td></tr>
+  <tr><td>7</td><td>Air Temperature</td><td>C</td></tr>
+  <tr><td>8</td><td>Relative Humidity</td><td>%</td></tr>  
+  <tr><td>9</td><td>Illuminance</td><td>Lux</td></tr>
+  <tr><td>10</td><td>UV</td><td>Index</td></tr>
+  <tr><td>11</td><td>Solar Radiation</td><td>W/m^2</td></tr>    
+  <tr><td>12</td><td>Rain Accumulated</td><td>mm</td></tr>
+  <tr><td>13</td><td>Precipitation Type</td><td>0 = none, 1 = rain, 2 = hail</td></tr>  
+  <tr><td>14</td><td>Lightning Strike Avg Distance</td><td>km</td></tr>
+  <tr><td>15</td><td>Lightning Strike Count</td><td></td></tr>  
+  <tr><td>16</td><td>Battery</td><td>Volts</td></tr>  
+  <tr><td>17</td><td>Report Interval</td><td>Minutes</td></tr>
+  <tr><td>18</td><td>Local Daily Rain Accumulation</td><td>mm</td></tr>
+  <tr><td>19</td><td>Rain Accumulated Final (Rain Check)</td><td>mm</td></tr>
+  <tr><td>20</td><td>Local Daily Rain Accumulation Final (Rain Check)</td><td>mm</td></tr>
+  <tr><td>21</td><td>Precipitation Analysis Type</td><td>0 = none<br>1 = Rain Check with user display on<br>2 = Rain Check with user display off</td></tr>
+</table>
 
 
 <h2><a name="other-useful-information">Other Useful Information</a></h2>
