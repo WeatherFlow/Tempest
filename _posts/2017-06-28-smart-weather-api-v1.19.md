@@ -2,6 +2,7 @@
 layout: post
 title:  "Smart Weather API - v1.19"
 date:   2017-06-28 3:00:00 -0500
+published: false
 categories: API
 ---
 
