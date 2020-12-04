@@ -3809,6 +3809,55 @@
         }
       }
     },
+    "/location_geo": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Smart Weather Devices all belong to a Station.  This response contains the public name of a Station given it's coordinates.",
+        "operationId": "location_geo",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": true,
+            "type": "long"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude",
+            "required": true,
+            "type": "long"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LocationResponse"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
     "/observations": {
       "get": {
         "tags": [
@@ -4814,6 +4863,28 @@
             "forecast"
           ],
           "example": "air_temperature_humidity"
+        }
+      }
+    },
+    "LocationResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "public_name": {
+          "type": "string",
+          "example": "Orlando Tempest"
+        },
+        "lat": {
+          "type": "number",
+          "format": "float",
+          "example": 29.00724
+        },
+        "lon": {
+          "type": "number",
+          "format": "float",
+          "example": -80.88067
         }
       }
     },
