@@ -1125,12 +1125,6 @@
     "BetterForecastForecast": {
       "type": "object",
       "properties": {
-        "devices": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Device"
-          }
-        },
         "daily": {
           "type": "array",
           "items": {
