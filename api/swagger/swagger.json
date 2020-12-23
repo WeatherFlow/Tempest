@@ -18,6 +18,10 @@
     {
       "name": "stations",
       "description": "Get Stations"
+    },
+    {
+      "name": "forecast",
+      "description": "Get Forecast"
     }
   ],
   "schemes": [
@@ -231,6 +235,111 @@
           },
           "404": {
             "description": "Station not found"
+          }
+        }
+      }
+    },
+    "/better_forecast": {
+      "get": {
+        "tags": [
+          "forecast"
+        ],
+        "summary": "Get Better Forecast Data",
+        "description": "The better forecast includes current conditions, daily forecast and hourly forecast.<br>Conditions:<br>Clear<br>Rain Likely<br>Rain Possible<br>Snow<br>Snow Possible<br>Wintry Mix Likely<br>Wintry Mix Possible<br>Thunderstorms Likely<br>Thunderstorms Possible<br>Windy<br>Foggy<br>Cloudy<br>Partly Cloudy<br>Very Light Rain",
+        "operationId": "getBetterForecast",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "station_id",
+            "in": "query",
+            "description": "The station_id to use in the current conditions response object.  If the Station has a recent observation it will be used.  Any fields not available from the Station will get their values from the another source. If a station_id is not provided all current condition data will come from another source",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "units_temp",
+            "in": "query",
+            "description": "default = c",
+            "required": false,
+            "enum": [
+              "c",
+              "f"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_wind",
+            "in": "query",
+            "description": "default = mps",
+            "required": false,
+            "enum": [
+              "mph",
+              "kph",
+              "kts",
+              "mps",
+              "bft",
+              "lfm"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_pressure",
+            "in": "query",
+            "description": "default = mb",
+            "required": false,
+            "enum": [
+              "mb",
+              "inhg",
+              "mmhg",
+              "hpa"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_precip",
+            "in": "query",
+            "description": "default = mm",
+            "required": false,
+            "enum": [
+              "mm",
+              "cm",
+              "in"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "units_distance",
+            "in": "query",
+            "description": "default = km",
+            "required": false,
+            "enum": [
+              "km",
+              "mi"
+            ],
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
           }
         }
       }
@@ -776,6 +885,406 @@
           "type": "number",
           "format": "float",
           "example": 1.18257
+        }
+      }
+    },
+    "BetterForecast": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "current_conditions": {
+          "$ref": "#/definitions/BetterForecastCurrentConditions"
+        },
+        "forecast": {
+          "$ref": "#/definitions/BetterForecastForecast"
+        },
+        "units": {
+          "$ref": "#/definitions/BetterForecastUnits"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 29.00724
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -80.88067
+        },
+        "timezone": {
+          "type": "string",
+          "example": "America/New_York"
+        },
+        "timezone_offset_minutes": {
+          "type": "number",
+          "format": "int32",
+          "example": -300
+        }
+      }
+    },
+    "BetterForecastCurrentConditions": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "number",
+          "format": "int32",
+          "example": 1608668142
+        },
+        "conditions": {
+          "type": "string",
+          "example": "Clear"
+        },
+        "icon": {
+          "type": "string",
+          "example": "clear-day"
+        },
+        "air_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 67.0
+        },
+        "sea_level_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 30.195
+        },
+        "station_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 30.079
+        },
+        "pressure_trend": {
+          "type": "string",
+          "example": "falling"
+        },
+        "relative_humidity": {
+          "type": "number",
+          "format": "int32",
+          "example": 55
+        },
+        "wind_avg": {
+          "type": "number",
+          "format": "float",
+          "example": 3.2
+        },
+        "wind_direction": {
+          "type": "number",
+          "format": "int32",
+          "example": 15
+        },
+        "wind_direction_cardinal": {
+          "type": "string",
+          "example": "NNE"
+        },
+        "wind_direction_icon": {
+          "type": "string",
+          "example": "wind-rose-nne"
+        },
+        "wind_gust": {
+          "type": "number",
+          "format": "float",
+          "example": 3.4
+        },
+        "solar_radiation": {
+          "type": "number",
+          "format": "int32",
+          "example": 22
+        },
+        "uv": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "brightness": {
+          "type": "number",
+          "format": "int32",
+          "example": 2582
+        },
+        "feels_like": {
+          "type": "number",
+          "format": "float",
+          "example": 68.9
+        },
+        "dew_point": {
+          "type": "number",
+          "format": "float",
+          "example": 50.0
+        },
+        "wet_bulb_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 57.0
+        },
+        "delta_t": {
+          "type": "number",
+          "format": "float",
+          "example": 10.0
+        },
+        "air_density": {
+          "type": "number",
+          "format": "float",
+          "example": 0.08
+        },
+        "lightning_strike_count_last_1hr": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "lightning_strike_count_last_3hr": {
+          "type": "number",
+          "format": "int32",
+          "example": 1
+        },
+        "lightning_strike_last_distance": {
+          "type": "number",
+          "format": "int32",
+          "example": 7
+        },
+        "lightning_strike_last_distance_msg": {
+          "type": "string",
+          "example": "6 - 8 mi"
+        },
+        "lightning_strike_last_epoch": {
+          "type": "number",
+          "format": "int32",
+          "example": 1608150959
+        },
+        "precip_accum_local_day": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "precip_accum_local_yesterday": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "precip_minutes_local_day": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "precip_minutes_local_yesterday": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "is_precip_local_day_rain_check": {
+          "type": "boolean",
+          "example": false
+        },
+        "is_precip_local_yesterday_rain_check": {
+          "type": "number",
+          "example": true
+        }
+      }
+    },
+    "BetterForecastUnits": {
+      "type": "object",
+      "properties": {
+        "units_temp": {
+          "type": "string",
+          "example": "f"
+        },
+        "units_wind": {
+          "type": "string",
+          "example": "mph"
+        },
+        "units_precip": {
+          "type": "string",
+          "example": "in"
+        },
+        "units_pressure": {
+          "type": "string",
+          "example": "inhg"
+        },
+        "units_distance": {
+          "type": "string",
+          "example": "mi"
+        },
+        "units_brightness": {
+          "type": "string",
+          "example": "lux"
+        },
+        "units_solar_radiation": {
+          "type": "string",
+          "example": "w/m2"
+        },
+        "units_other": {
+          "type": "string",
+          "example": "imperial"
+        },
+        "units_air_density": {
+          "type": "string",
+          "example": "lbs/ft3"
+        }
+      }
+    },
+    "BetterForecastForecast": {
+      "type": "object",
+      "properties": {
+        "devices": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Device"
+          }
+        },
+        "daily": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BetterForecastDailyForecast"
+          }
+        },
+        "hourly": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BetterForecastHourlyForecast"
+          }
+        }
+      }
+    },
+    "BetterForecastDailyForecast": {
+      "type": "object",
+      "properties": {
+        "day_start_local": {
+          "type": "number",
+          "format": "int32",
+          "example": 1608699600
+        },
+        "day_num": {
+          "type": "number",
+          "format": "int32",
+          "example": 23
+        },
+        "month_num": {
+          "type": "number",
+          "format": "int32",
+          "example": 12
+        },
+        "conditions": {
+          "type": "string",
+          "example": "Clear"
+        },
+        "icon": {
+          "type": "string",
+          "example": "clear-day"
+        },
+        "sunrise": {
+          "type": "number",
+          "format": "int32",
+          "example": 1608639322
+        },
+        "sunset": {
+          "type": "number",
+          "format": "int32",
+          "example": 1608676362
+        },
+        "air_temp_high": {
+          "type": "number",
+          "format": "float",
+          "example": 73.0
+        },
+        "air_temp_low": {
+          "type": "number",
+          "format": "float",
+          "example": 39.0
+        },
+        "precip_probability": {
+          "type": "number",
+          "format": "int32",
+          "example": 10
+        },
+        "precip_icon": {
+          "type": "string",
+          "example": "chance-rain"
+        },
+        "precip_type": {
+          "type": "string",
+          "example": "rain"
+        }
+      }
+    },
+    "BetterForecastHourlyForecast": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "number",
+          "format": "int32",
+          "example": 1608735600
+        },
+        "conditions": {
+          "type": "string",
+          "example": "Clear"
+        },
+        "icon": {
+          "type": "string",
+          "example": "clear-day"
+        },
+        "air_temperature": {
+          "type": "number",
+          "format": "float",
+          "example": 57.0
+        },
+        "sea_level_pressure": {
+          "type": "number",
+          "format": "float",
+          "example": 30.257
+        },
+        "relative_humidity": {
+          "type": "number",
+          "format": "int32",
+          "example": 82
+        },
+        "precip": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "precip_probability": {
+          "type": "number",
+          "format": "int32",
+          "example": 0
+        },
+        "wind_avg": {
+          "type": "number",
+          "format": "float",
+          "example": 2.0
+        },
+        "wind_direction": {
+          "type": "number",
+          "format": "float",
+          "example": 34
+        },
+        "wind_direction_cardinal": {
+          "type": "string",
+          "example": "NE"
+        },
+        "wind_gust": {
+          "type": "number",
+          "format": "float",
+          "example": 3.0
+        },
+        "uv": {
+          "type": "number",
+          "format": "float",
+          "example": 2.0
+        },
+        "feels_like": {
+          "type": "number",
+          "format": "float",
+          "example": 57.0
+        },
+        "local_hour": {
+          "type": "number",
+          "format": "int32",
+          "example": 10
+        },
+        "local_day": {
+          "type": "number",
+          "format": "int32",
+          "example": 23
         }
       }
     },
