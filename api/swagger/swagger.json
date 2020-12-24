@@ -264,7 +264,7 @@
           {
             "name": "station_id",
             "in": "query",
-            "description": "The station_id to use in the current conditions response object.  If the Station has a recent observation it will be used.  Any fields not available from the Station will get their values from the another source. If a station_id is not provided all current condition data will come from another source",
+            "description": "The station_id to use in the current conditions response object.",
             "required": true,
             "type": "integer"
           },
