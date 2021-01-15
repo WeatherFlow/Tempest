@@ -16,6 +16,10 @@
       "description": "Manage Oauth Applications"
     },
     {
+      "name": "api_key",
+      "description": "Manage API Keys"
+    },
+    {
       "name": "calibration",
       "description": "Manage Calibrations"
     },
@@ -479,6 +483,193 @@
             "description": "The token_id for the token that you want to delete.",
             "required": true,
             "type": "String"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    },
+    "/api_key": {
+      "get": {
+        "tags": [
+          "api_key"
+        ],
+        "description": "Get all API Keys for a client.",
+        "summary": "Get all API Keys for a client",
+        "operationId": "getAPIKeys",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The client id associated with the API Keys to be returned",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "api_key"
+        ],
+        "summary": "Create an API Key",
+        "description": "Create a new API Key.  A user can create multiple API Keys for an application and are all limited at the User level using the hidden application that they belong to.",
+        "operationId": "createAPIKey",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The client id of the application that the API Key will be created for",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A name for the API Key",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "api_key"
+        ],
+        "summary": "Update an API Key",
+        "description": "Update the name associated with an API Key",
+        "operationId": "updateAPIKey",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "target_api_key",
+            "in": "query",
+            "description": "The API Key to be updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A name for the API Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      },      
+      "delete": {
+        "tags": [
+          "token"
+        ],
+        "description": "Delete an API Key",
+        "summary": "Delete an API Key",
+        "operationId": "deleteAPIKey",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "target_api_key",
+            "in": "query",
+            "description": "The API Key to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The client id of the application associated with the API Key",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
