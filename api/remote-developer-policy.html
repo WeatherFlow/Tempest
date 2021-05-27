@@ -6,7 +6,7 @@ title: Tempest API Remote Data Access Policy
     <p>This policy, which is subject to change, applies to remote data access. This policy does not apply to local data access.</p>
     
     <h2>Summary:</h2>
-    <p>All data (observations, forecast & metadata) is available to station owners from stations that they own (public or private) via any application. No data (observations, forecast or metadata) is available from private stations via any application. Metadata from public stations is available to any user via any application. Observation and forecast data from public stations may be available to any user via licensed enterprise applications (please <a href="https://weatherflow.com/partner-inquiry/">contact us</a> for details).</p>
+    <p>All data (qualilty-controlled observations, augmentation with additional network data, metadata & proprietary forecasts) is available to station owners from stations that they own (public or private) via any application for personal use. No data (observations, forecast or metadata) is available from private stations via any application. Metadata from public stations is available to any user via any application. Observation and forecast data from public stations may be available to any user via licensed commercial applications (please <a href="https://weatherflow.com/partner-inquiry/">contact us</a> for details).</p>
     
     <h2>Definitions:</h2>
     <table>
@@ -69,7 +69,7 @@ title: Tempest API Remote Data Access Policy
             <td>Obs/Forecast</td>
         </tr>
         <tr>
-            <td rowspan="2">Normal</td>
+            <td rowspan="2">Personal</td>
             <td rowspan="2">lower</td>
             <td>station owner</td>
             <td class="green">all</td>
@@ -85,13 +85,13 @@ title: Tempest API Remote Data Access Policy
             <td class="red">none</td>
         </tr>
         <tr>
-            <td rowspan="2">Enterprise</td>
+            <td rowspan="2">Commercial</td>
             <td rowspan="2">higher</td>
             <td>station owner</td>
-            <td class="green">all</td>
-            <td class="green">all</td>
-            <td class="green">all</td>
-            <td class="green">all</td>
+            <td class="green">&#x2021;</td>
+            <td class="green">&#x2021;</td>
+            <td class="green">&#x2021;</td>
+            <td class="green">&#x2021;</td>
         </tr>
         <tr>
             <td>any user</td>
@@ -103,9 +103,9 @@ title: Tempest API Remote Data Access Policy
     </table>
     
     <p>&#x2020; public metadata only</p>
-    <p>&#x2021; observation and forecast data from public stations may be available, please <a href="https://weatherflow.com/partner-inquiry/">contact us</a> for details</p>
+    <p>&#x2021; for details about access to observation and forecast data for commerical use, please <a href="https://weatherflow.com/partner-inquiry/">contact us</a></p>
     
-    <h3>Normal</h3>
+    <h3>Personal</h3>
     
     <p>Available to any user - no special agreement required</p>
     
@@ -115,11 +115,13 @@ title: Tempest API Remote Data Access Policy
         <li>no access to private data by any user</li>
         <li>no access to observation or forecast data by any user</li>
         <li>generous rate/volume limits (enough for personal use and small-scale apps)</li>
+        <li>limited to personal use</li>
+        <li>rebroadcast may be limited</li>
     </ul>
     
-    <h3>Enterprise</h3>
+    <h3>Commercial</h3>
     
-    <p>Provided upon request - partnership agreement may be required</p>
+    <p>Partnership agreement required. <a href="https://weatherflow.com/partner-inquiry/">Contact us.</a></p>
     
     <ul>
         <li>access to metadata, observation & forecast data by owner of station</li>
@@ -127,6 +129,8 @@ title: Tempest API Remote Data Access Policy
         <li>no access to private data by any user</li>
         <li>may include access to observation or forecast data by any user</li>
         <li>may include higher rate/volume limits, if necessary</li>
+        <li>Authorization to use data in a commercial manner under terms specified in partnership agreement</li>
+        <li>Rebroadcast only according to terms specified in partnership agreement</li>
     </ul>
     
 </div>
