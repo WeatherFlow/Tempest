@@ -6,7 +6,12 @@ doc_version: 170
 <h2>Change Log Since <a href="{{site.url}}/api/udp/v119">143</a></h2>
 <h3><span class="s2">hub_status</span></h3>
 <ul class="highlight">
-  <li>Added BLE Connected to the <span class="s2">radio_status</span> field< of the <span class="s2">hub_status</span> message/li>
+  <li>Added BLE Connected to the <span class="s2">radio_status</span> field</li>
   <li>Added POWER_BOOSTER_DEPLECTED and POWER_BOOSTER_SHORE_POWER to the <span class="s2">sensor_status</span> field of the <span class="s2">device_status</span> message</li>
+</ul>
+<h3><span class="s2">device_status</span></h3>
+<ul class="highlight">
+  <li>Added POWER_BOOSTER_DEPLECTED to <span class="s2">sensor_status</span> field</li>
+  <li>Added POWER_BOOSTER_SHORE_POWER to <span class="s2">sensor_status</span> field</li>
 </ul>
 {% include udp.html v=page.doc_version %}
