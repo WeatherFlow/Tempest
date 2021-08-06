@@ -1,4 +1,29 @@
-{% if include.v >= 72 %}
+{% if include.v >= 170 %}
+    <h4>Sensor Status (sensor_status) is a set of bit flags, encoded in a single decimal value, each bit represents the following</h4>
+    <table>
+        <tr><th>Binary Value</th><th>Applies to device<th>Status description</th></tr>
+        <tr><td>0b000000000</td><td>All</td><td>Sensors OK</td></tr>
+        <tr><td>0b000000001</td><td>AIR, Tempest</td><td>lightning failed</td></tr>
+        <tr><td>0b000000010</td><td>AIR, Tempest</td><td>lightning noise</td></tr>
+        <tr><td>0b000000100</td><td>AIR, Tempest</td><td>lightning disturber</td></tr>
+        <tr><td>0b000001000</td><td>AIR, Tempest</td><td>pressure failed</td></tr>
+        <tr><td>0b000010000</td><td>AIR, Tempest</td><td>temperature failed</td></tr>
+        <tr><td>0b000100000</td><td>AIR, Tempest</td><td>rh failed</td></tr>
+        <tr><td>0b001000000</td><td>SKY, Tempest</td><td>wind failed</td></tr>
+        <tr><td>0b010000000</td><td>SKY, Tempest</td><td>precip failed</td></tr>
+        <tr><td>0x00008000</td><td>Tempest</td><td>power booster depleted</td></tr>
+        <tr><td>0x00010000</td><td>Tempest</td><td>power booster shore power</td></tr>
+    </table>
+    <h4>any bits above 0b100000000 are reserved for internal use and should be ignored</h4>
+
+    <h4>debug</h4>
+    <table>
+        <tr><th>Value</th><th>Description</th></tr>
+        <tr><td>0</td><td>Debugging is disabled</td></tr>
+        <tr><td>1</td><td>Debugging is enabled</td></tr>
+    </table>
+
+{% elsif include.v >= 72 %}
     <h4>Sensor Status (sensor_status) is a set of bit flags, encoded in a single decimal value, each bit represents the following</h4>
     <table>
         <tr><th>Binary Value</th><th>Applies to device<th>Status description</th></tr>
