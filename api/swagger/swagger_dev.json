@@ -3,7 +3,7 @@
   "info": {
     "description": "",
     "version": "1.0.0",
-    "title": "WeatherFlow Smart Weather API",
+    "title": "WeatherFlow Tempest API",
     "contact": {
       "email": "jforare@weatherflow.com"
     }
@@ -3113,6 +3113,15 @@
         "produces": [
           "application/json"
         ],
+		"parameters": [
+          {
+            "name": "include_arbitrary_locations",
+            "in": "query",
+            "description": "If true, arbitrary locations with be returned in addition to stations. If false, only stations will be returned. Defaults to false.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
         "responses": {
           "200": {
             "description": "successful operation",
@@ -4424,7 +4433,58 @@
           }
         }
       }
-    }
+    },
+	"/stations_meta":{
+		"get": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Retrieve a list of core station data. Can be separated into multiple requests using pagination.",
+        "summary": "Retrieve a list of core station data",
+        "operationId": "stationMeta",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "next_cursor",
+            "in": "query",
+            "description": "When a request has more results to return than limit, the next_cursor value is returned as part of the response. You can then specify this value as the next_cursor parameter of a following request. Defaults to 1.",
+            "required": false,
+            "type": "string"
+          },
+		  {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum amount of stations that can be returned in the response. Defaults to 10,000.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+	}
   },
   "securityDefinitions": {
     "swdImplicit": {
@@ -4528,6 +4588,16 @@
           "type": "number",
           "format": "float",
           "example": -80.88067
+        },
+		"is_current_location": {
+          "type": "boolean",
+          "example": true,
+		  "default": false
+        },
+		"is_arbitrary_location": {
+          "type": "boolean",
+          "example": false,
+		  "default": false
         },
         "station_meta": {
           "$ref": "#/definitions/StationMeta"
