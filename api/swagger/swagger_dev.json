@@ -5317,6 +5317,17 @@
 	"LocationSuggestionsResponse": {
       "type": "object",
       "properties": {
+		"suggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationSuggestion"
+          }
+        }
+      }
+    },
+	"LocationSuggestion": {
+      "type": "object",
+      "properties": {
         "name": {
           "type": "string",
           "example": "Orlando, FL, USA"
@@ -5324,17 +5335,6 @@
 		"key": {
           "type": "string",
           "example": "xHA9MCNsb2M9Nzc1NTA1MCNsbmc9MzQj"
-        }
-      }
-    },
-	"LocationSuggestion": {
-      "type": "object",
-      "properties": {
-        "suggestions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LocationSuggestion"
-          }
         }
       }
     },
