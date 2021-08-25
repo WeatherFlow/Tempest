@@ -4161,6 +4161,104 @@
         }
       }
     },
+	"/location_suggestions": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Used to search for an Arbitrary Location (can include lat and lon for location biasing). Keys returned in results can be passed in to location_suggestion_data to get lat/lon.",
+        "operationId": "location_suggestions",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+			{
+            "name": "name",
+            "in": "query",
+            "description": "Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": false,
+            "type": "long"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude",
+            "required": false,
+            "type": "long"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/LocationSuggestionsResponse"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
+	"/location_suggestion_data": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Uses key from location_suggestions requests to get lat/lon for location.",
+        "operationId": "location_suggestion_data",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+			{
+            "name": "key",
+            "in": "query",
+            "description": "Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ArbitraryLocationPost"
+            }
+          },
+          "404": {
+            "description": "Station not found"
+          }
+        }
+      }
+    },
     "/observations": {
       "get": {
         "tags": [
@@ -5216,6 +5314,30 @@
         }
       }
     },
+	"LocationSuggestionsResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Orlando, FL, USA"
+        },
+		"key": {
+          "type": "string",
+          "example": "xHA9MCNsb2M9Nzc1NTA1MCNsbmc9MzQj"
+        }
+      }
+    },
+	"LocationSuggestion": {
+      "type": "object",
+      "properties": {
+        "suggestions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationSuggestion"
+          }
+        }
+      }
+    },
 	"ArbitraryLocationPost": {
       "type": "object",
       "properties": {
@@ -5232,7 +5354,7 @@
           "type": "number",
           "format": "float",
           "example": -81.2
-        },
+        }
       }
     },
     "LocationPost": {
