@@ -4016,6 +4016,14 @@
             "description": "Longitude",
             "required": true,
             "type": "long"
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "description": "Level of location accuracy. 0 uses street while 1 uses neighborhood/city. Defaults to 0.",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -4027,6 +4035,128 @@
           },
           "404": {
             "description": "Station not found"
+          }
+        }
+      }
+    },
+	"/arbitrary_locations": {
+      "post": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Create an Arbitrary Location",
+        "summary": "Create an Arbitrary Location",
+        "operationId": "createArbitraryLocation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "body",
+            "description": "The Location to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Arbitrary Location not found"
+          }
+        }
+      }
+    },
+	"/arbitrary_locations/{location_id}": {
+      "put": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Update an Arbitrary Location",
+        "summary": "Update an Arbitrary Location",
+        "operationId": "updateArbitraryLocation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "location",
+            "in": "body",
+            "description": "The Location to create",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LocationPost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Arbitrary Location not found"
+          }
+        }
+      },
+	  "delete": {
+        "tags": [
+          "locations"
+        ],
+        "description": "Delete an Arbitrary Location",
+        "summary": "Delete an Arbitrary Location",
+        "operationId": "deleteArbitraryLocation",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Arbitrary Location not found"
           }
         }
       }
