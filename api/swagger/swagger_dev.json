@@ -47,6 +47,10 @@
       "name": "forecast",
       "description": "Get forecast data"
     },
+	{
+      "name": "hello",
+      "description": "Sent when app is opened"
+    },
     {
       "name": "locations",
       "description": "Locations (Stations)"
@@ -318,7 +322,7 @@
         }
       }
     },
-  "/token_application": {
+	"/token_application": {
       "get": {
         "tags": [
           "token"
@@ -2348,10 +2352,6 @@
         }
       }
     },
-    
-    
-    
-    
     "/external_app_user": {
       "get": {
         "tags": [
@@ -2560,11 +2560,6 @@
         }
       }
     },
-
-
-
-
-
     "/external_app_device": {
       "get": {
         "tags": [
@@ -2718,17 +2713,6 @@
         }
       }
     },
-    
-    
-    
-
-
-
-
-
-
-
-
     "/external_app_device_update_poll": {
       "get": {
         "tags": [
@@ -2800,11 +2784,6 @@
         }
       }
     },
-    
-
-    
-    
-    
     "/external_app_work_list": {
       "get": {
         "tags": [
@@ -2848,12 +2827,6 @@
         }
       }
     },
-    
-    
-    
-    
-    
-    
     "/user_notifications": {
       "get": {
         "tags": [
@@ -4484,7 +4457,57 @@
           }
         }
       }
-	}
+	},
+	"/hello": {
+      "put": {
+        "tags": [
+          "hello"
+        ],
+        "summary": "Sent on app open. Updates user's current location and last used dates.",
+        "description": "Sent on app open. Updates user's current location and last used dates.",
+        "operationId": "hello",
+        "security": [
+          {
+            "swdImplicit": [
+              "user"
+            ]
+          },
+          {
+            "swdApiKey": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Latitude",
+            "required": false,
+            "type": "long"
+          },
+          {
+            "name": "lon",
+            "in": "query",
+            "description": "Longitude",
+            "required": false,
+            "type": "long"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Status"
+            }
+          },
+          "404": {
+            "description": "Not found"
+          }
+        }
+      }
+    }
   },
   "securityDefinitions": {
     "swdImplicit": {
@@ -4591,7 +4614,7 @@
         },
 		"is_current_location": {
           "type": "boolean",
-          "example": true,
+          "example": false,
 		  "default": false
         },
 		"is_arbitrary_location": {
