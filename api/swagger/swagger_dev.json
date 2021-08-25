@@ -4067,7 +4067,7 @@
             "description": "The Location to create",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationPost"
+              "$ref": "#/definitions/ArbitraryLocationPost"
             }
           }
         ],
@@ -4112,7 +4112,7 @@
             "description": "The Location to create",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/LocationPost"
+              "$ref": "#/definitions/ArbitraryLocationPost"
             }
           }
         ],
@@ -5214,6 +5214,25 @@
           "type": "string",
           "example": "SUCCESS"
         }
+      }
+    },
+	"ArbitraryLocationPost": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Home"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float",
+          "example": 27.1
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float",
+          "example": -81.2
+        },
       }
     },
     "LocationPost": {
