@@ -1,0 +1,16 @@
+---
+layout: udpversion
+title: WeatherFlow Tempest UDP Reference - v171
+doc_version: 171
+---
+<h2>Change Log Since <a href="{{site.url}}/api/udp/v119">143</a></h2>
+<h3><span class="s2">hub_status</span></h3>
+<ul class="highlight">
+  <li>Added BLE Connected flag to the <span class="s2">radio_status</span> field</li>
+</ul>
+<h3><span class="s2">device_status</span></h3>
+<ul class="highlight">
+  <li>Added POWER_BOOSTER_DEPLECTED to <span class="s2">sensor_status</span> field</li>
+  <li>Added POWER_BOOSTER_SHORE_POWER to <span class="s2">sensor_status</span> field</li>
+</ul>
+{% include udp.html v=page.doc_version %}
