@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Smart Weather for Android - v4.6.75"
-date:   2021-12-20 12:00:01 -0500
+date:   2021-12-21 12:00:01 -0500
 categories: Android
 ---
 
