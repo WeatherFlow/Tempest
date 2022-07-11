@@ -6,7 +6,7 @@ categories: iOS
 ---
 
 Out with the blue, in with the new! In addition to a sleek new color scheme and design, the AI-powered Tempest app has added a number of exciting features. These include:
-• Weather Anywhere: Tempest forecasts are not just for Tempest stations anymore! You can now get a Tempest forecast for any location.
-• Widgets
-• Apple Watch App
-• Light / Dark Mode
+- Weather Anywhere: Tempest forecasts are not just for Tempest stations anymore! You can now get a Tempest forecast for any location.
+- Widgets
+- Apple Watch App
+- Light / Dark Mode
