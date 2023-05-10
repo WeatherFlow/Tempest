@@ -42,34 +42,6 @@ For more information about how to obtain an access token, see our <a href="../">
       <div class="code-highlight">
 {% highlight javascript %}
 {
-  "type":"listen_start_events",
-  "station_id":2594,
-  "id":"2098388541"
-}
-{% endhighlight %}
-    </div>
-    <td>ack<br>evt_station_online<br>evt_station_offline</td>
-    <td>Start listening for all Station online and offline events.  All Station events will be immediatly pushed.</td>
-  </tr>
-  <tr>
-    <td>
-      <div class="code-highlight">
-{% highlight javascript %}
-{
-  "type":"listen_stop_events",
-  "station_id":2594,
-  "id":"2098388541"
-}
-{% endhighlight %}
-    </div>
-    <td>ack</td>
-    <td>Stop listening for all event messages for a Station.</td>
-  </tr>
-  <tr>
-    <td>
-      <div class="code-highlight">
-{% highlight javascript %}
-{
   "type":"listen_rapid_start",
   "device_id":1110,
   "id":"2098388542"
@@ -139,68 +111,6 @@ Evt Value Layout
   <tr><td>1</td><td>Distance</td><td>km</td></tr>
   <tr><td>2</td><td>Energy</td><td></td></tr>
 </table>
-
-
-
-
-<br><br>
-<h3>Device Online Event [type = evt_device_online]</h3>
-      <div class="code-highlight">
-{% highlight javascript %}
-{
-  "type":"evt_device_online",
-  "device_id":1110
-}
-{% endhighlight %}
-</div>
-
-
-
-
-<br><br>
-<h3>Device Offline Event [type = evt_device_offline]</h3>
-      <div class="code-highlight">
-{% highlight javascript %}
-{
-  "type":"evt_device_offline",
-  "device_id":1110
-}
-{% endhighlight %}
-</div>
-
-
-
-
-<br><br>
-<h3>Station Online Event [type = evt_station_online]</h3>
-      <div class="code-highlight">
-{% highlight javascript %}
-{
-  "type":"evt_station_online",
-  "station_id":4582
-}
-{% endhighlight %}
-</div>
-
-
-
-
-<br><br>
-<h3>Station Offline Event [type = evt_station_offline]</h3>
-      <div class="code-highlight">
-{% highlight javascript %}
-{
-  "type":"evt_station_offline",
-  "station_id":4582
-}
-{% endhighlight %}
-</div>
-
-
-
-
-
-
 
 <br><br>
 <h3>Rapid Wind [type = rapid_wind] (3 second interval)</h3>
